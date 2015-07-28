@@ -6,9 +6,6 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# Autoload lib files in addition to normal rails files.
-config.autoload_paths << Rails.root.join('lib')
-
 module ChampaignAkProcessor
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -25,5 +22,8 @@ module ChampaignAkProcessor
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Autoload lib files in addition to normal rails files.
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

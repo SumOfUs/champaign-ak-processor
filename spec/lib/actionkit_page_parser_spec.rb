@@ -1,5 +1,3 @@
-# require_relative '../../../queue_listeners/lib/actionkit_page_parser'
-# require_relative '../../../queue_listeners/lib/crm_page'
 require 'json'
 require 'rails_helper'
 
