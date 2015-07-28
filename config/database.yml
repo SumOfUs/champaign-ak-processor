@@ -1,0 +1,11 @@
+development: &default
+  adapter: postgresql
+  encoding: unicode
+  database: champaign
+  pool: 5
+  username: <%= ENV['PG_USERNAME'] %>
+  host: <%= ENV['PG_HOST'] %>
+
+test:
+  <<: *default
+  database: champaign_test

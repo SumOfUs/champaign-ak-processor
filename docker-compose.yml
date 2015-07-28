@@ -1,0 +1,13 @@
+processor:
+  build: .
+  volumes:
+    - .:/myapp
+  ports:
+    - "3002:3002"
+  external_links:
+    - champaign_db_1
+  environment:
+    PG_USERNAME: postgres
+    PG_HOST: champaign_db_1
+
+  command: bundle exec rails s -b 0.0.0.0 -p 3002
