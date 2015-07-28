@@ -1,5 +1,5 @@
 require_relative '../config/load_env'
-require_relative '../lib/crm_page'
+# require_relative '../lib/crm_page'
 require 'json'
 
 class ActionkitPageParser
