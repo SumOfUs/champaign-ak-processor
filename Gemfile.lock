@@ -1,8 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    action_kit_rest (0.2.2)
-      vertebrae
+    actionkit_connector (0.1.0)
+      httparty (~> 0.13)
     actionmailer (4.2.1)
       actionpack (= 4.2.1)
       actionview (= 4.2.1)
@@ -57,13 +57,11 @@ GEM
     envyable (0.2.0)
     erubis (2.7.0)
     execjs (2.5.2)
-    faraday (0.9.1)
-      multipart-post (>= 1.2, < 3)
-    faraday_middleware (0.10.0)
-      faraday (>= 0.7.4, < 0.10)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
-    hashie (3.4.2)
+    httparty (0.13.5)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
@@ -81,7 +79,7 @@ GEM
     mini_portile (0.6.2)
     minitest (5.7.0)
     multi_json (1.11.2)
-    multipart-post (2.0.0)
+    multi_xml (0.5.5)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pg (0.18.2)
@@ -159,11 +157,6 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    vertebrae (0.2.11)
-      activesupport
-      faraday
-      faraday_middleware
-      hashie
     web-console (2.2.1)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -174,7 +167,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  action_kit_rest
+  actionkit_connector
   byebug
   coffee-rails (~> 4.1.0)
   envyable
