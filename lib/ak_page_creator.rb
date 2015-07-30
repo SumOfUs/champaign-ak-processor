@@ -9,6 +9,10 @@ class AkPageCreator < AkCreator
     end
   end
 
+  def page_types
+    SUPPORTED_PAGE_TYPES
+  end
+
   protected
   def create_petition_page(name, title, language, url)
     @connection.create_petition_page name, title, language, url
