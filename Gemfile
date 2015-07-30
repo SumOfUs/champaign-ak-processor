@@ -50,5 +50,8 @@ group :development, :test do
 
   # Rspec for testing
   gem 'rspec-rails', '~> 3.3'
+
+  # Needed for testing API calls to the AK API
+  gem 'webmock'
 end
 
