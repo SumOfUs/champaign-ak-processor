@@ -7,7 +7,7 @@ describe AkPageCreator do
   let(:password) { 'fake_password' }
   let(:creator) { AkPageCreator.new hostname, username, password }
 
-  it 'should call the endpoint for creating a petition page' do
+  it 'calls the endpoint for creating a petition page' do
     stub_request(:post, 'http://fake_username:fake_password@localhost/petitionpage/')
     creator.create_page 'fake-test-page',
                         'Fake Test Page',
@@ -18,7 +18,7 @@ describe AkPageCreator do
     expect(WebMock).to have_requested(:post, 'http://fake_username:fake_password@localhost/petitionpage/')
   end
 
-  it 'should call the endpoint for creating a donation page' do
+  it 'calls the endpoint for creating a donation page' do
     stub_request(:post, 'http://fake_username:fake_password@localhost/donationpage/')
     creator.create_page 'fake-test-page',
                         'Fake Test Page',

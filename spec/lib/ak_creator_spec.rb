@@ -6,7 +6,7 @@ describe AkCreator do
   let(:password) { 'fake_password' }
   let(:connection) {ActionKitConnector::Connector.new username, password, hostname }
 
-  it 'should initialize the connection' do
+  it 'initializes the connection' do
     creator = AkCreator.new hostname, username, password
     expect(creator.connection.base_url).to eq(connection.base_url)
     expect(creator.connection.password).to eq(connection.password)
