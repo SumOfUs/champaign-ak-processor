@@ -11,7 +11,7 @@ describe AkPageCreator do
     stub_request(:post, 'http://fake_username:fake_password@localhost/petitionpage/')
     creator.create_page 'fake-test-page',
                         'Fake Test Page',
-                        '/rest/v1/language/100/',
+                        'en',
                         'localhost',
                         creator.page_types[:petition]
 
@@ -22,7 +22,7 @@ describe AkPageCreator do
     stub_request(:post, 'http://fake_username:fake_password@localhost/donationpage/')
     creator.create_page 'fake-test-page',
                         'Fake Test Page',
-                        '/rest/v1/language/100/',
+                        'en',
                         'localhost',
                         creator.page_types[:donation]
 
