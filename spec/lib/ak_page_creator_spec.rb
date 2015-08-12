@@ -21,7 +21,7 @@ describe AkPageCreator do
                         'Fake Test Page',
                         'en',
                         'localhost',
-                        creator.page_types[:petition],
+                        AkPageCreator.page_types[:petition],
                         page.id
 
     expect(WebMock).to have_requested(:post, 'http://fake_username:fake_password@localhost/petitionpage/')
@@ -33,7 +33,7 @@ describe AkPageCreator do
                         'Fake Test Page',
                         'en',
                         'localhost',
-                        creator.page_types[:donation],
+                        AkPageCreator.page_types[:donation],
                         page.id
 
     expect(WebMock).to have_requested(:post, 'http://fake_username:fake_password@localhost/donationpage/')
@@ -46,7 +46,7 @@ describe AkPageCreator do
                         'Fake Test Page',
                         'en',
                         'localhost',
-                        creator.page_types[:petition],
+                        AkPageCreator.page_types[:petition],
                         page.id
 
     expect(CampaignPage.find(saved_page.id).status).to eq('success')
@@ -59,7 +59,7 @@ describe AkPageCreator do
                         'Fake Test Page',
                         'en',
                         'localhost',
-                        creator.page_types[:petition],
+                        AkPageCreator.page_types[:petition],
                         page.id
 
     refreshed_page = CampaignPage.find(saved_page.id)

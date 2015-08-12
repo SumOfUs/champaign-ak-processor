@@ -31,7 +31,7 @@ class AkPageCreator < AkCreator
     end
   end
 
-  def page_types
+  def self.page_types
     SUPPORTED_PAGE_TYPES
   end
 
