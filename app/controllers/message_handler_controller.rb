@@ -34,12 +34,12 @@ class MessageHandlerController < ApplicationController
 
   def create_page(params)
     @page_creator.create_page(
-        petition_params[:name],
-        petition_params[:title],
-        petition_params[:language_uri],
-        petition_params[:url],
-        petition_params[:page_type],
-        petition_params[:page_id]
+        params[:name],
+        params[:title],
+        params[:language_uri],
+        params[:url],
+        params[:page_type],
+        params[:page_id]
     )
   end
 end
