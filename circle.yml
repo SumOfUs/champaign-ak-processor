@@ -1,0 +1,13 @@
+machine:
+  ruby:
+    version: 2.2.0
+  environment:
+    ROOT_URL: https://act.sumofus.org/
+    ROOT_ACTION_URL: https://act.sumofus.org/a/
+    AK_HOST: https://action.sumofus.org/rest/v1/
+    AK_USERNAME: ak_username
+    AK_PASSWORD: ak_password
+    ENGLISH_URI: /rest/v1/language/100/
+    GERMAN_URI: /rest/v1/language/101/
+    SPANISH_URI: /rest/v1/language/102/
+    FRENCH_URI: /rest/v1/language/103/

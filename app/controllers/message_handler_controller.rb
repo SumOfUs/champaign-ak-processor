@@ -13,7 +13,7 @@ class MessageHandlerController < ApplicationController
         donation_params = converter.get_params_for_donation_page
         # We blindly create both page types, because we can use pages for
         # both petitions and donations, and there's essentially no overhead to doing
-        # this on our end. 
+        # this on our end.
         @page_creator.create_page(
             petition_params[:name],
             petition_params[:title],
