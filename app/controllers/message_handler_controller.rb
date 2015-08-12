@@ -9,27 +9,11 @@ class MessageHandlerController < ApplicationController
     case params[:type]
       when CREATE_MESSAGE_TYPE
         converter = PageParamConverter.new(message_params)
-        petition_params = converter.get_params_for_petition_page
-        donation_params = converter.get_params_for_donation_page
         # We blindly create both page types, because we can use pages for
         # both petitions and donations, and there's essentially no overhead to doing
         # this on our end.
-        @page_creator.create_page(
-            petition_params[:name],
-            petition_params[:title],
-            petition_params[:language_uri],
-            petition_params[:url],
-            petition_params[:page_type],
-            petition_params[:page_id]
-        )
-        @page_creator.create_page(
-            donation_params[:name],
-            donation_params[:title],
-            donation_params[:language_uri],
-            donation_params[:url],
-            donation_params[:page_type],
-            donation_params[:page_id]
-        )
+        self.create_page converter.get_params_for_petition_page
+        self.create_page converter.get_params_for_donation_page
       when ACTION_MESSAGE_TYPE
         message_params = params[:params]
         @action_creator.create_action(message_params[:slug], message_params[:email])
@@ -45,6 +29,17 @@ class MessageHandlerController < ApplicationController
     )
     @action_creator = @action_creator || AkActionCreator.new(
         ENV['AK_HOST'], ENV['AK_USERNAME'], ENV['AK_PASSWORD']
+    )
+  end
+
+  def create_page(params)
+    @page_creator.create_page(
+        petition_params[:name],
+        petition_params[:title],
+        petition_params[:language_uri],
+        petition_params[:url],
+        petition_params[:page_type],
+        petition_params[:page_id]
     )
   end
 end
