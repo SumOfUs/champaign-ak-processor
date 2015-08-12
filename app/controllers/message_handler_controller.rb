@@ -11,6 +11,9 @@ class MessageHandlerController < ApplicationController
         converter = PageParamConverter.new(message_params)
         petition_params = converter.get_params_for_petition_page
         donation_params = converter.get_params_for_donation_page
+        # We blindly create both page types, because we can use pages for
+        # both petitions and donations, and there's essentially no overhead to doing
+        # this on our end. 
         @page_creator.create_page(
             petition_params[:name],
             petition_params[:title],
@@ -28,7 +31,8 @@ class MessageHandlerController < ApplicationController
             donation_params[:page_id]
         )
       when ACTION_MESSAGE_TYPE
-        # dispatch to action creator
+        message_params = params[:params]
+        @action_creator.create_action(message_params[:slug], message_params[:email])
       else
         # You've provided an unsupported type of message, we don't know how to handle this
     end
