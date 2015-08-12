@@ -1,6 +1,6 @@
 machine:
   ruby:
-    version: 2.2.0
+    version: 2.2.2
   environment:
     ROOT_URL: https://act.sumofus.org/
     ROOT_ACTION_URL: https://act.sumofus.org/a/
