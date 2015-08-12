@@ -47,5 +47,7 @@ group :development, :test do
 
   # Needed for testing API calls to the AK API
   gem 'webmock'
+
+  gem 'database_cleaner'
 end
 
