@@ -1,11 +1,13 @@
-class MessageHandlerController < ApplicationController
+class QueueListener
+  include Shoryuken::Worker
   CREATE_MESSAGE_TYPE = 'create'
   ACTION_MESSAGE_TYPE = 'action'
 
-  before_action :initialize_creators
+  shoryuken_options queue: 'post_test', auto_delete: true, body_parser: :json
 
-  def handle
-    message_params = params[:params]
+  def perform(sqs_message, params)
+    params = params.symbolize_keys
+    message_params = params[:params].symbolize_keys
     case params[:type]
       when CREATE_MESSAGE_TYPE
         converter = PageParamConverter.new(message_params)
@@ -16,24 +18,28 @@ class MessageHandlerController < ApplicationController
         self.create_page converter.get_params_for_donation_page
       when ACTION_MESSAGE_TYPE
         message_params = params[:params]
-        @action_creator.create_action(message_params[:slug], message_params[:email])
+        self.get_action_creator.create_action(message_params[:slug], message_params[:email])
       else
         # You've provided an unsupported type of message, we don't know how to handle this
     end
   end
 
   protected
-  def initialize_creators
+  def get_page_creator
     @page_creator = @page_creator || AkPageCreator.new(
         ENV['AK_HOST'], ENV['AK_USERNAME'], ENV['AK_PASSWORD']
     )
+  end
+
+  def self.get_action_creator
     @action_creator = @action_creator || AkActionCreator.new(
         ENV['AK_HOST'], ENV['AK_USERNAME'], ENV['AK_PASSWORD']
     )
   end
 
   def create_page(params)
-    @page_creator.create_page(
+    p params
+    self.get_page_creator.create_page(
         params[:name],
         params[:title],
         params[:language_uri],
