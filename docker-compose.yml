@@ -10,4 +10,4 @@ processor:
     PG_USERNAME: postgres
     PG_HOST: champaign_db_1
 
-  command: bundle exec rails s -b 0.0.0.0 -p 3002
+  command: bundle exec shoryuken -R -C config/shoryuken.yml
