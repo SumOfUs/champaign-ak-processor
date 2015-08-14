@@ -32,6 +32,9 @@ gem 'actionkit_connector'
 # For pushing out updates after processing an event.
 gem 'pusher'
 
+# For processing messages from SQS
+gem 'shoryuken'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
