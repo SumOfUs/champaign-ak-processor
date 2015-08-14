@@ -8,7 +8,7 @@ COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 RUN bundle install
 
-EXPOSE 3000
+EXPOSE 3002
 ADD . /myapp
 WORKDIR /myapp
 
