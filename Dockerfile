@@ -12,4 +12,4 @@ EXPOSE 3000
 ADD . /myapp
 WORKDIR /myapp
 
-RUN rm -f /myapp/tmp/pids/server.pid
+CMD bundle exec shoryuken -R -C config/shoryuken.yml
