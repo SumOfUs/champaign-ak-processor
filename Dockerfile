@@ -12,4 +12,4 @@ EXPOSE 3002
 ADD . /myapp
 WORKDIR /myapp
 
-CMD bundle exec shoryuken -R -C config/shoryuken.yml
+CMD bundle exec rails s -b 0.0.0.0
