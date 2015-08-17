@@ -1,5 +1,5 @@
 FROM ruby:2.2.2
-RUN apt-get update -qq && apt-get install -y build-essential nodejs npm nodejs-legacy libpq-dev vim postgresql-9.4 imagemagick
+RUN apt-get update -qq && apt-get install -y build-essential nodejs npm nodejs-legacy libpq-dev vim postgresql-9.4
 
 RUN mkdir /myapp
 
@@ -12,4 +12,4 @@ EXPOSE 3000
 ADD . /myapp
 WORKDIR /myapp
 
-RUN rm -f /myapp/tmp/pids/server.pid
+CMD bundle exec rails s -b 0.0.0.0
