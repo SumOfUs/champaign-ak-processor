@@ -11,4 +11,3 @@ machine:
     GERMAN_URI: /rest/v1/language/101/
     SPANISH_URI: /rest/v1/language/102/
     FRENCH_URI: /rest/v1/language/103/
-    
