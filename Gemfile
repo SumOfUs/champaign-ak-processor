@@ -27,13 +27,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'envyable'
 
 # For interacting with the ActionKit API.
-gem 'actionkit_connector'
+gem 'actionkit_connector', '~> 0.1.1'
 
 # For pushing out updates after processing an event.
 gem 'pusher'
 
 # For processing messages from SQS
-gem 'shoryuken'
+# gem 'shoryuken'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
