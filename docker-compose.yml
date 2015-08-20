@@ -5,10 +5,10 @@ processor:
   ports:
     - "3000:3000"
   external_links:
-    - champaignakprocessor_db_1
+    - champaign_db_1
   environment:
     PG_USERNAME: postgres
-    PG_HOST: champaignakprocessor_db_1
+    PG_HOST: champaign_db_1
 
 db:
   image: postgres
