@@ -1,5 +1,5 @@
 FROM ruby:2.2.2
-RUN apt-get update -qq && apt-get install -y build-essential nodejs npm nodejs-legacy libpq-dev vim postgresql-9.4
+RUN apt-get update -qq && apt-get install -y nodejs netcat
 
 RUN mkdir /myapp
 
@@ -12,4 +12,4 @@ EXPOSE 3000
 ADD . /myapp
 WORKDIR /myapp
 
-CMD bundle exec rails s -b 0.0.0.0
+CMD RAILS_ENV=production bundle exec rails s -b 0.0.0.0
