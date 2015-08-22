@@ -3,7 +3,7 @@
   "Authentication": {
   },
   "Image": {
-    "Name": "soutech/champaign-ak-processor"
+    "Name": "soutech/champaign-ak-processor:$CIRCLE_SHA1"
   },
   "Ports": [
     {
