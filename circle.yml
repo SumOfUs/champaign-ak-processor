@@ -16,7 +16,7 @@ test:
   override:
     # tests the built image
     - cat circle/docker-compose-template.yml | envsubst > circle/docker-compose.yml
-    - cat Dockerrun.aws.json.template | envsubst > Dockerrun.aws.json
+    - cat Dockerrun.aws.json.template | envsubst > $CIRCLE_SHA1-Dockerrun.aws.json
     - annotate-output docker-compose -f circle/docker-compose.yml run processor
 
 database:
