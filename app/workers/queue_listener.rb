@@ -1,9 +1,9 @@
 class QueueListener
-  include Shoryuken::Worker
+  # include Shoryuken::Worker
   CREATE_MESSAGE_TYPE = 'create'
   ACTION_MESSAGE_TYPE = 'action'
 
-  shoryuken_options queue: 'post_test', auto_delete: true, body_parser: :json
+  # shoryuken_options queue: 'post_test', auto_delete: true, body_parser: :json
 
   def perform(sqs_message, params)
     params = params.symbolize_keys
