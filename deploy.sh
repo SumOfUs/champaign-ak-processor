@@ -1,8 +1,6 @@
 #!/bin/bash
 set -eu -o pipefail
 SHA1=$1
-# Push image to Docker Hub
-docker push soutech/champaign-ak-processor:$SHA1
 
 # Prepare the source bundle .zip
 EB_BUCKET=champaign.dockerrun.files
