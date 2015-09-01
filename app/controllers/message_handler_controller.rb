@@ -1,4 +1,5 @@
 class MessageHandlerController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def handle
     # We bump handling the message off to the same class than handles
     # reading the contents directly off of SQS in the first place.

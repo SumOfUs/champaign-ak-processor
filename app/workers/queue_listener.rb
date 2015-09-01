@@ -1,9 +1,9 @@
 class QueueListener
-  include Shoryuken::Worker
+  # include Shoryuken::Worker
   CREATE_MESSAGE_TYPE = 'create'
   ACTION_MESSAGE_TYPE = 'action'
 
-  shoryuken_options queue: 'post_test', auto_delete: true, body_parser: :json
+  # shoryuken_options queue: 'post_test', auto_delete: true, body_parser: :json
 
   def perform(sqs_message, params)
     params = params.symbolize_keys
@@ -18,7 +18,10 @@ class QueueListener
         self.create_page converter.get_params_for_donation_page
       when ACTION_MESSAGE_TYPE
         message_params = params[:params]
-        self.get_action_creator.create_action(message_params[:slug], message_params[:email])
+        # We pass the rest of message params to `create_action` in order to allow for more fields than
+        # just the email address being passed along for the user. `create_action` can filter the
+        # params on its own, so we don't have to worry about passing along invalid fields.
+        self.get_action_creator.create_action(message_params[:slug], message_params[:email], message_params)
       else
         # You've provided an unsupported type of message, we don't know how to handle this
     end

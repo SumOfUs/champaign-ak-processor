@@ -3,11 +3,16 @@ processor:
   volumes:
     - .:/myapp
   ports:
-    - "3002:3002"
+    - "3000:3000"
   external_links:
     - champaign_db_1
   environment:
     PG_USERNAME: postgres
     PG_HOST: champaign_db_1
 
-  command: bundle exec shoryuken -R -C config/shoryuken.yml
+db:
+  image: postgres
+  ports:
+    - "5432"
+  environment:
+      POSTGRES_DB: champaign

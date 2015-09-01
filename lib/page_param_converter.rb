@@ -41,7 +41,7 @@ class PageParamConverter
 
   def find_language_uri_code(language_id)
     language = Language.find language_id
-    AkLanguageUriFinder.get_ak_language_uri language.language_code
+    AkLanguageUriFinder.get_ak_language_uri language.code
   end
 
   def find_absolute_page_url(slug)

@@ -4,4 +4,4 @@ aws:
   region: us-west-2
 concurrency: 10
 queues:
-  - post_test
+  - champaign_development
