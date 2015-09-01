@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20150731143047) do
   end
 
   create_table "languages", force: :cascade do |t|
-    t.string   "language_code", null: false
-    t.string   "language_name", null: false
+    t.string   "code", null: false
+    t.string   "name", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
