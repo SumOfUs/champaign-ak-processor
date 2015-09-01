@@ -8,5 +8,8 @@ class MessageHandlerController < ApplicationController
     # getting the messages fed to us by SQS via POST to this HTTP endpoint
     # as is the standard for the Worker Tier in Elastic Beanstalk.
     QueueListener.new.perform(nil, params)
+    
+    # Tell SQS everything went hunky dory and we can delete the message.
+    render nothing: true, status: 200
   end
 end
