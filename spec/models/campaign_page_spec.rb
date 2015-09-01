@@ -5,7 +5,7 @@ describe CampaignPage do
   it {should respond_to :messages}
 
   let(:page) {
-    language = Language.create! language_code: 'en', language_name: 'English'
+    language = Language.create! code: 'en', name: 'English'
     CampaignPage.create! title: 'A nice title', language_id: language.id,
                          slug: 'test-slug', active: true, featured: false
   }
