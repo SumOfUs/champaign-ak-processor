@@ -6,7 +6,7 @@ describe PageParamConverter do
   let(:title) { 'A test title' }
   let(:page_id) { 1 }
   let(:created_language) {
-    Language.create! language_code: language_code, language_name: 'English'
+    Language.create! code: language_code, name: 'English'
   }
   let(:params) {
     {
