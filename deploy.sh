@@ -1,7 +1,8 @@
 #!/bin/bash
 set -eu -o pipefail
 SHA1=$1
-AWS_ENVIRONMENT_NAME=$2
+AWS_APPLICATION_NAME=$2
+AWS_ENVIRONMENT_NAME=$3
 
 # Prepare the source bundle .zip
 EB_BUCKET=champaign.dockerrun.files
