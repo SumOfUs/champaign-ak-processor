@@ -30,9 +30,9 @@ deployment:
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push soutech/champaign-ak-processor
-      - ./deploy.sh $CIRCLE_SHA1 'champaign' 'ak-processor-production'
-    branch: aws-deploy
+      - ./deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-production'
+    branch: development
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push soutech/champaign-ak-processor
-      - ./deploy.sh $CIRCLE_SHA1 'champaign' 'ak-processor-production'
+      - ./deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-staging'
