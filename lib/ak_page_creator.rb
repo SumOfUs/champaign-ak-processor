@@ -21,6 +21,7 @@ class AkPageCreator < AkCreator
 
   def process_create_request(request, page_id)
     page = Page.find page_id
+
     if request.response.class == Net::HTTPCreated
       page.status = 'success'
       page.save
@@ -44,3 +45,4 @@ class AkPageCreator < AkCreator
     @connection.create_donation_page name, title, language, url
   end
 end
+
