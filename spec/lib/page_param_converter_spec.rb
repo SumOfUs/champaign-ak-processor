@@ -5,15 +5,12 @@ describe PageParamConverter do
   let(:slug) { 'a-test-slug' }
   let(:title) { 'A test title' }
   let(:page_id) { 1 }
-  let(:created_language) {
-    Language.create! code: language_code, name: 'English'
-  }
   let(:params) {
     {
         slug: slug,
         title: title,
         id: page_id,
-        language_id: created_language.id,
+        language_code: 'en'
     }
   }
   it 'gets params for petition pages' do

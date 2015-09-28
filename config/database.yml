@@ -8,7 +8,7 @@ development: &default
 
 test:
   <<: *default
-  database: champaign_test
+  database: champaign
 
 production:
   adapter: postgresql

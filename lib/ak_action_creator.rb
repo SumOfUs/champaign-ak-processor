@@ -1,5 +1,5 @@
 class AkActionCreator < AkCreator
-  def create_action(page_name, email, additional_fields = {})
-    @connection.create_action page_name, email, additional_fields
+  def create_action(page_name, params)
+    @connection.create_action(page_name, params[:email], params)
   end
 end

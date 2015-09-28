@@ -21,13 +21,18 @@ test:
 
 database:
   override:
-    - echo "look in circle/run-tests for database setup for testing environment"
+    - echo "Look in circle/run-tests for database setup for testing environment."
 
 deployment:
   production:
   # push to Docker Hub and deploy new version on AWS
-    branch: aws-deploy
+    branch: master
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push soutech/champaign-ak-processor
-      - ./deploy.sh $CIRCLE_SHA1
+      - ./deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-production'
+    branch: development
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push soutech/champaign-ak-processor
+      - ./deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-staging'
