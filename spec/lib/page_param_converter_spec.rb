@@ -5,9 +5,6 @@ describe PageParamConverter do
   let(:slug) { 'a-test-slug' }
   let(:title) { 'A test title' }
   let(:page_id) { 1 }
-  let(:created_language) {
-    Language.create! code: language_code, name: 'English'
-  }
   let(:params) {
     {
         slug: slug,
