@@ -9,7 +9,7 @@ class PageParamConverter
         name: @params[:slug], # We don't change the slug for petitions because this keeps old petitions viable.
         title: self.convert_title_for_petition(@params[:title]),
         page_id: @params[:id],
-        language_uri: self.find_language_uri_code(@params[:language_id]),
+        language_uri: self.find_language_uri_code(@params[:language_code]),
         url: self.find_absolute_page_url(@params[:slug]),
         page_type: AkPageCreator.page_types[:petition]
     }
@@ -20,7 +20,7 @@ class PageParamConverter
         name: self.convert_slug_for_donation(@params[:slug]),
         title: self.convert_title_for_donation(@params[:title]),
         page_id: @params[:id],
-        language_uri: self.find_language_uri_code(@params[:language_id]),
+        language_uri: self.find_language_uri_code(@params[:language_code]),
         url: self.find_absolute_page_url(@params[:slug]),
         page_type: AkPageCreator.page_types[:donation]
     }
@@ -39,12 +39,13 @@ class PageParamConverter
     title + ' [Donation]'
   end
 
-  def find_language_uri_code(language_id)
-    language = Language.find language_id
-    AkLanguageUriFinder.get_ak_language_uri language.code
+  def find_language_uri_code(lang_code)
+    #language = Language.find language_id
+    AkLanguageUriFinder.get_ak_language_uri lang_code
   end
 
   def find_absolute_page_url(slug)
-    ENV['ROOT_ACTION_URL'] + slug
+    "https://act.sumofus.org/a/#{slug}"
+    #ENV['ROOT_ACTION_URL'] + slug
   end
 end
