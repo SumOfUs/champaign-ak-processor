@@ -13,7 +13,7 @@ describe PageParamConverter do
         slug: slug,
         title: title,
         id: page_id,
-        language_id: created_language.id,
+        language_code: 'en'
     }
   }
   it 'gets params for petition pages' do
