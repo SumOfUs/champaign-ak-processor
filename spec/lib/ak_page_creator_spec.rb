@@ -8,7 +8,7 @@ describe AkPageCreator do
   let(:creator) { AkPageCreator.new hostname, username, password }
   let(:page) {
     language = Language.create! code: 'en', name: 'English'
-    CampaignPage.create! title: 'A nice title', language_id: language.id,
+    Page.create! title: 'A nice title', language_id: language.id,
                          slug: 'test-slug', active: true, featured: false
   }
   let(:good_response) { {status: [201, 'Created']} }
@@ -49,7 +49,7 @@ describe AkPageCreator do
                         AkPageCreator.page_types[:petition],
                         page.id
 
-    expect(CampaignPage.find(saved_page.id).status).to eq('success')
+    expect(Page.find(saved_page.id).status).to eq('success')
   end
 
   it 'correctly sets a successful status' do
@@ -62,7 +62,7 @@ describe AkPageCreator do
                         AkPageCreator.page_types[:petition],
                         page.id
 
-    refreshed_page = CampaignPage.find(saved_page.id)
+    refreshed_page = Page.find(saved_page.id)
     expect(refreshed_page.status).to eq('failed')
     expect(refreshed_page.messages).to eq(bad_messages.to_json)
   end
