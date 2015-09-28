@@ -1,6 +1,6 @@
 class AkLanguageUriFinder
   LANGUAGE_MAPPINGS = {
-      en: ENV['ENGLISH_URI'] || '/rest/v1/language/100/',
+      en: ENV['ENGLISH_URI'],
       de: ENV['GERMAN_URI'],
       fr: ENV['FRENCH_URI'],
       es: ENV['SPANISH_URI'],

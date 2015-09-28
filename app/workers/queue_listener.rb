@@ -12,15 +12,12 @@ class QueueListener
         # We blindly create both page types, because we can use pages for
         # both petitions and donations, and there's essentially no overhead to doing
         # this on our end.
-        pp self.create_page converter.get_params_for_petition_page
         self.create_page converter.get_params_for_donation_page
       when ACTION_MESSAGE_TYPE
-        message_params = params[:params]
         # We pass the rest of message params to `create_action` in order to allow for more fields than
         # just the email address being passed along for the user. `create_action` can filter the
         # params on its own, so we don't have to worry about passing along invalid fields.
-        resp = QueueListener.get_action_creator.create_action(message_params[:slug], params[:params])
-
+        QueueListener.get_action_creator.create_action(params[:params][:slug], params[:params])
       else
         # You've provided an unsupported type of message, we don't know how to handle this
     end

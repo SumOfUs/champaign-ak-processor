@@ -40,12 +40,10 @@ class PageParamConverter
   end
 
   def find_language_uri_code(lang_code)
-    #language = Language.find language_id
-    AkLanguageUriFinder.get_ak_language_uri lang_code
+    AkLanguageUriFinder.get_ak_language_uri(lang_code)
   end
 
   def find_absolute_page_url(slug)
-    "https://act.sumofus.org/a/#{slug}"
-    #ENV['ROOT_ACTION_URL'] + slug
+    ENV['ROOT_ACTION_URL'] + slug
   end
 end

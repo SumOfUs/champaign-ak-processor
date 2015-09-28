@@ -1,7 +1,3 @@
-ENV['AK_HOST'] = 'https://act.sumofus.org/rest/v1'
-ENV['AK_USERNAME'] = 'api'
-ENV['AK_PASSWORD'] = '0oLvG1~9]3(YE?P'
-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
