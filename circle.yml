@@ -16,7 +16,7 @@ test:
   override:
     # tests the built image
     - cat circle/docker-compose-template.yml | envsubst > circle/docker-compose.yml
-    - cat Dockerrun.aws.json.template | envsubst > $CIRCLE_SHA1-Dockerrun.aws.json
+    - cat Dockerrun.aws.json.template | envsubst > Dockerrun.aws.json
     - annotate-output docker-compose -f circle/docker-compose.yml run processor
 
 database:
@@ -31,7 +31,7 @@ deployment:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push soutech/champaign-ak-processor
       - ./deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-production'
-    branch: development
+    branch: aws-deploy
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push soutech/champaign-ak-processor
