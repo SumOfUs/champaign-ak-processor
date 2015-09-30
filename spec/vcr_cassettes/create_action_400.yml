@@ -1,0 +1,35 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/action/
+    body:
+      encoding: UTF-8
+      string: page=i-do-not-exist&email=foo%40example.com
+    headers: {}
+  response:
+    status:
+      code: 400
+      message: BAD REQUEST
+    headers:
+      Date:
+      - Fri, 02 Oct 2015 10:55:08 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-03.actionkit.com
+      Vary:
+      - Cookie,Accept-Encoding,User-Agent
+      Set-Cookie:
+      - sid=eksk17m9fyrim1kh4bq4yhtso1llhj8f; expires=Fri, 02-Oct-2015 18:46:22 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: '{"page": "Unable to find a page for processing. You sent page=i-do-not-exist."}'
+    http_version: 
+  recorded_at: Fri, 02 Oct 2015 10:46:22 GMT
+recorded_with: VCR 2.9.3

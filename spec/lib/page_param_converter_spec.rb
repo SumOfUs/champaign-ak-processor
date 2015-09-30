@@ -18,8 +18,8 @@ describe PageParamConverter do
         name: slug,
         title: title + ' [Petition]',
         page_id: page_id,
-        language_uri: AkLanguageUriFinder.get_ak_language_uri(language_code),
-        url: ENV['ROOT_ACTION_URL'] + slug,
+        language: AkLanguageUriFinder.get_ak_language_uri(language_code),
+        url: ENV['ROOT_ACTION_URL'] + "/" + slug,
         page_type: AkPageCreator.page_types[:petition]
     }
     expect(PageParamConverter.new(params).get_params_for_petition_page).to eq(expected_params)
@@ -30,8 +30,8 @@ describe PageParamConverter do
         name: slug + '-donation',
         title: title + ' [Donation]',
         page_id: page_id,
-        language_uri: AkLanguageUriFinder.get_ak_language_uri(language_code),
-        url: ENV['ROOT_ACTION_URL'] + slug,
+        language: AkLanguageUriFinder.get_ak_language_uri(language_code),
+        url: ENV['ROOT_ACTION_URL'] + "/" + slug,
         page_type: AkPageCreator.page_types[:donation]
     }
     expect(PageParamConverter.new(params).get_params_for_donation_page).to eq(expected_params)

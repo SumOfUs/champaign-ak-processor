@@ -20,7 +20,7 @@ class AkPageCreator < AkCreator
   end
 
   def process_create_request(request, page_id)
-    page = Page.find page_id
+    page = Page.find(page_id)
 
     if request.response.class == Net::HTTPCreated
       page.status = 'success'
@@ -30,6 +30,12 @@ class AkPageCreator < AkCreator
       page.messages = request.parsed_response.to_json
       page.save
     end
+
+    AkLog.create({
+      resource: 'create',
+      response_body: request.response.body,
+      response_status: request.response.code
+    })
   end
 
   def self.page_types
