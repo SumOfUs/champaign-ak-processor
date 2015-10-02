@@ -1,0 +1,77 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/
+    body:
+      encoding: UTF-8
+      string: '{"type":"petitionpage","hidden":false,"name":"abcd_efgh_ijkl2hkjh_dad_defdf_dsad","title":"Test
+        AA3 [OMAR] [Petition]","lang":null,"canonical_url":"http://example.com/abcd_efgh_ijkl2hkjh_dad_defdf_dsad"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Fri, 02 Oct 2015 10:55:52 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-02.actionkit.com
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      Location:
+      - https://act.sumofus.org/rest/v1/petitionpage/8769/
+      Set-Cookie:
+      - sid=rqhda887q18gr0mq2a4cbend7fsw1hgv; expires=Fri, 02-Oct-2015 18:47:07 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 02 Oct 2015 10:47:07 GMT
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/
+    body:
+      encoding: UTF-8
+      string: '{"type":"donationpage","hidden":false,"name":"abcd_efgh_ijkl2hkjh_dad_defdf_dsad-donation","title":"Test
+        AA3 [OMAR] [Donation]","lang":null,"canonical_url":"http://example.com/abcd_efgh_ijkl2hkjh_dad_defdf_dsad"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Fri, 02 Oct 2015 10:55:53 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-01.actionkit.com
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      Location:
+      - https://act.sumofus.org/rest/v1/donationpage/8770/
+      Set-Cookie:
+      - sid=mf163onx6x7upzadbrd8jg8mtp2bj351; expires=Fri, 02-Oct-2015 18:47:08 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 02 Oct 2015 10:47:08 GMT
+recorded_with: VCR 2.9.3

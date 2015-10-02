@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924201854) do
+ActiveRecord::Schema.define(version: 20150930130924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(version: 20150924201854) do
 
   add_index "actions", ["action_user_id"], name: "index_actions_on_action_user_id", using: :btree
   add_index "actions", ["page_id"], name: "index_actions_on_page_id", using: :btree
+
+  create_table "ak_logs", force: :cascade do |t|
+    t.text     "request_body"
+    t.text     "response_body"
+    t.string   "response_status"
+    t.string   "resource"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "campaigns", force: :cascade do |t|
     t.string   "name"
@@ -138,21 +147,23 @@ ActiveRecord::Schema.define(version: 20150924201854) do
   create_table "pages", force: :cascade do |t|
     t.integer  "language_id"
     t.integer  "campaign_id"
-    t.string   "title",                                null: false
-    t.string   "slug",                                 null: false
+    t.string   "title",                                          null: false
+    t.string   "slug",                                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "compiled_html"
-    t.string   "status",           default: "pending"
+    t.string   "status",                     default: "pending"
     t.text     "messages"
-    t.text     "content",          default: ""
-    t.boolean  "thermometer",      default: false
-    t.boolean  "featured",         default: false
-    t.boolean  "active",           default: false
+    t.text     "content",                    default: ""
+    t.boolean  "thermometer",                default: false
+    t.boolean  "featured",                   default: false
+    t.boolean  "active",                     default: false
     t.integer  "liquid_layout_id"
+    t.integer  "secondary_liquid_layout_id"
   end
 
   add_index "pages", ["liquid_layout_id"], name: "index_pages_on_liquid_layout_id", using: :btree
+  add_index "pages", ["secondary_liquid_layout_id"], name: "index_pages_on_secondary_liquid_layout_id", using: :btree
 
   create_table "pages_tags", force: :cascade do |t|
     t.integer "page_id"
@@ -291,9 +302,11 @@ ActiveRecord::Schema.define(version: 20150924201854) do
   add_foreign_key "pages", "campaigns"
   add_foreign_key "pages", "languages"
   add_foreign_key "pages", "liquid_layouts"
+  add_foreign_key "pages", "liquid_layouts", column: "secondary_liquid_layout_id"
   add_foreign_key "plugins_actions", "forms"
   add_foreign_key "plugins_actions", "pages"
   add_foreign_key "plugins_thermometers", "pages"
   add_foreign_key "share_emails", "pages"
   add_foreign_key "share_twitters", "pages"
 end
+
