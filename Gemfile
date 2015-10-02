@@ -47,10 +47,10 @@ group :development, :test do
 
   # Rspec for testing
   gem 'rspec-rails', '~> 3.3'
+  gem 'vcr'
 
   # Needed for testing API calls to the AK API
   gem 'webmock'
-
   gem 'database_cleaner'
 end
 

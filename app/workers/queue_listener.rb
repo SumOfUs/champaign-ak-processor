@@ -12,6 +12,7 @@ class QueueListener
         # We blindly create both page types, because we can use pages for
         # both petitions and donations, and there's essentially no overhead to doing
         # this on our end.
+        self.create_page converter.get_params_for_petition_page
         self.create_page converter.get_params_for_donation_page
       when ACTION_MESSAGE_TYPE
         # We pass the rest of message params to `create_action` in order to allow for more fields than
@@ -40,7 +41,7 @@ class QueueListener
     self.get_page_creator.create_page(
         params[:name],
         params[:title],
-        params[:language_uri],
+        params[:language],
         params[:url],
         params[:page_type],
         params[:page_id]
