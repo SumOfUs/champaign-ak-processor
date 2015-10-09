@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'envyable'
 
 # For interacting with the ActionKit API.
-gem 'actionkit_connector', '~> 0.1.1'
+gem 'actionkit_connector', '~> 0.1.3'
 
 # For pushing out updates after processing an event.
 gem 'pusher'
