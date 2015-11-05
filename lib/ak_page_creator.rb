@@ -1,5 +1,14 @@
 class AkPageCreator < AkCreator
-  SUPPORTED_PAGE_TYPES = {petition: 'petition', donation: 'donation'}
+  SUPPORTED_PAGE_TYPES = {
+    petition: 'petition',
+    donation: 'donation'
+  }
+
+  class << self
+    def create_page(name, title, language, url, type, page_id)
+      new.create_page(name, title, language, url, type, page_id)
+    end
+  end
 
   def create_page(name, title, language, url, type, page_id)
     translated_language = AkLanguageUriFinder.get_ak_language_uri(language)
@@ -44,11 +53,11 @@ class AkPageCreator < AkCreator
 
   protected
   def create_petition_page(name, title, language, url)
-    @connection.create_petition_page name, title, language, url
+    client.create_petition_page name, title, language, url
   end
 
   def create_donation_page(name, title, language, url)
-    @connection.create_donation_page name, title, language, url
+    client.create_donation_page name, title, language, url
   end
 end
 
