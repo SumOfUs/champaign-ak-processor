@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe PageParamConverter do
+  before do
+    allow(ENV).to receive(:[]).with('ROOT_ACTION_URL'){ 'http://example.com' }
+  end
   let(:language_code) { 'en' }
   let(:slug) { 'a-test-slug' }
   let(:title) { 'A test title' }
@@ -19,7 +22,7 @@ describe PageParamConverter do
         title: title + ' [Petition]',
         page_id: page_id,
         language: AkLanguageUriFinder.get_ak_language_uri(language_code),
-        url: ENV['ROOT_ACTION_URL'] + "/" + slug,
+        url: "http://example.com/#{slug}",
         page_type: AkPageCreator.page_types[:petition]
     }
     expect(PageParamConverter.new(params).get_params_for_petition_page).to eq(expected_params)
@@ -31,7 +34,7 @@ describe PageParamConverter do
         title: title + ' [Donation]',
         page_id: page_id,
         language: AkLanguageUriFinder.get_ak_language_uri(language_code),
-        url: ENV['ROOT_ACTION_URL'] + "/" + slug,
+        url: "http://example.com/#{slug}",
         page_type: AkPageCreator.page_types[:donation]
     }
     expect(PageParamConverter.new(params).get_params_for_donation_page).to eq(expected_params)

@@ -25,7 +25,7 @@ class QueueListener
   private
 
   def create_action(params)
-    AkActionCreator.create_action(params[:params][:slug], params[:params])
+    AkActionCreator.create_action(params[:params][:slug], params[:params][:body])
   end
 
   def create_page(params)

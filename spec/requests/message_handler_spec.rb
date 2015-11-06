@@ -59,9 +59,11 @@ describe "Logging API requests" do
       let(:params) do
         { type: 'action',
           params: {
-          slug: 'foo-bar',
-          email: "foo@example.com"
-        }
+            slug: 'foo-bar',
+            body: {
+              email: "foo@example.com"
+            }
+          }
         }
       end
 
@@ -80,7 +82,9 @@ describe "Logging API requests" do
         { type: 'action',
           params: {
             slug: 'i-do-not-exist',
-            email: "foo@example.com"
+            body: {
+              email: "foo@example.com"
+            }
           }
         }
       end
