@@ -1,10 +1,12 @@
 class QueueListener
   CREATE_MESSAGE_TYPE = 'create'
   ACTION_MESSAGE_TYPE = 'action'
-
+  UPDATE_PAGE_MESSAGE_TYPE = 'update'
 
   def perform(sqs_message, params)
     case params[:type]
+      when UPDATE_PAGE_MESSAGE_TYPE
+        update_resource(params)
       when CREATE_MESSAGE_TYPE
         converter = PageParamConverter.new(params[:params])
         # We blindly create both page types, because we can use pages for
@@ -18,7 +20,7 @@ class QueueListener
         # params on its own, so we don't have to worry about passing along invalid fields.
         create_action(params)
       else
-        # You've provided an unsupported type of message, we don't know how to handle this
+        raise ArgumentError, "Unsupported message type: #{params[:type]}"
     end
   end
 
@@ -26,6 +28,10 @@ class QueueListener
 
   def create_action(params)
     AkActionCreator.create_action(params[:params][:slug], params[:params][:body])
+  end
+
+  def update_resource(params)
+    Ak::Updater.update(uri: params[:uri], body: params[:params])
   end
 
   def create_page(params)
