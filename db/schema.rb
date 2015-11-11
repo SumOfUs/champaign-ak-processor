@@ -152,17 +152,22 @@ ActiveRecord::Schema.define(version: 20150930130924) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "compiled_html"
-    t.string   "status",                     default: "pending"
-    t.text     "messages"
     t.text     "content",                    default: ""
     t.boolean  "thermometer",                default: false
     t.boolean  "featured",                   default: false
     t.boolean  "active",                     default: false
+    t.string   "status",                     default: "pending"
+    t.text     "messages"
     t.integer  "liquid_layout_id"
     t.integer  "secondary_liquid_layout_id"
+    t.integer  "action_count",               default: 0
+    t.integer  "primary_image_id"
+    t.string   "ak_petition_resource_uri"
+    t.string   "ak_donation_resource_uri"
   end
 
   add_index "pages", ["liquid_layout_id"], name: "index_pages_on_liquid_layout_id", using: :btree
+  add_index "pages", ["primary_image_id"], name: "index_pages_on_primary_image_id", using: :btree
   add_index "pages", ["secondary_liquid_layout_id"], name: "index_pages_on_secondary_liquid_layout_id", using: :btree
 
   create_table "pages_tags", force: :cascade do |t|
