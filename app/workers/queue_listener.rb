@@ -2,6 +2,7 @@ class QueueListener
   CREATE_MESSAGE_TYPE = 'create'
   ACTION_MESSAGE_TYPE = 'action'
   UPDATE_PAGE_MESSAGE_TYPE = 'update'
+  DONATION_ACTION_MESSAGE_TYPE = 'donation'
 
   def perform(sqs_message, params)
     case params[:type]
@@ -19,6 +20,8 @@ class QueueListener
         # just the email address being passed along for the user. `create_action` can filter the
         # params on its own, so we don't have to worry about passing along invalid fields.
         create_action(params)
+      when DONATION_ACTION_MESSAGE_TYPE
+        create_donation(params)
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
     end
@@ -32,6 +35,10 @@ class QueueListener
 
   def update_resource(params)
     Ak::Updater.update(uri: params[:uri], body: params[:params])
+  end
+
+  def create_donation(params)
+    AkDonationActionCreator.create_donation_action(params[:params])
   end
 
   def create_page(params)
