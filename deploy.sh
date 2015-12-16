@@ -7,9 +7,10 @@ AWS_ENVIRONMENT_NAME=$3
 # Set configuration for logging with Papertrail
 export PAPERTRAIL_HOST=$(cut -d ":" -f 1 <<< $4)
 export PAPERTRAIL_PORT=$(cut -d ":" -f 2 <<< $4)
+export PAPERTRAIL_SYSTEM=$3
 
 # Set the right place for paper trail logging
-cat .ebextensions/02_papertrail.config | envsubst '$PAPERTRAIL_HOST:$PAPERTRAIL_PORT' >tmp
+cat .ebextensions/02_papertrail.config | envsubst '$PAPERTRAIL_HOST:$PAPERTRAIL_PORT:$PAPERTRAIL_SYSTEM' >tmp
 mv tmp .ebextensions/02_papertrail.config
 
 # Prepare the source bundle .zip
