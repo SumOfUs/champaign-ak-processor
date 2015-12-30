@@ -12,4 +12,3 @@ describe AkActionCreator do
   end
 
 end
-
