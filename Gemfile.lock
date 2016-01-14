@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    actionkit_connector (0.2.0)
+    actionkit_connector (0.3.0)
       httparty (~> 0.13)
     actionmailer (4.2.5)
       actionpack (= 4.2.5)
@@ -182,7 +182,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionkit_connector (~> 0.2.0)
+  actionkit_connector (~> 0.3.0)
   byebug
   coffee-rails (~> 4.1.0)
   database_cleaner

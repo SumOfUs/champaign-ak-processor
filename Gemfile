@@ -9,8 +9,11 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+
+# For interacting with the ActionKit API.
+gem 'actionkit_connector', '~> 0.3.0'
 gem 'puma', '~> 2.15.3'
-gem 'actionkit_connector', '~> 0.2.0'
 
 # For pushing out updates after processing an event.
 gem 'pusher'
