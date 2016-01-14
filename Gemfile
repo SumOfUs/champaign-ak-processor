@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 
 # For interacting with the ActionKit API.
-gem 'actionkit_connector', '~> 0.2.0'
+gem 'actionkit_connector', '~> 0.3.0'
 
 # For pushing out updates after processing an event.
 gem 'pusher'
