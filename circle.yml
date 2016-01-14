@@ -37,3 +37,4 @@ deployment:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push soutech/champaign-ak-processor
       - ./deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-staging' 'logs3.papertrailapp.com:34848'
+
