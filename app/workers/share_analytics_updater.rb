@@ -9,8 +9,10 @@ class ShareAnalyticsUpdater
       uri = 'http://run.shareprogress.org/api/v1/buttons/analytics'
       uri = URI.parse(uri)
 
-      response = Net::HTTP.post_form(uri, {key: Settings.share_progress_api_key, id: button.sp_id})
-      button.update(analytics: response.body )
+      response = Net::HTTP.post_form(uri, {key: ENV['SHARE_PROGRESS_API_KEY'], id: button.sp_id})
+      if response.success?
+        button.update(analytics: response.body )
+      end
     end
 
     puts "Fetching has completed."
