@@ -1,5 +1,5 @@
 version: 1
 cron:
- - name: "update-share-statistics"          # required - unique across all entries in this file
-   url: "/update-share-statistics"              # required - does not need to be unique
+ - name: "update_share_analytics"          # required - unique across all entries in this file
+   url: "/update_share_analytics"              # required - does not need to be unique
    schedule: "*/5 * * * *"    # required - does not need to be unique

@@ -1,4 +1,5 @@
 class MessageHandlerController < ApplicationController
+  include HTTParty
   skip_before_action :verify_authenticity_token
   def handle
     # We bump handling the message off to the same class that handles
@@ -11,6 +12,10 @@ class MessageHandlerController < ApplicationController
 
     # Tell SQS everything went hunky dory and we can delete the message.
     render nothing: true, status: 200
+  end
+
+  def dispatch_shareprogress_update
+    ShareAnalyticsUpdater.dispatch_update
   end
 end
 
