@@ -10,8 +10,11 @@ class ShareAnalyticsUpdater
       uri = URI.parse(uri)
 
       response = Net::HTTP.post_form(uri, {key: ENV['SHARE_PROGRESS_API_KEY'], id: button.sp_id})
-      if response.success?
+      parsed_body = JSON.parse(response.body).with_indifferent_access
+      if parsed_body[:success]
         button.update(analytics: response.body )
+      else
+        raise "ShareProgress button update failed with the following message from their API: #{parsed_body[:message]}."
       end
     end
 
