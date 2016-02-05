@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://run.shareprogress.org/api/v1/buttons/analytics
+    body:
+      encoding: US-ASCII
+      string: key=<SP_API_KEY>&id=148454
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - run.shareprogress.org
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Connection:
+      - close
+      Date:
+      - Fri, 05 Feb 2016 00:56:59 GMT
+      Status:
+      - 200 OK
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Ua-Compatible:
+      - chrome=1
+      X-Ratelimit-Limit:
+      - '30'
+      X-Ratelimit-Remaining:
+      - '29'
+      X-Ratelimit-Reset:
+      - '1454633877'
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - '"834e43a7514216dd39e5d509b40b3a5a"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5d687c81-1374-468d-9f53-6cbfd6b2c30d
+      X-Runtime:
+      - '2.229623'
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"response":[{"created_at":null,"id":148454,"share_types":{"email":{"shares":0,"viral_visits":0,"viral_actions":0},"facebook":{"shares":2,"viral_visits":0,"viral_actions":0},"twitter":{"shares":0,"viral_visits":0,"viral_actions":0},"dark_social":{"shares":0,"viral_visits":0,"viral_actions":0}},"generations":[{"generation":1,"shares":2,"visits":1}],"share_tests":{"email":[{"shares":0,"successful_shares":0,"conversion":0.0,"ci":0.0,"confidence":"--","improvement":"--","winner":false,"id":467571,"weight":"100.0%"}],"facebook":[{"shares":0,"successful_shares":0,"conversion":0.0,"ci":0.0,"confidence":"--","improvement":"--","winner":false,"id":467622,"weight":"33.3%"},{"shares":0,"successful_shares":0,"conversion":0.0,"ci":0.0,"confidence":"0.0%","improvement":"\u0026#8734;","winner":false,"id":468878,"weight":"33.3%"},{"shares":0,"successful_shares":0,"conversion":0.0,"ci":0.0,"confidence":"0.0%","improvement":"\u0026#8734;","winner":false,"id":468879,"weight":"33.3%"}],"twitter":[{"shares":0,"successful_shares":0,"conversion":0.0,"ci":0.0,"confidence":"--","improvement":"--","winner":false,"id":467572,"weight":"100.0%"}]},"total":{"total_visitors":1,"total_shares":2,"total_viral_visitors":0,"total_viral_actions":0}}],"message":null}'
+    http_version: 
+  recorded_at: Fri, 05 Feb 2016 00:56:59 GMT
+recorded_with: VCR 3.0.0
