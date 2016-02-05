@@ -1,0 +1,81 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/
+    body:
+      encoding: UTF-8
+      string: '{"type":"petitionpage","hidden":false,"name":"this-page-does-not-exist-1234","title":"Foo
+        Bar [Petition]","language":null,"canonical_url":"http://example.com/this-page-does-not-exist-1234"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Fri, 05 Feb 2016 15:00:54 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-02.actionkit.com
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      Location:
+      - https://act.sumofus.org/rest/v1/petitionpage/11247/
+      Set-Cookie:
+      - sid=0f98ncb19q0loidfxwk6k5gsj44uw5fk; expires=Fri, 05-Feb-2016 22:48:10 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 05 Feb 2016 14:48:10 GMT
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/
+    body:
+      encoding: UTF-8
+      string: '{"type":"donationpage","hidden":false,"name":"this-page-does-not-exist-1234-donation","title":"Foo
+        Bar [Donation]","language":null,"canonical_url":"http://example.com/this-page-does-not-exist-1234"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Fri, 05 Feb 2016 15:00:55 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-02.actionkit.com
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      Location:
+      - https://act.sumofus.org/rest/v1/donationpage/11248/
+      Set-Cookie:
+      - sid=rltt4qdm1ysree0ol3eya8jf4m2kz7jv; expires=Fri, 05-Feb-2016 22:48:11 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 05 Feb 2016 14:48:12 GMT
+recorded_with: VCR 3.0.0

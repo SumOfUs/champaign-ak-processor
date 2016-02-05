@@ -30,7 +30,10 @@ class QueueListener
   private
 
   def create_action(params)
-    AkActionCreator.create_action(params[:params][:slug], params[:params][:body])
+    data = params[:params][:body].merge( page: params[:params].fetch(:slug) )
+    data[:mailing_id] = data.fetch(:akid, '').split('.').first
+
+    AkActionCreator.create_action(data)
   end
 
   def update_resource(params)

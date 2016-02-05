@@ -1,0 +1,77 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/
+    body:
+      encoding: UTF-8
+      string: '{"type":"petitionpage","hidden":false,"name":"this-page-does-not-exist-1234","title":"Foo
+        Bar [Petition]","language":null,"canonical_url":"http://example.com/this-page-does-not-exist-1234"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 400
+      message: BAD REQUEST
+    headers:
+      Date:
+      - Fri, 05 Feb 2016 15:00:56 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-03.actionkit.com
+      Vary:
+      - Cookie,Accept-Encoding,User-Agent
+      Set-Cookie:
+      - sid=a739he7i826esp06h3omlzl6ld76hpr5; expires=Fri, 05-Feb-2016 22:48:13 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: '{"petitionpage": {"name": ["Page with this Short name already exists."]}}'
+    http_version: 
+  recorded_at: Fri, 05 Feb 2016 14:48:13 GMT
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/
+    body:
+      encoding: UTF-8
+      string: '{"type":"donationpage","hidden":false,"name":"this-page-does-not-exist-1234-donation","title":"Foo
+        Bar [Donation]","language":null,"canonical_url":"http://example.com/this-page-does-not-exist-1234"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 400
+      message: BAD REQUEST
+    headers:
+      Date:
+      - Fri, 05 Feb 2016 15:00:57 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-01.actionkit.com
+      Vary:
+      - Cookie,Accept-Encoding,User-Agent
+      Set-Cookie:
+      - sid=en0gol6w8myr9ek74j5k4kbsbkuey1w1; expires=Fri, 05-Feb-2016 22:48:14 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: '{"donationpage": {"name": ["Page with this Short name already exists."]}}'
+    http_version: 
+  recorded_at: Fri, 05 Feb 2016 14:48:14 GMT
+recorded_with: VCR 3.0.0

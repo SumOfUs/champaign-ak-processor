@@ -8,5 +8,7 @@ class AkDonationActionCreator < AkCreator
   def create_donation_action(options)
     request = client.create_donation_action(options)
     AkLog.create(resource: 'donation', response_body: request.response.body, response_status: request.response.code)
+
+    request.response.body
   end
 end

@@ -45,7 +45,7 @@ class AkPageCreator < AkCreator
       when Net::HTTPBadRequest
         page.update(
           status: 'failed',
-          messages: request.parsed_response.to_json
+          messages: request.parsed_response
         )
     end
 
