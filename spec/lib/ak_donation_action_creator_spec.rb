@@ -25,8 +25,10 @@ describe AkDonationActionCreator do
   }
 
   it 'calls the endpoint for creating a donation action in ActionKit' do
-    stub_request(:post, 'https://fake_username:fake_password@act.sumofus.org/rest/v1/action/')
-    subject.create_donation_action(full_donation_options)
-    expect(WebMock).to have_requested(:post, 'https://fake_username:fake_password@act.sumofus.org/rest/v1/donationpush/')
+    VCR.use_cassette('AkDonationActionCreator') do
+      stub_request(:post, 'https://fake_username:fake_password@act.sumofus.org/rest/v1/action/')
+      subject.create_donation_action(full_donation_options)
+      expect(WebMock).to have_requested(:post, 'https://fake_username:fake_password@act.sumofus.org/rest/v1/donationpush/')
+    end
   end
 end

@@ -10,7 +10,19 @@ class MessageHandlerController < ApplicationController
     resp = QueueListener.new.perform(nil, params)
 
     # Tell SQS everything went hunky dory and we can delete the message.
+    send_status_ok
+  end
+
+  def dispatch_shareprogress_update
+    ShareAnalyticsUpdater.update_shares
+    send_status_ok
+  end
+
+  private
+
+  def send_status_ok
     render nothing: true, status: 200
   end
+
 end
 

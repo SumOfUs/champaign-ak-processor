@@ -16,7 +16,7 @@ mv tmp .ebextensions/02_papertrail.config
 # Prepare the source bundle .zip
 EB_BUCKET=champaign.dockerrun.files
 echo 'Shipping source bundle to S3...'
-zip -r9 $SHA1-config.zip Dockerrun.aws.json ./.ebextensions/
+zip -r9 $SHA1-config.zip Dockerrun.aws.json cron.yaml ./.ebextensions/
 SOURCE_BUNDLE=$SHA1-config.zip
 
 aws configure set default.region $AWS_REGION
