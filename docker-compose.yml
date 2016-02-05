@@ -9,6 +9,8 @@ processor:
   environment:
     PG_USERNAME: postgres
     PG_HOST: champaign_db_1
+  env_file:
+    - env.yml
 
 db:
   image: postgres
