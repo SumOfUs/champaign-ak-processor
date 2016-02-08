@@ -1,5 +1,7 @@
-PATH
-  remote: ../actionkit_connector
+GIT
+  remote: https://github.com/SumOfUs/actionkit_connector
+  revision: 37a1be69b2776140ad7d8fb0c86763fff8701dcc
+  branch: master
   specs:
     actionkit_connector (0.4.0)
       httparty (~> 0.13)

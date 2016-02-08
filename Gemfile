@@ -10,12 +10,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'typhoeus'
-
-# For interacting with the ActionKit API.
-#gem 'actionkit_connector', '~> 0.3.0'
-#gem 'actionkit_connector', git: 'https://github.com/SumOfUs/actionkit_connector', branch: 'master'
-
-gem 'actionkit_connector', path: '../actionkit_connector'
+gem 'actionkit_connector', git: 'https://github.com/SumOfUs/actionkit_connector', branch: 'master'
 gem 'puma', '~> 2.15.3'
 
 # For pushing out updates after processing an event.
