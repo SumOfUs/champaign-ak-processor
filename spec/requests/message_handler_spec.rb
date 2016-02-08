@@ -1,7 +1,30 @@
 require 'rails_helper'
 
 describe "Logging API requests" do
-  context "Page Creation" do
+  let(:page) { Page.create(title: 'Foo', slug: 'foo-bar') }
+
+  context "Updating Page Resource" do
+    let(:params) do
+      { type: 'update',
+        uri: "https://act.sumofus.org/rest/v1/petitionpage/8769/",
+        params: {
+          title: 'Foo Bar',
+          tags: ["/rest/v1/tag/878/"]
+        }
+      }
+    end
+
+    context "204 response" do
+      it "updates resource" do
+        VCR.use_cassette('update_resource_204') do
+          expect(post "/message", params).to eq(200)
+        end
+      end
+
+    end
+  end
+
+  context "Creating Page Resource" do
     let(:params) do
       { type: 'create',
         params: {
@@ -12,8 +35,6 @@ describe "Logging API requests" do
         }
       }
     end
-
-    let(:page) { Page.create(title: 'Foo', slug: 'foo-bar') }
 
     context "400 response" do
       it "logs failure" do
@@ -28,6 +49,14 @@ describe "Logging API requests" do
           expect(donation_log.response_body).to eq("{\"donationpage\": {\"name\": [\"Page with this Short name already exists.\"]}}")
         end
       end
+
+      it 'update pages' do
+        VCR.use_cassette('create_page_400') do
+          post "/message", params
+
+          expect(page.reload.status).to eq('failed')
+        end
+      end
     end
 
     context "201 response" do
@@ -40,6 +69,16 @@ describe "Logging API requests" do
             language_code: 'en'
           }
         }
+      end
+
+      it 'updates page model' do
+        VCR.use_cassette('create_page_201') do
+          post "/message", params
+
+          expect(page.reload.status).to eq('success')
+          expect(page.ak_donation_resource_uri).to eq('https://act.sumofus.org/rest/v1/donationpage/8770/')
+          expect(page.ak_petition_resource_uri).to eq('https://act.sumofus.org/rest/v1/petitionpage/8769/')
+        end
       end
 
       it "logs success" do
@@ -59,9 +98,11 @@ describe "Logging API requests" do
       let(:params) do
         { type: 'action',
           params: {
-          slug: 'foo-bar',
-          email: "foo@example.com"
-        }
+            slug: 'foo-bar',
+            body: {
+              email: "foo@example.com"
+            }
+          }
         }
       end
 
@@ -80,7 +121,9 @@ describe "Logging API requests" do
         { type: 'action',
           params: {
             slug: 'i-do-not-exist',
-            email: "foo@example.com"
+            body: {
+              email: "foo@example.com"
+            }
           }
         }
       end

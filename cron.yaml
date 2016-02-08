@@ -1,0 +1,5 @@
+version: 1
+cron:
+ - name: "update_share_analytics"
+   url: "/update_share_analytics"
+   schedule: "*/5 * * * *"

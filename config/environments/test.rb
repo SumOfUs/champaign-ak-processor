@@ -1,4 +1,16 @@
 Rails.application.configure do
+  {
+    ENGLISH_URI:  '/rest/v1/language/100/',
+    GERMAN_URI:   '/rest/v1/language/101/',
+    SPANISH_URI:  '/rest/v1/language/102/',
+    FRENCH_URI:   '/rest/v1/language/103/',
+    AK_USERNAME:  'fake_username',
+    AK_PASSWORD:  'fake_password',
+    AK_HOST:      'https://act.sumofus.org/rest/v1'
+  }.each do |key, val|
+    ENV.store(key.to_s, val)
+  end
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # The test environment is used exclusively to run your application's
