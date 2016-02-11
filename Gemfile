@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'typhoeus'
 
+#gem 'actionkit_connector', path: '../actionkit_connector'
 gem 'actionkit_connector', github: 'SumOfUs/actionkit_connector'
 gem 'puma', '~> 2.15.3'
 
@@ -27,9 +28,13 @@ end
 
 group :test do
   gem 'rspec-rails', '~> 3.3'
-  gem 'vcr'
-  gem 'webmock'
   gem 'database_cleaner'
   gem 'guard-rspec', require: false
+end
+
+
+group :test do
+  gem 'webmock'
+  gem 'vcr'
 end
 

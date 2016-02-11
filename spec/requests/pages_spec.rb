@@ -7,10 +7,11 @@ describe "REST" do
     let(:params) do
       { type: 'create',
         params: {
-        id: page.id,
-        slug: "this-page-does-not-exist-1234",
-        title: 'Foo Bar',
-        language_code: 'en' }
+          page_id: page.id,
+          slug: "this-page-does-not-exist-1234",
+          title: 'Foo Bar',
+          language: '/rest/v1/language/1234/'
+        }
       }
     end
 

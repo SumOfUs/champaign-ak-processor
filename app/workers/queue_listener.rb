@@ -1,58 +1,73 @@
 class QueueListener
-  CREATE_MESSAGE_TYPE = 'create'
-  ACTION_MESSAGE_TYPE = 'action'
-  UPDATE_PAGE_MESSAGE_TYPE = 'update'
-  DONATION_ACTION_MESSAGE_TYPE = 'donation'
+  include Ak::Client
+
+  CREATE_PAGES    = 'create'
+  CREATE_ACTION   = 'action'
+  CREATE_DONATION = 'donation'
+  UPDATE_PAGES    = 'update_pages'
 
   def perform(sqs_message, params)
     case params[:type]
-      when UPDATE_PAGE_MESSAGE_TYPE
-        update_resource(params)
-      when CREATE_MESSAGE_TYPE
-        converter = PageParamConverter.new(params[:params])
-        # We blindly create both page types, because we can use pages for
-        # both petitions and donations, and there's essentially no overhead to doing
-        # this on our end.
-        create_page converter.get_params_for_petition_page
-        create_page converter.get_params_for_donation_page
-      when ACTION_MESSAGE_TYPE
-        # We pass the rest of message params to `create_action` in order to allow for more fields than
-        # just the email address being passed along for the user. `create_action` can filter the
-        # params on its own, so we don't have to worry about passing along invalid fields.
+      when UPDATE_PAGES
+        update_pages(params)
+
+      when CREATE_PAGES
+        create_pages( params[:params] )
+
+      when CREATE_ACTION
         create_action(params)
-      when DONATION_ACTION_MESSAGE_TYPE
+
+      when CREATE_DONATION
         create_donation(params)
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
     end
   end
 
-  private
+  def update_pages(params)
+    data = params[:params]
+    data.delete(:name)
 
-  def create_action(params)
-    data = params[:params][:body].merge( page: params[:params].fetch(:slug) )
-    data[:mailing_id] = data.fetch(:akid, '').split('.').first
-
-    AkActionCreator.create_action(data)
+    client.update_petition_page( data.merge(id: petition_id(params) ))
+    client.update_donation_page( data.merge(id: donation_id(params) ))
   end
 
-  def update_resource(params)
-    Ak::Updater.update(uri: params[:uri], body: params[:params])
+  private
+
+  def petition_id(params)
+    params.fetch(:petition_uri, '').match(/(\d+)\/$/)[1]
+  end
+
+  def donation_id(params)
+    params.fetch(:donation_uri, '').match(/(\d+)\/$/)[1]
+  end
+
+  def create_action(params)
+    data = params[:params]
+    data[:mailing_id] = extract_mailing_id(data[:akid])
+    client.create_action(data)
   end
 
   def create_donation(params)
-    AkDonationActionCreator.create_donation_action(params[:params])
+    data = params[:params]
+    client.create_donation(data)
   end
 
-  def create_page(params)
-    AkPageCreator.create_page(
-        params[:name],
-        params[:title],
-        params[:language],
-        params[:url],
-        params[:page_type],
-        params[:page_id]
-    )
+  def create_pages(params)
+    AkPageCreator.create_page(params.merge(page_type: 'petition'))
+    AkPageCreator.create_page(params.merge(page_type: 'donation'))
+  end
+
+  def extract_mailing_id(akid = '')
+    (akid.try(:split, '.') || []).first
+  end
+
+  def client
+    @client ||= ActionKitConnector::Client.new do |c|
+      c.username = ENV['AK_USERNAME']
+      c.password = ENV['AK_PASSWORD']
+      c.host     = ENV['AK_HOST']
+    end
   end
 end
 
