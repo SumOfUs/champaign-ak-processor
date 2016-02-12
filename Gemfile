@@ -11,7 +11,6 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-#gem 'actionkit_connector', path: '../actionkit_connector'
 gem 'actionkit_connector', github: 'SumOfUs/actionkit_connector'
 gem 'puma', '~> 2.15.3'
 
