@@ -15,7 +15,7 @@ describe "REST" do
         {
           donationpage: {
             name: 'foo-bar-donation',
-            payment_account: 'Default Import Stub'
+            payment_account: 'Braintree EUR'
           },
 
           order: {
@@ -74,13 +74,14 @@ describe "REST" do
 
       context 'with PayPal as payment method' do
         before do
+          data[:donationpage][:payment_account] = 'PayPal EUR'
           VCR.use_cassette('donation_push_paypal') do
-            post '/message', params
+            puts post '/message', params
           end
         end
 
-        xit "has PayPal has payment_method" do
-          expect(subject[:order][:payment_method]).to eq('PayPal')
+        it "has PayPal account type" do
+          expect(subject[:order].fetch(:account)).to eq('PayPal EUR')
         end
       end
     end
