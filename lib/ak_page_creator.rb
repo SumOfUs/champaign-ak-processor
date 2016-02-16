@@ -1,51 +1,38 @@
-class AkPageCreator < AkCreator
-  SUPPORTED_PAGE_TYPES = {
-    petition: 'petition',
-    donation: 'donation'
-  }
+class AkPageCreator
+  include Ak::Client
 
   class << self
-    def create_page(name, title, language, url, type, page_id)
-      new.create_page(name, title, language, url, type, page_id)
-    end
-
-    def page_types
-      SUPPORTED_PAGE_TYPES
+    def create_page(params)
+      new(params).create_page
     end
   end
 
-  def create_page(name, title, language, url, type, page_id)
-    translated_language = AkLanguageUriFinder.get_ak_language_uri(language)
+  def initialize(params)
+    @params = params
+  end
 
-    case type
-      when SUPPORTED_PAGE_TYPES[:donation]
-        process_create_request(
-          create_donation_page(name, title, translated_language, url),
-          page_id,
-          type
-        )
-      when SUPPORTED_PAGE_TYPES[:petition]
-        process_create_request(
-          create_petition_page(name, title, translated_language, url),
-          page_id,
-          type
-        )
+  def create_page
+    case page_type
+    when 'donation'
+        process_create_request(create_donation_page)
+    when 'petition'
+        process_create_request(create_petition_page)
     end
   end
 
-  def process_create_request(request, page_id, type)
+  def process_create_request(request)
     page = Page.find(page_id)
 
     case request.response
       when Net::HTTPCreated
         page.update(
-          "ak_#{type}_resource_uri" => request.headers['location'],
+          "ak_#{page_type}_resource_uri" => request.headers['location'],
           status: 'success'
         )
       when Net::HTTPBadRequest
         page.update(
           status: 'failed',
-          messages: request.parsed_response.to_json
+          messages: request.parsed_response
         )
     end
 
@@ -58,12 +45,22 @@ class AkPageCreator < AkCreator
 
   private
 
-  def create_petition_page(name, title, language, url)
-    client.create_petition_page name, title, language, url
+  def create_petition_page
+    name = "#{@params[:name]}-petition"
+    client.create_petition_page( @params.merge(name: name) )
   end
 
-  def create_donation_page(name, title, language, url)
-    client.create_donation_page name, title, language, url
+  def create_donation_page
+    name = "#{@params[:name]}-donation"
+    client.create_donation_page( @params.merge(name: name) )
+  end
+
+  def page_type
+    @params[:page_type]
+  end
+
+  def page_id
+    @params[:page_id]
   end
 end
 
