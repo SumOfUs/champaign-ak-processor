@@ -38,6 +38,7 @@ class ShareAnalyticsUpdater
   def raise_or_update(response, button)
     parsed_body = JSON.parse(response.body).with_indifferent_access
     if parsed_body[:success]
+      Rails.logger.debug "SharePogress Response: #{parsed_body}"
       button.update!(analytics: response.body )
     else
       raise ::ShareProgressApiError, "ShareProgress button analytics update failed with the following message from their API: #{parsed_body[:message]}."
