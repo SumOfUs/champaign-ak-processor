@@ -13,6 +13,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'actionkit_connector', github: 'SumOfUs/actionkit_connector'
 gem 'puma', '~> 2.15.3'
+gem 'aws-sdk'
 
 # For pushing out updates after processing an event.
 gem 'pusher'

@@ -1,3 +1,5 @@
+require 'app/workers/share_analytics_updater'
+
 class QueueListener
   include Ak::Client
 
@@ -5,6 +7,7 @@ class QueueListener
   CREATE_ACTION   = 'action'
   CREATE_DONATION = 'donation'
   UPDATE_PAGES    = 'update_pages'
+  UPDATE_SHARE    = 'update_share'
 
   def perform(sqs_message, params)
     case params[:type]
@@ -19,6 +22,9 @@ class QueueListener
 
       when CREATE_DONATION
         create_donation(params)
+
+      when UPDATE_SHARE
+        update_share(params)
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
     end
@@ -33,6 +39,10 @@ class QueueListener
   end
 
   private
+
+  def update_share
+    ShareAnalyticsUpdater.update_share(params[:share_id])
+  end
 
   def petition_id(params)
     params.fetch(:petition_uri, '').match(/(\d+)\/$/)[1]
