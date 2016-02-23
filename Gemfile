@@ -16,6 +16,7 @@ gem 'puma', '~> 2.15.3'
 
 # For pushing out updates after processing an event.
 gem 'pusher'
+gem 'lograge'
 
 group :development, :test do
   gem 'byebug'
