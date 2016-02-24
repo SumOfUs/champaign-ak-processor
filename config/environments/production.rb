@@ -52,8 +52,8 @@ Rails.application.configure do
       ['controller', 'action'].include? k
     end
     log_hash = {"params"=> params, "time"=>event.time}
-    if not event.payload[:exception].blank?
-      log_hash["exception"]=event.payload[:exception]
+    if event.payload[:exception].present?
+      log_hash["exception"] = event.payload[:exception]
     end
     log_hash
   end
