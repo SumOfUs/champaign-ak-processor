@@ -8,9 +8,9 @@ describe "REST" do
       { type: 'create',
         params: {
           page_id: page.id,
-          slug: "this-page-does-not-exist-1234",
+          name: "this-page-does-not-exist-13172402",
           title: 'Foo Bar',
-          language: '/rest/v1/language/1234/'
+          language: '/rest/v1/language/100/'
         }
       }
     end

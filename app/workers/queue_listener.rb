@@ -1,5 +1,3 @@
-require 'app/workers/share_analytics_updater'
-
 class QueueListener
   include Ak::Client
 
@@ -40,8 +38,8 @@ class QueueListener
 
   private
 
-  def update_share
-    ShareAnalyticsUpdater.update_share(params[:share_id])
+  def update_share(params)
+    ShareAnalyticsUpdater.update_share(params[:button_id])
   end
 
   def petition_id(params)

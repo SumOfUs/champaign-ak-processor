@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.3.0'
-
+gem 'envyable', require: 'envyable/rails-now', group: [:test, :development]
 gem 'rails', '4.2.5'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
@@ -21,7 +21,6 @@ gem 'pusher'
 group :development, :test do
   gem 'byebug'
   gem 'guard-rspec', require: false
-  gem 'envyable'
 end
 
 group :test do
@@ -31,5 +30,8 @@ group :test do
   gem 'vcr'
 end
 
-gem 'web-console', '~> 2.0', group: :development
+group :development do
+  gem 'spring-commands-rspec'
+  gem 'web-console', '~> 2.0'
+end
 
