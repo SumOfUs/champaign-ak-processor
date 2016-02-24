@@ -40,7 +40,7 @@ describe ShareAnalyticsUpdater::FetchAnalytics do
     it 'updates button with stats' do
       subject
 
-      data = JSON.parse(button.reload.analytics)
+      data = JSON.parse(button.reload.analytics)['response']
 
       expect(data.first).to include({'id' => 159400})
       expect(data.first.keys).to match_array(%w{created_at id share_types generations share_tests total})

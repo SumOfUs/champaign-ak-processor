@@ -32,7 +32,7 @@ class ShareAnalyticsUpdater
         body = JSON.parse(response.body)
 
         if body['success']
-          button.update(analytics: body['response'].to_json )
+          button.update(analytics: body.to_json )
         else
           raise ::ShareProgressApiError, "ShareProgress isn't happy. It says '#{body['message']}'. \n\n We gave it this: Share::Button - #{button.inspect}"
         end
