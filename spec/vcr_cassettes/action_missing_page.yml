@@ -5,9 +5,9 @@ http_interactions:
     uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/action/
     body:
       encoding: UTF-8
-      string: '{"name":"Pablo José Francisco de María","postal":"W1","address1":"The
+      string: '{"page":"i-do-not-exist-anywhere","name":"Pablo José Francisco de María","postal":"W1","address1":"The
         Lodge","address2":"High Street","city":"London","country":"United Kingdom","action_age":"101","action_foo":"Foo","action_bar":"Bar","ignored":"ignore
-        me","email":"omar@sumofus.org","source":"FB","akid":"3.4234.fsdf","page":"i-do-not-exist-anywhere","mailing_id":"3"}'
+        me","email":"omar@sumofus.org","source":"FB","akid":"3.4234.fsdf","mailing_id":"3"}'
     headers:
       Content-Type:
       - application/json
@@ -19,7 +19,7 @@ http_interactions:
       message: BAD REQUEST
     headers:
       Date:
-      - Fri, 05 Feb 2016 14:00:28 GMT
+      - Wed, 24 Feb 2016 13:43:34 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -27,15 +27,15 @@ http_interactions:
       Connection:
       - keep-alive
       X-Machine-Id:
-      - web-g02-03.actionkit.com
+      - web-g02-02.actionkit.com
       Vary:
       - Cookie,Accept-Encoding,User-Agent
       Set-Cookie:
-      - sid=tqqmwhc2d0w5c8i9vk10ss2sjvno75ow; expires=Fri, 05-Feb-2016 21:47:44 GMT;
+      - sid=vfoqqpn2h9k71w5zmcxgdor10ua8631p; expires=Wed, 24-Feb-2016 21:30:16 GMT;
         httponly; Max-Age=28800; Path=/
     body:
       encoding: UTF-8
       string: '{"page": "Unable to find a page for processing. You sent page=i-do-not-exist-anywhere."}'
     http_version: 
-  recorded_at: Fri, 05 Feb 2016 13:47:45 GMT
-recorded_with: VCR 3.0.0
+  recorded_at: Wed, 24 Feb 2016 13:30:16 GMT
+recorded_with: VCR 3.0.1
