@@ -17,6 +17,7 @@ gem 'aws-sdk'
 
 # For pushing out updates after processing an event.
 gem 'pusher'
+gem 'lograge'
 
 group :development, :test do
   gem 'byebug'
