@@ -7,7 +7,7 @@ class MessageHandlerController < ApplicationController
   end
 
   def dispatch_shareprogress_update
-    ShareAnalyticsUpdater::EnqueueJobs.run
+    ShareAnalyticsUpdater.enqueue_jobs
     render nothing: true, status: 200
   end
 end
