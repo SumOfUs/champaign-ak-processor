@@ -92,22 +92,20 @@ describe "REST" do
 
       let(:data) do
         {
-          slug: 'foo-bar',
-          body: {
-            name:         "Pablo José Francisco de María",
-            postal:       "W1",
-            address1:     "The Lodge",
-            address2:     "High Street",
-            city:         "London",
-            country:      "United Kingdom",
-            action_age:   "101",
-            action_foo:   "Foo",
-            action_bar:   "Bar",
-            ignored:      "ignore me",
-            email:        "omar@sumofus.org",
-            source:       'FB',
-            akid:         '3.4234.fsdf'
-          }
+          page:         "foo-bar",
+          name:         "Pablo José Francisco de María",
+          postal:       "W1",
+          address1:     "The Lodge",
+          address2:     "High Street",
+          city:         "London",
+          country:      "United Kingdom",
+          action_age:   "101",
+          action_foo:   "Foo",
+          action_bar:   "Bar",
+          ignored:      "ignore me",
+          email:        "omar@sumofus.org",
+          source:       'FB',
+          akid:         '3.4234.fsdf'
         }
       end
 
@@ -147,7 +145,7 @@ describe "REST" do
       context 'for missing page' do
         before do
           VCR.use_cassette("action_missing_page") do
-            data[:slug] = 'i-do-not-exist-anywhere'
+            data[:page] = 'i-do-not-exist-anywhere'
             post '/message', params
           end
         end
