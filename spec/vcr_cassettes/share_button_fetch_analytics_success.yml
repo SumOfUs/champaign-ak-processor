@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://run.shareprogress.org/api/v1/buttons/analytics
+    body:
+      encoding: US-ASCII
+      string: key=<SP_API_KEY>&id=159400
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - run.shareprogress.org
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Connection:
+      - close
+      Date:
+      - Wed, 24 Feb 2016 13:20:42 GMT
+      Status:
+      - 200 OK
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Ua-Compatible:
+      - chrome=1
+      X-Ratelimit-Limit:
+      - '30'
+      X-Ratelimit-Remaining:
+      - '28'
+      X-Ratelimit-Reset:
+      - '1456320071'
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - '"90fd4f62f5614283e83a23f108c09dfc"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 392111cf-31ae-402e-936b-ff94c4cc50b0
+      X-Runtime:
+      - '2.213856'
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"response":[{"created_at":null,"id":159400,"share_types":{"email":{"shares":0,"viral_visits":0,"viral_actions":0},"facebook":{"shares":0,"viral_visits":0,"viral_actions":0},"twitter":{"shares":5,"viral_visits":0,"viral_actions":0},"dark_social":{"shares":0,"viral_visits":0,"viral_actions":0}},"generations":[{"generation":1,"shares":5,"visits":64}],"share_tests":{"email":[{"shares":0,"successful_shares":0,"conversion":0.0,"ci":0.0,"confidence":"--","improvement":"--","winner":false,"id":501462,"weight":"100.0%"}],"facebook":[{"shares":0,"successful_shares":0,"conversion":0.0,"ci":0.0,"confidence":"--","improvement":"--","winner":false,"id":501463,"weight":"100.0%"}],"twitter":[{"shares":0,"successful_shares":0,"conversion":0.0,"ci":0.0,"confidence":"--","improvement":"--","winner":false,"id":501461,"weight":"100.0%"}]},"total":{"total_visitors":64,"total_shares":5,"total_viral_visitors":0,"total_viral_actions":0}}],"message":null}'
+    http_version: 
+  recorded_at: Wed, 24 Feb 2016 13:20:42 GMT
+recorded_with: VCR 3.0.1

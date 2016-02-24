@@ -5,8 +5,8 @@ http_interactions:
     uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpush/
     body:
       encoding: UTF-8
-      string: '{"donationpage":{"name":"foo-bar-donation","payment_account":"Default
-        Import Stub"},"order":{"amount":"34.00","card_code":"007","card_num":"4111111111111111","exp_date_month":"12","exp_date_year":"2015","currency":"GBP"},"user":{"email":"foo+100@example.com","country":"Portugal"}}'
+      string: '{"donationpage":{"name":"foo-bar-donation","payment_account":"Braintree
+        EUR"},"order":{"amount":"34.00","card_code":"007","card_num":"4111111111111111","exp_date_month":"12","exp_date_year":"2015","currency":"GBP"},"user":{"email":"foo+100@example.com","country":"Portugal"}}'
     headers:
       Content-Type:
       - application/json
@@ -18,7 +18,7 @@ http_interactions:
       message: CREATED
     headers:
       Date:
-      - Fri, 05 Feb 2016 14:00:26 GMT
+      - Wed, 24 Feb 2016 13:33:54 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -26,30 +26,30 @@ http_interactions:
       Connection:
       - keep-alive
       X-Machine-Id:
-      - web-g02-01.actionkit.com
+      - web-g02-02.actionkit.com
       Vary:
       - Accept,Cookie,Accept-Encoding,User-Agent
       Location:
-      - https://act.sumofus.org/rest/v1/donationaction/60773490/
+      - https://act.sumofus.org/rest/v1/donationaction/61820869/
       Set-Cookie:
-      - sid=9r9oo2xubi2v1l1x82fq48wjrmnv76xf; expires=Fri, 05-Feb-2016 21:47:42 GMT;
+      - sid=ekpn2nrmzkdks1pgw0a61hv4kcu4jid4; expires=Wed, 24-Feb-2016 21:20:35 GMT;
         httponly; Max-Age=28800; Path=/
     body:
       encoding: UTF-8
-      string: '{"akid": ".10555390.Bl7ItH", "created_at": "2016-02-05T13:47:42.544314",
-        "created_user": false, "fields": {}, "id": 60773490, "ip_address": "88.107.223.117",
+      string: '{"akid": ".10555390.Bl7ItH", "created_at": "2016-02-24T13:20:35.763492",
+        "created_user": false, "fields": {}, "id": 61820869, "ip_address": "2.102.90.130",
         "is_forwarded": false, "link": null, "mailing": null, "opq_id": "", "order":
-        {"account": "Default Import Stub", "action": "/rest/v1/donationaction/60773490/",
-        "card_num_last_four": "1111", "created_at": "2016-02-05T13:47:42.614668",
-        "currency": "GBP", "id": 799025, "import_id": null, "orderdetails": [], "orderrecurrings":
-        [], "payment_method": "cc", "resource_uri": "/rest/v1/order/799025/", "shipping_address":
-        null, "status": "completed", "total": "34.00", "total_converted": "49.4509484251",
-        "transactions": ["/rest/v1/transaction/952868/"], "updated_at": "2016-02-05T13:47:42.633027",
-        "user": "/rest/v1/user/10555390/", "user_detail": "/rest/v1/orderuserdetail/799149/"},
+        {"account": "Braintree EUR", "action": "/rest/v1/donationaction/61820869/",
+        "card_num_last_four": "1111", "created_at": "2016-02-24T13:20:35.843132",
+        "currency": "GBP", "id": 808759, "import_id": null, "orderdetails": [], "orderrecurrings":
+        [], "payment_method": "cc", "resource_uri": "/rest/v1/order/808759/", "shipping_address":
+        null, "status": "completed", "total": "34.00", "total_converted": "47.2308144519",
+        "transactions": ["/rest/v1/transaction/965569/"], "updated_at": "2016-02-24T13:20:35.863336",
+        "user": "/rest/v1/user/10555390/", "user_detail": "/rest/v1/orderuserdetail/808886/"},
         "page": "/rest/v1/donationpage/8644/", "referring_mailing": null, "referring_user":
-        null, "resource_uri": "/rest/v1/donationaction/60773490/", "source": "restful_api",
+        null, "resource_uri": "/rest/v1/donationaction/61820869/", "source": "restful_api",
         "status": "complete", "subscribed_user": false, "taf_emails_sent": null, "type":
-        "Donation", "updated_at": "2016-02-05T13:47:42.586930", "user": "/rest/v1/user/10555390/"}'
+        "Donation", "updated_at": "2016-02-24T13:20:35.818700", "user": "/rest/v1/user/10555390/"}'
     http_version: 
-  recorded_at: Fri, 05 Feb 2016 13:47:42 GMT
-recorded_with: VCR 3.0.0
+  recorded_at: Wed, 24 Feb 2016 13:20:36 GMT
+recorded_with: VCR 3.0.1
