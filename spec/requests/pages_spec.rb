@@ -3,6 +3,29 @@ require 'rails_helper'
 describe "REST" do
   let(:page) { Page.create(title: 'Foo', slug: 'foo-bar') }
 
+  describe 'MessageHandler' do
+    describe 'update_pages' do
+      context "page does not exist on ActionKit" do
+        let(:params) do
+          {
+            type: 'update_pages',
+            petition_uri:  "",
+            donation_uri:  "",
+            params: {
+              tags: ["/rest/v1/tag/5678/"]
+            }
+          }
+        end
+
+        it 'fails' do
+          expect {
+            VCR.use_cassette('page_update_404'){ post("/message", params) }
+          }.to raise_error(ArgumentError)
+        end
+      end
+    end
+  end
+
   describe "POST /petitionpage" do
     let(:params) do
       { type: 'create',

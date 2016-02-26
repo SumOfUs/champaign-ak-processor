@@ -43,11 +43,17 @@ class QueueListener
   end
 
   def petition_id(params)
-    params.fetch(:petition_uri, '').match(/(\d+)\/$/)[1]
+    extract_id(params[:petition_uri])
   end
 
   def donation_id(params)
-    params.fetch(:donation_uri, '').match(/(\d+)\/$/)[1]
+    extract_id(params[:donation_uri])
+  end
+
+  def extract_id(uri)
+    id = (uri || '').match(/(\d+)\/$/){|m| m[1] if m }
+    raise ArgumentError, "Missing resource URI for page" if id.blank?
+    id
   end
 
   def create_action(params)
