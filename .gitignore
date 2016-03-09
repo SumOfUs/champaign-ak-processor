@@ -22,3 +22,4 @@ env.yml
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 .DS_Store
+.byebug_history

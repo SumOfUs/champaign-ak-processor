@@ -5,6 +5,7 @@ class QueueListener
   CREATE_ACTION   = 'action'
   CREATE_DONATION = 'donation'
   UPDATE_PAGES    = 'update_pages'
+  UPDATE_SHARE    = 'update_share'
 
   def perform(sqs_message, params)
     case params[:type]
@@ -19,6 +20,9 @@ class QueueListener
 
       when CREATE_DONATION
         create_donation(params)
+
+      when UPDATE_SHARE
+        update_share(params)
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
     end
@@ -34,12 +38,22 @@ class QueueListener
 
   private
 
+  def update_share(params)
+    ShareAnalyticsUpdater.update_share(params[:button_id])
+  end
+
   def petition_id(params)
-    params.fetch(:petition_uri, '').match(/(\d+)\/$/)[1]
+    extract_id(params[:petition_uri])
   end
 
   def donation_id(params)
-    params.fetch(:donation_uri, '').match(/(\d+)\/$/)[1]
+    extract_id(params[:donation_uri])
+  end
+
+  def extract_id(uri)
+    id = (uri || '').match(/(\d+)\/$/){|m| m[1] if m }
+    raise ArgumentError, "Missing resource URI for page" if id.blank?
+    id
   end
 
   def create_action(params)

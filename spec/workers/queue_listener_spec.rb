@@ -10,6 +10,21 @@ describe QueueListener do
   subject { QueueListener.new }
 
   describe "#perform" do
+    describe 'update_share' do
+      let(:params) do
+        {
+          type: 'update_share',
+          button_id: '1'
+        }
+      end
+
+      it 'updates share' do
+        expect(ShareAnalyticsUpdater).to receive(:update_share).with('1')
+        subject.perform(nil, params)
+      end
+
+    end
+
     describe 'update_pages' do
       before do
         allow(client).to receive(:update_donation_page)
@@ -45,6 +60,27 @@ describe QueueListener do
 
         expect(client).to receive(:update_petition_page).with(expected_params)
         subject.perform(nil, params)
+      end
+
+      context 'without resource URI' do
+        before do
+          params[:petition_uri] = nil
+        end
+
+        let(:expected_params) do
+          {
+            tags: ["/rest/v1/tag/5678/"],
+            id: nil
+          }
+        end
+
+        it "raises argument error" do
+          expect(client).not_to receive(:update_petition_page).with(expected_params)
+
+          expect{
+            subject.perform(nil, params)
+           }.to raise_error(ArgumentError, /Missing resource URI/)
+        end
       end
     end
   end

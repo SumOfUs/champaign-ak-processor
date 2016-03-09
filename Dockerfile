@@ -12,5 +12,5 @@ EXPOSE 3000
 ADD . /myapp
 WORKDIR /myapp
 
-CMD bundle exec puma -b tcp://0.0.0.0 -p 3000 -t 1:16
+CMD bundle exec puma -C config/puma.rb
 

@@ -5,8 +5,8 @@ http_interactions:
     uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/
     body:
       encoding: UTF-8
-      string: '{"type":"petitionpage","hidden":false,"name":"this-page-does-not-exist-1234","title":"Foo
-        Bar [Petition]","language":null,"canonical_url":"http://example.com/this-page-does-not-exist-1234"}'
+      string: '{"page_id":"1","name":"this-page-does-not-exist-13172402-petition","title":"Foo
+        Bar","language":"/rest/v1/language/100/","page_type":"petition"}'
     headers:
       Content-Type:
       - application/json
@@ -18,34 +18,34 @@ http_interactions:
       message: CREATED
     headers:
       Date:
-      - Fri, 05 Feb 2016 15:00:54 GMT
+      - Wed, 24 Feb 2016 13:33:41 GMT
       Content-Type:
       - text/html; charset=utf-8
-      Content-Length:
-      - '0'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
       X-Machine-Id:
-      - web-g02-02.actionkit.com
+      - web-g02-01.actionkit.com
       Vary:
       - Accept,Cookie,Accept-Encoding,User-Agent
       Location:
-      - https://act.sumofus.org/rest/v1/petitionpage/11247/
+      - https://act.sumofus.org/rest/v1/petitionpage/12377/
       Set-Cookie:
-      - sid=0f98ncb19q0loidfxwk6k5gsj44uw5fk; expires=Fri, 05-Feb-2016 22:48:10 GMT;
+      - sid=2n945f1xdtqs7nonf9y2epbbzkanbf8g; expires=Wed, 24-Feb-2016 21:20:22 GMT;
         httponly; Max-Age=28800; Path=/
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 05 Feb 2016 14:48:10 GMT
+  recorded_at: Wed, 24 Feb 2016 13:20:22 GMT
 - request:
     method: post
     uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/
     body:
       encoding: UTF-8
-      string: '{"type":"donationpage","hidden":false,"name":"this-page-does-not-exist-1234-donation","title":"Foo
-        Bar [Donation]","language":null,"canonical_url":"http://example.com/this-page-does-not-exist-1234"}'
+      string: '{"page_id":"1","name":"this-page-does-not-exist-13172402-donation","title":"Foo
+        Bar","language":"/rest/v1/language/100/","page_type":"donation"}'
     headers:
       Content-Type:
       - application/json
@@ -57,7 +57,7 @@ http_interactions:
       message: CREATED
     headers:
       Date:
-      - Fri, 05 Feb 2016 15:00:55 GMT
+      - Wed, 24 Feb 2016 13:33:42 GMT
       Content-Type:
       - text/html; charset=utf-8
       Content-Length:
@@ -65,17 +65,17 @@ http_interactions:
       Connection:
       - keep-alive
       X-Machine-Id:
-      - web-g02-02.actionkit.com
+      - web-g02-01.actionkit.com
       Vary:
       - Accept,Cookie,Accept-Encoding,User-Agent
       Location:
-      - https://act.sumofus.org/rest/v1/donationpage/11248/
+      - https://act.sumofus.org/rest/v1/donationpage/12378/
       Set-Cookie:
-      - sid=rltt4qdm1ysree0ol3eya8jf4m2kz7jv; expires=Fri, 05-Feb-2016 22:48:11 GMT;
+      - sid=m1lm99qo9awobcod1am1tqn47phz69yr; expires=Wed, 24-Feb-2016 21:20:23 GMT;
         httponly; Max-Age=28800; Path=/
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 05 Feb 2016 14:48:12 GMT
-recorded_with: VCR 3.0.0
+  recorded_at: Wed, 24 Feb 2016 13:20:23 GMT
+recorded_with: VCR 3.0.1
