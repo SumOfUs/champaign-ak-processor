@@ -52,7 +52,7 @@ class AkPageCreator
 
   def create_donation_page
     name = "#{@params[:name]}-donation"
-    client.create_donation_page( @params.merge(name: name) )
+    client.create_donation_page( @params.merge(name: name, hpc_rule: "/rest/v1/donationhpcrule/#{ENV['HPC_RULE_ID']}/") )
   end
 
   def page_type
