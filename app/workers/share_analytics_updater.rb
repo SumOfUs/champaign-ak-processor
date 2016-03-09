@@ -29,9 +29,11 @@ class ShareAnalyticsUpdater
 
       begin
         response = Net::HTTP.post_form(API_URI, { key: API_KEY, id: button.sp_id })
-        Rails.logger.debug(response)
+        response_status = response.to_hash["status"].first
+        if response_status != "200 OK"
+           raise ::ShareProgressApiError, "ShareProgress web server responded with status #{response_status}."
+        end
         body = JSON.parse(response.body)
-
         if body['success']
           button.update(analytics: body.to_json )
         else
