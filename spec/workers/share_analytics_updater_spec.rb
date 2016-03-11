@@ -59,7 +59,7 @@ describe ShareAnalyticsUpdater::FetchAnalytics do
     it 'raises ShareProgressApiError' do
       expect{
         subject
-      }.to raise_error(ShareProgressApiError, /ShareProgress isn't happy/)
+      }.to raise_error(ShareProgressApiError, /ShareProgress web server responded with status 404 Not Found/)
     end
   end
 
@@ -75,7 +75,7 @@ describe ShareAnalyticsUpdater::FetchAnalytics do
     it 'raises ShareProgressApiError' do
       expect{
         subject
-      }.to raise_error(ShareProgressApiError, /ShareProgress isn't happy/)
+      }.to raise_error(ShareProgressApiError, /ShareProgress web server responded with status 404 Not Found/)
     end
   end
 end
