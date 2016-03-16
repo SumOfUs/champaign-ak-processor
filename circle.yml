@@ -38,3 +38,4 @@ deployment:
       - docker push soutech/champaign-ak-processor
       - ./deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-staging' 'logs3.papertrailapp.com:34848'
 
+
