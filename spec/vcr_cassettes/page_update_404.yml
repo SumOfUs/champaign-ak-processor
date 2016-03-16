@@ -1,0 +1,71 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage//
+    body:
+      encoding: UTF-8
+      string: '{"tags":["/rest/v1/tag/5678/"],"id":null}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 500
+      message: INTERNAL SERVER ERROR
+    headers:
+      Date:
+      - Fri, 26 Feb 2016 11:44:30 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-03.actionkit.com
+      Vary:
+      - Cookie,Accept-Encoding,User-Agent
+    body:
+      encoding: UTF-8
+      string: '{"error": "Sorry, this request could not be processed. Please try again
+        later."}'
+    http_version: 
+  recorded_at: Fri, 26 Feb 2016 11:31:08 GMT
+- request:
+    method: put
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage//
+    body:
+      encoding: UTF-8
+      string: '{"tags":["/rest/v1/tag/5678/"],"id":null}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 500
+      message: INTERNAL SERVER ERROR
+    headers:
+      Date:
+      - Fri, 26 Feb 2016 11:44:32 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-03.actionkit.com
+      Vary:
+      - Cookie,Accept-Encoding,User-Agent
+    body:
+      encoding: UTF-8
+      string: '{"error": "Sorry, this request could not be processed. Please try again
+        later."}'
+    http_version: 
+  recorded_at: Fri, 26 Feb 2016 11:31:09 GMT
+recorded_with: VCR 3.0.1

@@ -61,6 +61,27 @@ describe QueueListener do
         expect(client).to receive(:update_petition_page).with(expected_params)
         subject.perform(nil, params)
       end
+
+      context 'without resource URI' do
+        before do
+          params[:petition_uri] = nil
+        end
+
+        let(:expected_params) do
+          {
+            tags: ["/rest/v1/tag/5678/"],
+            id: nil
+          }
+        end
+
+        it "raises argument error" do
+          expect(client).not_to receive(:update_petition_page).with(expected_params)
+
+          expect{
+            subject.perform(nil, params)
+           }.to raise_error(ArgumentError, /Missing resource URI/)
+        end
+      end
     end
   end
 end
