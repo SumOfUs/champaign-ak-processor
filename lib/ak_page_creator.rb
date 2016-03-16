@@ -46,13 +46,18 @@ class AkPageCreator
   private
 
   def create_petition_page
-    name = "#{@params[:name]}-petition"
-    client.create_petition_page( @params.merge(name: name) )
+    client.create_petition_page( @params.merge( name_and_title( :petition ) ) )
   end
 
   def create_donation_page
-    name = "#{@params[:name]}-donation"
-    client.create_donation_page( @params.merge(name: name, hpc_rule: "/rest/v1/donationhpcrule/#{ENV['HPC_RULE_ID']}/") )
+    client.create_donation_page( @params.merge(name_and_title( :donation )).merge(hpc_rule: "/rest/v1/donationhpcrule/#{ENV['HPC_RULE_ID']}/") )
+  end
+
+  def name_and_title(type)
+    {
+      name:   "#{@params[:name]}-#{type}",
+      title:  "#{@params[:title]} (#{type.capitalize})"
+    }
   end
 
   def page_type

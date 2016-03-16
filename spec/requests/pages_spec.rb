@@ -48,7 +48,7 @@ describe "REST" do
               {
                 "page_id"=> page.id.to_s,
                 "name"=>"this-page-does-not-exist-13172404-donation",
-                "title"=>"Foo Bar",
+                "title"=>"Foo Bar (Donation)",
                 "language"=>"/rest/v1/language/100/",
                 "page_type"=>"donation",
                 "hpc_rule"=>"/rest/v1/donationhpcrule/22/"
@@ -57,6 +57,20 @@ describe "REST" do
             and_call_original
         )
 
+
+        expect_any_instance_of( ActionKitConnector::Client ).to(
+          receive(:create_petition_page).
+            with(hash_including(
+              {
+                "page_id"=> page.id.to_s,
+                "name"=>"this-page-does-not-exist-13172404-petition",
+                "title"=>"Foo Bar (Petition)",
+                "language"=>"/rest/v1/language/100/",
+                "page_type"=>"petition"
+              }
+            )).
+            and_call_original
+        )
         VCR.use_cassette('page_create'){ post "/message", params }
       end
     end
