@@ -14,14 +14,18 @@ class AkPageCreator
   def create_page
     case page_type
     when 'donation'
-        process_create_request(create_donation_page)
+      page, error = process_create_request(create_donation_page)
+      create_donationform(page) unless error
     when 'petition'
-        process_create_request(create_petition_page)
+      page, error = process_create_request(create_petition_page)
+      create_petitionform(page) unless error
     end
   end
 
   def process_create_request(request)
     page = Page.find(page_id)
+
+    error = false
 
     case request.response
       when Net::HTTPCreated
@@ -34,23 +38,48 @@ class AkPageCreator
           status: 'failed',
           messages: request.parsed_response
         )
+        error = true
     end
 
     AkLog.create({
-      resource: 'create',
-      response_body: request.response.body,
+      resource:        'create',
+      response_body:   request.response.body,
       response_status: request.response.code
     })
+
+    [page, error]
   end
 
   private
+
+  def create_donationform(page)
+    client.create_donationform( form_params(page).merge(page: page.ak_donation_resource_uri))
+  end
+
+  def create_petitionform(page)
+    client.create_petitionform( form_params(page).merge(page: page.ak_petition_resource_uri))
+  end
+
+  def form_params(page)
+    {
+      client_hosted: true,
+      client_url:     @params['url'],
+      ask_text:       'Dummy ask',
+      thank_you_text: 'Dummy thank you',
+      statement_text: 'Dummy statement'
+    }
+  end
 
   def create_petition_page
     client.create_petition_page( @params.merge( name_and_title( :petition ) ) )
   end
 
   def create_donation_page
-    client.create_donation_page( @params.merge(name_and_title( :donation )).merge(hpc_rule: "/rest/v1/donationhpcrule/#{ENV['HPC_RULE_ID']}/") )
+    client.create_donation_page( @params.merge(name_and_title( :donation )).
+      merge({
+        hpc_rule: "/rest/v1/donationhpcrule/#{ENV['HPC_RULE_ID']}/"
+      })
+    )
   end
 
   def name_and_title(type)
