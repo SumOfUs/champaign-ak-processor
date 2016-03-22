@@ -3,6 +3,16 @@ require 'rails_helper'
 describe "REST" do
   let(:page) { Page.create(title: 'Foo', slug: 'foo-bar') }
 
+  before do
+    allow_any_instance_of( ActionKitConnector::Client ).to(
+      receive(:create_petitionform)
+    )
+
+    allow_any_instance_of( ActionKitConnector::Client ).to(
+      receive(:create_donationform)
+    )
+  end
+
   describe 'MessageHandler' do
     describe 'update_pages' do
       context "page does not exist on ActionKit" do
@@ -33,12 +43,55 @@ describe "REST" do
           page_id: page.id,
           name: "this-page-does-not-exist-13172404",
           title: 'Foo Bar',
+          url:   'http://example.com',
           language: '/rest/v1/language/100/'
         }
       }
     end
 
     subject { page.reload }
+
+
+    describe 'form documents' do
+      it 'creats a petitionform' do
+        expect_any_instance_of( ActionKitConnector::Client ).to(
+          receive(:create_petitionform).
+            with(hash_including(
+              {
+                :client_hosted=>true,
+                :client_url=>"http://example.com",
+                :ask_text=>"Dummy ask",
+                :thank_you_text=>"Dummy thank you",
+                :statement_text=>"Dummy statement",
+                :page=>"https://act.sumofus.org/rest/v1/petitionpage/12574/"
+              }
+            )
+          )
+        )
+
+        VCR.use_cassette('page_create'){ post "/message", params }
+      end
+
+
+      it 'creats a donationform' do
+        expect_any_instance_of( ActionKitConnector::Client ).to(
+          receive(:create_donationform).
+            with(hash_including(
+              {
+                :client_hosted=>true,
+                :client_url=>"http://example.com",
+                :ask_text=>"Dummy ask",
+                :thank_you_text=>"Dummy thank you",
+                :statement_text=>"Dummy statement",
+                :page=>"https://act.sumofus.org/rest/v1/donationpage/12575/"
+              }
+            )
+          )
+        )
+
+        VCR.use_cassette('page_create'){ post "/message", params }
+      end
+    end
 
     context 'payload' do
       it 'has correct properties' do
@@ -56,7 +109,6 @@ describe "REST" do
             )).
             and_call_original
         )
-
 
         expect_any_instance_of( ActionKitConnector::Client ).to(
           receive(:create_petition_page).
