@@ -16,23 +16,7 @@ describe MessageHandlerController do
 
     it 'renders nothing' do
       expect(response.body).to eq('')
-      post :dispatch_shareprogress_update
-    end
-  end
-
-  describe 'POST#displatch_shareprogress_update' do
-    before do
-      allow(ShareAnalyticsUpdater::EnqueueJobs).to receive(:run)
-    end
-
-    it 'enqueues jobs' do
-      expect(ShareAnalyticsUpdater::EnqueueJobs).to receive(:run)
-      post :dispatch_shareprogress_update
-    end
-
-    it 'renders nothing' do
-      expect(response.body).to eq('')
-      post :dispatch_shareprogress_update
+      post :handle
     end
   end
 end

@@ -10,21 +10,6 @@ describe QueueListener do
   subject { QueueListener.new }
 
   describe "#perform" do
-    describe 'update_share' do
-      let(:params) do
-        {
-          type: 'update_share',
-          button_id: '1'
-        }
-      end
-
-      it 'updates share' do
-        expect(ShareAnalyticsUpdater).to receive(:update_share).with('1')
-        subject.perform(nil, params)
-      end
-
-    end
-
     describe 'update_pages' do
       before do
         allow(client).to receive(:update_donation_page)
