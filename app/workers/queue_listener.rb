@@ -5,7 +5,6 @@ class QueueListener
   CREATE_ACTION   = 'action'
   CREATE_DONATION = 'donation'
   UPDATE_PAGES    = 'update_pages'
-  UPDATE_SHARE    = 'update_share'
 
   def perform(sqs_message, params)
     case params[:type]
@@ -20,9 +19,6 @@ class QueueListener
 
       when CREATE_DONATION
         create_donation(params)
-
-      when UPDATE_SHARE
-        update_share(params)
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
     end
@@ -37,10 +33,6 @@ class QueueListener
   end
 
   private
-
-  def update_share(params)
-    ShareAnalyticsUpdater.update_share(params[:button_id])
-  end
 
   def petition_id(params)
     extract_id(params[:petition_uri])
