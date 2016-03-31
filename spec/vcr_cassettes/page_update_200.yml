@@ -1,0 +1,75 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/12853/
+    body:
+      encoding: UTF-8
+      string: '{"title":"house of cards (Petition)","id":"12853"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 204
+      message: NO CONTENT
+    headers:
+      Date:
+      - Thu, 31 Mar 2016 13:26:40 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-02.actionkit.com
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      Set-Cookie:
+      - sid=vhfmmm2v8dulgx9nectu15q9stdqjpkw; expires=Thu, 31-Mar-2016 21:12:16 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 31 Mar 2016 13:12:16 GMT
+- request:
+    method: put
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/12854/
+    body:
+      encoding: UTF-8
+      string: '{"title":"house of cards (Petition)","id":"12854"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 204
+      message: NO CONTENT
+    headers:
+      Date:
+      - Thu, 31 Mar 2016 13:26:42 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-02.actionkit.com
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      Set-Cookie:
+      - sid=sy58pqjz7m9id8saprzb876pjl7iuqhn; expires=Thu, 31-Mar-2016 21:12:17 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 31 Mar 2016 13:12:17 GMT
+recorded_with: VCR 3.0.1

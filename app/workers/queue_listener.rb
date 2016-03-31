@@ -28,11 +28,31 @@ class QueueListener
     data = params[:params]
     data.delete(:name)
 
-    client.update_petition_page( data.merge(id: petition_id(params) ))
-    client.update_donation_page( data.merge(id: donation_id(params) ))
+    client.update_petition_page(
+      data.merge({
+        id: petition_id(params)
+      }.tap do |load|
+          load[:title] = suffix_title(data[:title], 'petition') if data[:title]
+        end
+      )
+    )
+
+    client.update_donation_page(
+      data.merge({
+        id: donation_id(params)
+      }.tap do |load|
+        load[:title] = suffix_title(data[:title], 'donation') if data[:title]
+      end
+      )
+    )
   end
 
   private
+
+  def suffix_title(title, type)
+    return title if title.strip =~ %r{(#{type.capitalize})}
+    "#{title} (#{type.capitalize})"
+  end
 
   def petition_id(params)
     extract_id(params[:petition_uri])
