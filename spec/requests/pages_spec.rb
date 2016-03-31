@@ -50,6 +50,7 @@ describe "REST" do
             receive(:update_petition_page)
           )
         end
+
         let(:params) do
           {
             type: 'update_pages',
@@ -70,7 +71,7 @@ describe "REST" do
             expect_any_instance_of( ActionKitConnector::Client ).to(
               receive(:update_petition_page).with(hash_including({title: "house of cards (Petition)"}))
             )
-           expect_any_instance_of( ActionKitConnector::Client ).to(
+            expect_any_instance_of( ActionKitConnector::Client ).to(
               receive(:update_donation_page).with(hash_including({title: "house of cards (Donation)"}))
             )
 
@@ -84,13 +85,13 @@ describe "REST" do
   describe "POST /petitionpage" do
     let(:params) do
       { type: 'create',
-        params: {
-        page_id: page.id,
-        name: "this-page-does-not-exist-13172404",
-        title: 'Foo Bar',
-        url:   'http://example.com',
-        language: '/rest/v1/language/100/'
-      }
+          params: {
+          page_id: page.id,
+          name: "this-page-does-not-exist-13172404",
+          title: 'Foo Bar',
+          url:   'http://example.com',
+          language: '/rest/v1/language/100/'
+        }
       }
     end
 
@@ -98,40 +99,36 @@ describe "REST" do
 
 
     describe 'form documents' do
-      it 'creats a petitionform' do
+      it 'creates a petitionform' do
         expect_any_instance_of( ActionKitConnector::Client ).to(
           receive(:create_petitionform).
-          with(hash_including(
-            {
+          with(hash_including({
               :client_hosted=>true,
               :client_url=>"http://example.com",
               :ask_text=>"Dummy ask",
               :thank_you_text=>"Dummy thank you",
               :statement_text=>"Dummy statement",
               :page=>"https://act.sumofus.org/rest/v1/petitionpage/12574/"
-            }
+            })
           )
-              )
         )
 
         VCR.use_cassette('page_create'){ post "/message", params }
       end
 
 
-      it 'creats a donationform' do
+      it 'creates a donationform' do
         expect_any_instance_of( ActionKitConnector::Client ).to(
           receive(:create_donationform).
-          with(hash_including(
-            {
+          with(hash_including({
               :client_hosted=>true,
               :client_url=>"http://example.com",
               :ask_text=>"Dummy ask",
               :thank_you_text=>"Dummy thank you",
               :statement_text=>"Dummy statement",
               :page=>"https://act.sumofus.org/rest/v1/donationpage/12575/"
-            }
+            })
           )
-              )
         )
 
         VCR.use_cassette('page_create'){ post "/message", params }
@@ -157,17 +154,16 @@ describe "REST" do
 
         expect_any_instance_of( ActionKitConnector::Client ).to(
           receive(:create_petition_page).
-          with(hash_including(
-            {
+          with(hash_including({
               "page_id"=> page.id.to_s,
               "name"=>"this-page-does-not-exist-13172404-petition",
               "title"=>"Foo Bar (Petition)",
               "language"=>"/rest/v1/language/100/",
               "page_type"=>"petition"
-            }
-          )).
-          and_call_original
+            })
+          ).and_call_original
         )
+
         VCR.use_cassette('page_create'){ post "/message", params }
       end
     end
