@@ -28,26 +28,27 @@ class QueueListener
     data = params[:params]
     data.delete(:name)
 
-    client.update_petition_page(
-      data.merge({
-        id: petition_id(params)
-      }.tap do |load|
-          load[:title] = suffix_title(data[:title], 'petition') if data[:title]
-        end
-      )
-    )
+    raise ArgumentError, "Missing resource URI for page" if params[:petition_uri].blank? and params[:donation_uri].blank?
 
-    client.update_donation_page(
-      data.merge({
-        id: donation_id(params)
-      }.tap do |load|
-        load[:title] = suffix_title(data[:title], 'donation') if data[:title]
-      end
-      )
-    )
+    unless params[:petition_uri].blank?
+      client.update_petition_page(add_title_and_id(data, params, 'petition'))
+    end
+
+    unless params[:donation_uri].blank?
+      client.update_donation_page(add_title_and_id(data, params, 'donation'))
+    end
   end
 
   private
+
+  def add_title_and_id(data, params, suffix)
+    data.merge({
+      id: suffix.inquiry.donation? ? donation_id(params) : petition_id(params)
+    }.tap do |load|
+        load[:title] = suffix_title(data[:title], suffix) if data[:title]
+      end
+    )
+  end
 
   def suffix_title(title, type)
     return title if title.strip =~ %r{(#{type.capitalize})}
@@ -63,9 +64,7 @@ class QueueListener
   end
 
   def extract_id(uri)
-    id = (uri || '').match(/(\d+)\/$/){|m| m[1] if m }
-    raise ArgumentError, "Missing resource URI for page" if id.blank?
-    id
+    (uri || '').match(/(\d+)\/$/){|m| m[1] if m }
   end
 
   def create_action(params)
