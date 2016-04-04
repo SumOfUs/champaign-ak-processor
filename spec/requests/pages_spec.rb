@@ -142,7 +142,7 @@ describe "REST" do
           with(hash_including(
             {
               "page_id"=> page.id.to_s,
-              "name"=>"this-page-does-not-exist-13172404-donation",
+              "name"=>"this-page-does-not-exist-13172404",
               "title"=>"Foo Bar (Donation)",
               "language"=>"/rest/v1/language/100/",
               "page_type"=>"donation",
@@ -156,7 +156,7 @@ describe "REST" do
           receive(:create_petition_page).
           with(hash_including({
               "page_id"=> page.id.to_s,
-              "name"=>"this-page-does-not-exist-13172404-petition",
+              "name"=>"this-page-does-not-exist-13172404",
               "title"=>"Foo Bar (Petition)",
               "language"=>"/rest/v1/language/100/",
               "page_type"=>"petition"
