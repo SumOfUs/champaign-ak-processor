@@ -71,20 +71,19 @@ class AkPageCreator
   end
 
   def create_petition_page
-    client.create_petition_page( @params.merge( name_and_title( :petition ) ) )
+    client.create_petition_page( @params.merge( title( :petition ) ) )
   end
 
   def create_donation_page
-    client.create_donation_page( @params.merge(name_and_title( :donation )).
+    client.create_donation_page( @params.merge( title( :donation ) ).
       merge({
         hpc_rule: "/rest/v1/donationhpcrule/#{ENV['HPC_RULE_ID']}/"
       })
     )
   end
 
-  def name_and_title(type)
+  def title(type)
     {
-      name:   "#{@params[:name]}-#{type}",
       title:  "#{@params[:title]} (#{type.capitalize})"
     }
   end
@@ -97,4 +96,3 @@ class AkPageCreator
     @params[:page_id]
   end
 end
-
