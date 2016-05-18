@@ -8,6 +8,31 @@ describe "REST" do
     }
   end
 
+  describe 'POST /recurringpaymentpush', :focus do
+    describe 'ActionKit' do
+      let(:action_type) { 'subscription-payment' }
+
+      let(:data) do
+        # ID from https://act.sumofus.org/rest/v1/orderrecurring/10413/
+        #
+        { recurring_id: 'd53gs5' }
+      end
+
+      before do
+        VCR.use_cassette('recurring_payment_push_200') do
+          post '/message', params
+        end
+      end
+
+      # Confirm transaction has been created here:
+      #   https://act.sumofus.org/rest/v1/donationaction/67503908/
+      #
+      it "is successful" do
+        expect(response.status).to eq(200)
+      end
+    end
+  end
+
   describe 'POST /donationpush' do
     describe 'ActionKit' do
 
