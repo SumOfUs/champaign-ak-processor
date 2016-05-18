@@ -8,7 +8,7 @@ describe "REST" do
     }
   end
 
-  describe 'POST /recurringpaymentpush', :focus do
+  describe 'POST /recurringpaymentpush' do
     describe 'ActionKit' do
       let(:action_type) { 'subscription-payment' }
 
