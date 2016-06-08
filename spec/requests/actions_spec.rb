@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 describe "REST" do
+  let(:redis) { double(publish: true) }
+
+  before do
+    allow(RedisClient).to receive(:client) { redis }
+  end
+
   let(:params) do
     {
       type: action_type,
@@ -140,10 +146,16 @@ describe "REST" do
 
       context 'for valid page' do
 
+
+
         before do
           VCR.use_cassette("action_existing_page") do
             post '/message', params
           end
+        end
+
+        it 'publishes action' do
+          expect(redis).to have_received(:publish)
         end
 
         describe "recorded 'fields'" do

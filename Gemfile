@@ -30,7 +30,6 @@ group :test do
   gem 'database_cleaner'
   gem 'webmock'
   gem 'vcr'
-  gem 'spring-commands-rspec'
 end
 
 group :development do
