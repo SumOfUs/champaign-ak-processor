@@ -75,11 +75,27 @@ class QueueListener
     data = params[:params]
     data[:mailing_id] = extract_mailing_id(data[:akid])
     client.create_action(data)
+    Broadcast.emit( action_data(type: :petition, data: data) )
+  end
+
+  def action_data(type:, data:)
+    {
+      type:       type,
+      name:       data[:name],
+      page_id:    data[:page_id],
+      source:     data[:source],
+      country:    data[:country],
+      referer:    data[:action_referer],
+      amount:     data[:amount],
+      currency:   data[:currency],
+      created_at: Time.now.to_i
+    }
   end
 
   def create_donation(params)
     data = params[:params]
     client.create_donation(data)
+    Broadcast.emit( action_data(type: :donation, data: data) )
   end
 
   def create_payment(params)
@@ -96,3 +112,23 @@ class QueueListener
   end
 end
 
+#
+# name: 'Omar',
+# country: 'United Kingdom',
+# time: '12 Dec 13:23',
+# action_type: 'donation|petition',
+# meta: { amount: 12 },
+# page: {title: 'Foo Bar', slug: 'foo-bar', url: '/a/foo-bar'}
+
+#
+#
+# 10:01
+#   1,2,3,4,5,6
+# 10:02
+#   7,8,9,10
+# 10:03
+#   
+#
+#
+#pages:12 = { title: 'foo bar', slug: 'foo-bar' }
+#countries: {1: 'unitked kingdom' }
