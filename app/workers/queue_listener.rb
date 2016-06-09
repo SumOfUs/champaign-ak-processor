@@ -16,10 +16,10 @@ class QueueListener
         create_pages( params[:params] )
 
       when CREATE_ACTION
-        create_action(params)
+        create_action(params[:params])
 
       when CREATE_DONATION
-        create_donation(params)
+        create_donation(params[:params])
 
       when SUBSCRIPTION_PAYMENT
         create_payment(params)
@@ -71,15 +71,35 @@ class QueueListener
     (uri || '').match(/(\d+)\/$/){|m| m[1] if m }
   end
 
-  def create_action(params)
-    data = params[:params]
+  def create_action(data)
     data[:mailing_id] = extract_mailing_id(data[:akid])
-    client.create_action(data)
+    response = client.create_action(data)
+    Broadcast.emit( action_data(type: :petition, data: data) )
+    response
   end
 
-  def create_donation(params)
-    data = params[:params]
-    client.create_donation(data)
+  def action_data(type:, data:)
+    {
+      type:       type,
+      name:       data[:name],
+      page_id:    data[:page_id],
+      source:     data[:source],
+      country:    data[:country],
+      referer:    data[:action_referer],
+      amount:     data[:amount],
+      currency:   data[:currency],
+      created_at: Time.now.to_i
+    }
+  end
+
+  def create_donation(data)
+    response = client.create_donation(data)
+    Broadcast.emit( action_data(type: :donation, data: data) )
+    response
+  end
+
+  def create_payment(params)
+    client.create_recurring_payment(params[:params])
   end
 
   def create_payment(params)
@@ -95,4 +115,3 @@ class QueueListener
     (akid.try(:split, '.') || []).first
   end
 end
-
