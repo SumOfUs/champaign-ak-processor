@@ -102,6 +102,10 @@ class QueueListener
     client.create_recurring_payment(params[:params])
   end
 
+  def create_payment(params)
+    client.create_recurring_payment(params[:params])
+  end
+
   def create_pages(params)
     AkPageCreator.create_page(params.merge(page_type: 'petition'))
     AkPageCreator.create_page(params.merge(page_type: 'donation'))
