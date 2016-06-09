@@ -111,24 +111,3 @@ class QueueListener
     (akid.try(:split, '.') || []).first
   end
 end
-
-#
-# name: 'Omar',
-# country: 'United Kingdom',
-# time: '12 Dec 13:23',
-# action_type: 'donation|petition',
-# meta: { amount: 12 },
-# page: {title: 'Foo Bar', slug: 'foo-bar', url: '/a/foo-bar'}
-
-#
-#
-# 10:01
-#   1,2,3,4,5,6
-# 10:02
-#   7,8,9,10
-# 10:03
-#   
-#
-#
-#pages:12 = { title: 'foo bar', slug: 'foo-bar' }
-#countries: {1: 'unitked kingdom' }
