@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/SumOfUs/actionkit_connector.git
-  revision: f6b5ea1e616609f5344a4c8ffa6e25e2aac02b0f
+  revision: 59635437d6b9d32e22fa4d7704b1cff061feea62
   specs:
     actionkit_connector (0.4.3)
       httparty (~> 0.13)
@@ -173,6 +173,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
+    redis (3.2.2)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -251,6 +252,7 @@ DEPENDENCIES
   puma (~> 2.15.3)
   pusher
   rails (= 4.2.5)
+  redis
   rspec-rails (~> 3.3)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
