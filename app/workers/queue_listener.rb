@@ -16,10 +16,10 @@ class QueueListener
         create_pages( params[:params] )
 
       when CREATE_ACTION
-        create_action(params[:params])
+        create_action(params)
 
       when CREATE_DONATION
-        create_donation(params[:params])
+        create_donation(params)
 
       when SUBSCRIPTION_PAYMENT
         create_payment(params)
@@ -71,30 +71,17 @@ class QueueListener
     (uri || '').match(/(\d+)\/$/){|m| m[1] if m }
   end
 
-  def create_action(data)
-    data[:mailing_id] = extract_mailing_id(data[:akid])
-    response = client.create_action(data)
-    Broadcast.emit( action_data(type: :petition, data: data) )
+  def create_action(params)
+    params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
+    response = client.create_action(params[:params])
+    Broadcast.emit( params[:meta].merge(type: 'petition' ) )
     response
   end
 
-  def action_data(type:, data:)
-    {
-      type:       type,
-      name:       data[:name],
-      page_id:    data[:page_id],
-      source:     data[:source],
-      country:    data[:country],
-      referer:    data[:action_referer],
-      amount:     data[:amount],
-      currency:   data[:currency],
-      created_at: Time.now.to_i
-    }
-  end
-
-  def create_donation(data)
-    response = client.create_donation(data)
-    Broadcast.emit( action_data(type: :donation, data: data) )
+  def create_donation(params)
+    order = params[:params][:order]
+    response = client.create_donation(params[:params])
+    Broadcast.emit( params[:meta].merge(type: 'donation', amount: order[:amount], currency: order[:currency] ) )
     response
   end
 

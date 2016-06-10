@@ -1,16 +1,15 @@
 require 'rails_helper'
 
 describe "REST" do
-  let(:redis) { double(publish: true) }
-
   before do
-    allow(RedisClient).to receive(:client) { redis }
+    allow(Broadcast).to receive(:emit)
   end
 
   let(:params) do
     {
       type: action_type,
-      params: data
+      params: data,
+      meta: { foo: 'bar' }
     }
   end
 
@@ -83,6 +82,12 @@ describe "REST" do
         expect(subject.fetch(:type)).to eq("Donation")
       end
 
+      it 'publishes action' do
+        expect(Broadcast).to have_received(:emit).with(
+          { foo: 'bar', type: 'donation', amount: '34.00', currency: 'GBP' }
+        )
+      end
+
       describe "recorded order" do
         subject { body.fetch(:order) }
 
@@ -145,9 +150,6 @@ describe "REST" do
       subject(:body) { JSON.parse(response.body).deep_symbolize_keys }
 
       context 'for valid page' do
-
-
-
         before do
           VCR.use_cassette("action_existing_page") do
             post '/message', params
@@ -155,7 +157,9 @@ describe "REST" do
         end
 
         it 'publishes action' do
-          expect(redis).to have_received(:publish)
+          expect(Broadcast).to have_received(:emit).with(
+            { foo: 'bar', type: 'petition' }
+          )
         end
 
         describe "recorded 'fields'" do
@@ -194,4 +198,3 @@ describe "REST" do
     end
   end
 end
-
