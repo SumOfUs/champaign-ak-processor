@@ -6,6 +6,7 @@ class QueueListener
   CREATE_DONATION = 'donation'
   UPDATE_PAGES    = 'update_pages'
   SUBSCRIPTION_PAYMENT = 'subscription-payment'
+  CREATE_MEMBER = 'create_member'
 
   def perform(sqs_message, params)
     case params[:type]
@@ -23,6 +24,10 @@ class QueueListener
 
       when SUBSCRIPTION_PAYMENT
         create_payment(params)
+
+      when CREATE_MEMBER
+        create_member(params)
+
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
     end
@@ -89,8 +94,8 @@ class QueueListener
     client.create_recurring_payment(params[:params])
   end
 
-  def create_payment(params)
-    client.create_recurring_payment(params[:params])
+  def create_member(params)
+    client.create_member(params)
   end
 
   def create_pages(params)
