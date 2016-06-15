@@ -5,11 +5,16 @@ describe "REST" do
     allow(Broadcast).to receive(:emit)
   end
 
+  let(:action) { Action.create(form_data: {}) }
+
   let(:params) do
     {
       type: action_type,
       params: data,
-      meta: { foo: 'bar' }
+      meta: {
+        foo: 'bar',
+        action_id: action.id
+      }
     }
   end
 
@@ -74,6 +79,10 @@ describe "REST" do
         end
       end
 
+      it 'stores resource ID in champaign action' do
+        expect(action.reload.form_data['ak_resource_id']).to match(/rest\/v1\/donationaction\//)
+      end
+
       it "registers as complete" do
         expect(subject.fetch(:status)).to eq("complete")
       end
@@ -84,7 +93,7 @@ describe "REST" do
 
       it 'publishes action' do
         expect(Broadcast).to have_received(:emit).with(
-          { foo: 'bar', type: 'donation', amount: '34.00', currency: 'GBP' }
+          hash_including( foo: 'bar', type: 'donation', amount: '34.00', currency: 'GBP' )
         )
       end
 
@@ -156,9 +165,13 @@ describe "REST" do
           end
         end
 
+        it 'stores resource ID in champaign action' do
+          expect(action.reload.form_data['ak_resource_id']).to match(/rest\/v1\/petitionaction\//)
+        end
+
         it 'publishes action' do
           expect(Broadcast).to have_received(:emit).with(
-            { foo: 'bar', type: 'petition' }
+            hash_including({ foo: 'bar', type: 'petition' })
           )
         end
 
