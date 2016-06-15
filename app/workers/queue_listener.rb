@@ -78,14 +78,29 @@ class QueueListener
 
   def create_action(params)
     params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
+
+    action = Action.find_by_id(params[:meta][:action_id])
     response = client.create_action(params[:params])
+
+    if action
+      action[:form_data][:ak_resource_id] = response['resource_uri']
+      action.save
+    end
+
     Broadcast.emit( params[:meta].merge(type: 'petition' ) )
     response
   end
 
   def create_donation(params)
     order = params[:params][:order]
+    action = Action.find_by_id(params[:meta][:action_id])
     response = client.create_donation(params[:params])
+
+    if action
+      action[:form_data][:ak_resource_id] = response['resource_uri']
+      action.save
+    end
+
     Broadcast.emit( params[:meta].merge(type: 'donation', amount: order[:amount], currency: order[:currency] ) )
     response
   end
