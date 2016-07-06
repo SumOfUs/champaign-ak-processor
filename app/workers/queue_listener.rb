@@ -111,7 +111,6 @@ class QueueListener
 
   def subscribe_member(params)
     page_name = ENV['AK_SUBSCRIPTION_PAGE_NAME']
-    byebug
     if page_name.blank?
       Rails.logger.error("Your ActionKit page for subscriptions from the home page has not been set!")
     else
