@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/action/
+    body:
+      encoding: UTF-8
+      string: '{"email":"guybrush_threepwood@example.com","name":"Guybrush Threepwood","country":"United
+        Kingdom","postal":"12345","page":"registration"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Wed, 06 Jul 2016 21:54:10 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-01.actionkit.com
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      Location:
+      - https://act.sumofus.org/rest/v1/signupaction/70611784/
+      Set-Cookie:
+      - sid=afbu1p0gi76yeqxdfrqly04zd1f825ty; expires=Thu, 07-Jul-2016 05:54:10 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: '{"akid": ".11835447.Wr-wqO", "created_at": "2016-07-06T21:54:10.386822",
+        "created_user": true, "fields": {}, "id": 70611784, "ip_address": "24.5.77.14",
+        "is_forwarded": false, "link": null, "mailing": null, "opq_id": "", "page":
+        "/rest/v1/signuppage/28/", "redirect_url": "http://sumofus.org/post/registration?action_id=70611784&akid=.11835447.Wr-wqO&ar=1&rd=1",
+        "referring_mailing": null, "referring_user": null, "resource_uri": "/rest/v1/signupaction/70611784/",
+        "source": "restful_api", "status": "complete", "subscribed_user": true, "taf_emails_sent":
+        null, "type": "Signup", "updated_at": "2016-07-06T21:54:10.435901", "user":
+        "/rest/v1/user/11835447/"}'
+    http_version: 
+  recorded_at: Wed, 06 Jul 2016 21:54:11 GMT
+recorded_with: VCR 3.0.1
