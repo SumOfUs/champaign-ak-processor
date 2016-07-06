@@ -121,7 +121,7 @@ describe "REST" do
         before do
           data[:donationpage][:payment_account] = 'PayPal EUR'
           VCR.use_cassette('donation_push_paypal') do
-            puts post '/message', params
+            post '/message', params
           end
         end
 
