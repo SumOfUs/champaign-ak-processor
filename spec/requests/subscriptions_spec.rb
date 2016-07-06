@@ -23,15 +23,6 @@ describe "REST" do
 
       context 'when a subscription page is set' do
 
-        let(:expected_params) do {
-          email: "guybrush_threepwood@example.com",
-          name: "Guybrush Threepwood",
-          country: "United Kingdom",
-          postal: "12345",
-          page: ENV['AK_SUBSCRIPTION_PAGE_NAME']
-        }
-        end
-
         it 'creates a new member' do
           VCR.use_cassette("home_page_subscription_success") do
             post '/message', params
