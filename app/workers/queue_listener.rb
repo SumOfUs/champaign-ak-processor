@@ -6,7 +6,7 @@ class QueueListener
   CREATE_DONATION = 'donation'
   UPDATE_PAGES    = 'update_pages'
   SUBSCRIPTION_PAYMENT = 'subscription-payment'
-  CREATE_MEMBER = 'create_member'
+  SUBSCRIBE_MEMBER = 'subscribe_member'
 
   def perform(sqs_message, params)
     case params[:type]
@@ -25,8 +25,8 @@ class QueueListener
       when SUBSCRIPTION_PAYMENT
         create_payment(params)
 
-      when CREATE_MEMBER
-        create_member(params)
+      when SUBSCRIBE_MEMBER
+        subscribe_member(params)
 
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
@@ -109,8 +109,14 @@ class QueueListener
     client.create_recurring_payment(params[:params])
   end
 
-  def create_member(params)
-    client.create_member(params)
+  def subscribe_member(params)
+    page_name = ENV['AK_SUBSCRIPTION_PAGE_NAME']
+    byebug
+    if page_name.blank?
+      Rails.logger.error("Your ActionKit page for subscriptions from the home page has not been set!")
+    else
+      client.create_action(params[:params].merge({ page: page_name }))
+    end
   end
 
   def create_pages(params)
