@@ -3,6 +3,7 @@ require 'rails_helper'
 describe "REST" do
   before do
     allow(Broadcast).to receive(:emit)
+    allow(ActionsCache).to receive(:append)
   end
 
   let(:action) { Action.create(form_data: {}) }
@@ -172,6 +173,12 @@ describe "REST" do
         it 'publishes action' do
           expect(Broadcast).to have_received(:emit).with(
             hash_including({ foo: 'bar', type: 'petition' })
+          )
+        end
+
+        it 'stores the action in ActionCache' do
+          expect(ActionsCache).to have_received(:append).with(
+            hash_including(foo: 'bar', type: 'petition')
           )
         end
 
