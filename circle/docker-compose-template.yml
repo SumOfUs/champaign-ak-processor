@@ -2,6 +2,7 @@ processor:
   image: "soutech/champaign-ak-processor:$CIRCLE_SHA1"
   links:
     - db
+    - redis
   command: /myapp/circle/run-tests
   env_file:
     - test.env
@@ -12,3 +13,6 @@ db:
     - "5432"
   environment:
     POSTGRES_DB: champaign_test
+redis:
+  image: redis
+  command: redis-server --protected-mode no
