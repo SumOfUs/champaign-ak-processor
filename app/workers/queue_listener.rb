@@ -81,13 +81,16 @@ class QueueListener
 
     action = Action.find_by_id(params[:meta][:action_id])
     response = client.create_action(params[:params])
+    payload = params[:meta].merge(type: 'petition')
 
     if action
       action[:form_data][:ak_resource_id] = response['resource_uri']
       action.save
     end
 
-    Broadcast.emit( params[:meta].merge(type: 'petition' ) )
+    Broadcast.emit(payload)
+    ActionsCache.append(payload)
+
     response
   end
 
