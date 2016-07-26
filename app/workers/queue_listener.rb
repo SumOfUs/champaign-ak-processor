@@ -90,7 +90,6 @@ class QueueListener
 
     Broadcast.emit(payload)
     ActionsCache.append(payload)
-
     response
   end
 
