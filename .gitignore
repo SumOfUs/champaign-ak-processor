@@ -23,3 +23,4 @@ env.yml
 !.elasticbeanstalk/*.global.yml
 .DS_Store
 .byebug_history
+.ruby-gemset
