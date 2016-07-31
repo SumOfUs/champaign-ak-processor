@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'rails_helper'
 
 describe "REST" do
   let(:page) { Page.create(title: 'Foo', slug: 'foo-bar') }
@@ -32,10 +33,9 @@ describe "REST" do
           VCR.use_cassette('page_update_404'){ post("/message", params) }
         end
 
-        it 'fails' do
-          expect {
-            subject
-          }.to raise_error(ArgumentError)
+        it 'responds 500 Internal Server Error' do
+          subject
+          expect(response.code).to eq('500')
         end
 
       end

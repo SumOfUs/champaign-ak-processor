@@ -7,6 +7,7 @@ class QueueListener
   UPDATE_PAGES    = 'update_pages'
   SUBSCRIPTION_PAYMENT = 'subscription-payment'
   SUBSCRIBE_MEMBER = 'subscribe_member'
+  CREATE_CAMPAIGN = 'create_campaign'
 
   def perform(sqs_message, params)
     case params[:type]
@@ -27,6 +28,9 @@ class QueueListener
 
       when SUBSCRIBE_MEMBER
         subscribe_member(params)
+
+      when CREATE_CAMPAIGN
+        CampaignCreator.run(params)
 
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"

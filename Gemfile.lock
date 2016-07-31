@@ -1,6 +1,7 @@
 GIT
   remote: git://github.com/SumOfUs/actionkit_connector.git
-  revision: 59635437d6b9d32e22fa4d7704b1cff061feea62
+  revision: 129c0ad4b61d124305491894da58b28694c0d205
+  branch: campaigns
   specs:
     actionkit_connector (0.4.3)
       httparty (~> 0.13)
@@ -91,8 +92,7 @@ GEM
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
     hashdiff (0.3.0)
-    httparty (0.13.7)
-      json (~> 1.8)
+    httparty (0.14.0)
       multi_xml (>= 0.5.2)
     httpclient (2.7.1)
     i18n (0.7.0)
@@ -261,5 +261,8 @@ DEPENDENCIES
   web-console (~> 2.0)
   webmock
 
+RUBY VERSION
+   ruby 2.3.0p0
+
 BUNDLED WITH
-   1.11.2
+   1.12.5
