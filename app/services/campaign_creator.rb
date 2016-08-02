@@ -8,11 +8,14 @@ class CampaignCreator
 
   def initialize(params)
     @params = params.slice(:name)
+    @campaign_id = params[:campaign_id] || raise(ArgumentError)
   end
 
   def run
     client.create_multilingual_campaign(@params).tap do |response|
-      if response.code != 201
+      if response.code == 201
+        CampaignRepository.set(@campaign_id, response.headers['location'])
+      else
         raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
       end
     end

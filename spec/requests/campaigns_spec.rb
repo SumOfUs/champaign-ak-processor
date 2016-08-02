@@ -7,7 +7,7 @@ describe "Campaigns", type: :request do
     context "given valid params" do
       it "responds 200 OK" do
         VCR.use_cassette "create_multilingual_campaign_200" do
-          post '/message', type: 'create_campaign', name: 'Test Campaign 4'
+          post '/message', type: 'create_campaign', name: 'Test Campaign 4', campaign_id: 123
         end
         expect(response.code).to eq "200"
       end
