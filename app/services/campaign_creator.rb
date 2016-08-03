@@ -13,7 +13,7 @@ class CampaignCreator
 
   def run
     client.create_multilingual_campaign(@params).tap do |response|
-      if response.code == 201
+      if response.success?
         CampaignRepository.set(@campaign_id, response.headers['location'])
       else
         raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")

@@ -16,7 +16,7 @@ class CampaignUpdater
     ak_campaign_id = ActionKitConnector::Util.extract_id_from_resource_uri(ak_campaign_uri)
 
     client.update_multilingual_campaign(ak_campaign_id, @params).tap do |response|
-      if response.code != 204
+      if !response.success?
         raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
       end
     end
