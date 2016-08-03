@@ -34,6 +34,9 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
+    if ENV['REDIS_URI'].present? && ENV['REDIS_PORT'].present?
+      DatabaseCleaner[:redis].db = "redis://#{ENV['REDIS_URI']}:#{ENV['REDIS_PORT']}"
+    end
     DatabaseCleaner[:redis].strategy = :truncation, { only: ["test:*"] }
     RedisClient.namespace = 'test'
   end
