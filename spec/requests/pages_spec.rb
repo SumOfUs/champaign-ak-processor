@@ -85,7 +85,7 @@ describe "REST" do
   describe "POST /petitionpage" do
     let(:params) do
       { type: 'create',
-          params: {
+        params: {
           page_id: page.id,
           name: "this-page-does-not-exist-13172404",
           title: 'Foo Bar',
