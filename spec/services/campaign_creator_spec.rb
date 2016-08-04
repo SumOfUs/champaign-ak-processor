@@ -32,4 +32,21 @@ describe CampaignCreator do
       end
     end
   end
+
+  context "given a campaign with the passed name already exists" do
+    before do
+      # Hardcoding rand so the suffix is always the same and plays well with VCR
+      allow_any_instance_of(Object).to receive(:rand).and_return(123)
+    end
+
+    it "appends a random number suffix to the name and retries" do
+      VCR.use_cassette "create_multilingual_campaign_retry" do
+        response = CampaignCreator.run(campaign_id: 123, name: "Test Campaign 6")
+        expect(response).to be_success
+
+        response = CampaignCreator.run(campaign_id: 123, name: "Test Campaign 6")
+        expect(response).to be_success
+      end
+    end
+  end
 end
