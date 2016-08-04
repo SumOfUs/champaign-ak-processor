@@ -1,4 +1,4 @@
-class CampaignCreator
+class CampaignUpdater
   class Error < StandardError; end
   include Ak::Client
 
@@ -12,10 +12,11 @@ class CampaignCreator
   end
 
   def run
-    client.create_multilingual_campaign(@params).tap do |response|
-      if response.success?
-        CampaignRepository.set(@campaign_id, response.headers['location'])
-      else
+    ak_campaign_uri = CampaignRepository.get!(@campaign_id)
+    ak_campaign_id = ActionKitConnector::Util.extract_id_from_resource_uri(ak_campaign_uri)
+
+    client.update_multilingual_campaign(ak_campaign_id, @params).tap do |response|
+      if !response.success?
         raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
       end
     end

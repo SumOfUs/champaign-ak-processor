@@ -23,6 +23,7 @@ gem 'lograge'
 group :development, :test do
   gem 'byebug'
   gem 'guard-rspec', require: false
+  gem 'redis-namespace'
 end
 
 group :test do
