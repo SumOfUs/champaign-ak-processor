@@ -1,0 +1,118 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/multilingualcampaign/
+    body:
+      encoding: UTF-8
+      string: '{"name":"Test Campaign 6"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Thu, 04 Aug 2016 20:15:40 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-03.actionkit.com
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      Location:
+      - https://act.sumofus.org/rest/v1/multilingualcampaign/131/
+      Set-Cookie:
+      - sid=1geshzx4h2kh2jbkmi964khoq2v8bkio; expires=Fri, 05-Aug-2016 04:15:40 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 04 Aug 2016 20:15:42 GMT
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/multilingualcampaign/
+    body:
+      encoding: UTF-8
+      string: '{"name":"Test Campaign 6"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 409
+      message: CONFLICT
+    headers:
+      Date:
+      - Thu, 04 Aug 2016 20:15:43 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-02.actionkit.com
+      Vary:
+      - Cookie,Accept-Encoding,User-Agent
+      Location:
+      - https://act.sumofus.org/rest/v1/multilingualcampaign/131/
+      Set-Cookie:
+      - sid=iwopjn5j199tg60nuhv3c26eci57xzs2; expires=Fri, 05-Aug-2016 04:15:43 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: '{"errors": {"name": ["Conflict on unique key ''name'' for value ''Test
+        Campaign 6'', existing location: /rest/v1/multilingualcampaign/131/"]}}'
+    http_version: 
+  recorded_at: Thu, 04 Aug 2016 20:15:43 GMT
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/multilingualcampaign/
+    body:
+      encoding: UTF-8
+      string: '{"name":"Test Campaign 6-123"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Thu, 04 Aug 2016 20:15:45 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-02.actionkit.com
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      Location:
+      - https://act.sumofus.org/rest/v1/multilingualcampaign/132/
+      Set-Cookie:
+      - sid=n0sflxxhbha3p4ppob4vh79odrtapo1t; expires=Fri, 05-Aug-2016 04:15:45 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 04 Aug 2016 20:15:45 GMT
+recorded_with: VCR 3.0.1
