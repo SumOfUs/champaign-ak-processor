@@ -14,6 +14,7 @@ class PageUpdater
   def run
     data = params[:params]
     data.delete(:name)
+    @campaign_id = data.delete(:campaign_id)
 
     raise ArgumentError, "Missing resource URI for page" if params[:petition_uri].blank? and params[:donation_uri].blank?
 
@@ -33,6 +34,7 @@ class PageUpdater
       id: suffix.inquiry.donation? ? donation_id(params) : petition_id(params)
     }.tap do |load|
         load[:title] = suffix_title(data[:title], suffix) if data[:title]
+        load[:multilingual_campaign] = multilingual_campaign_uri
       end
     )
   end
@@ -52,6 +54,10 @@ class PageUpdater
   def suffix_title(title, type)
     return title if title.strip =~ %r{(#{type.capitalize})}
     "#{title} (#{type.capitalize})"
+  end
+
+  def multilingual_campaign_uri
+    CampaignRepository.get(@campaign_id) if @campaign_id
   end
 
 end

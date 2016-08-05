@@ -57,12 +57,14 @@ class PageCreator
     end
 
     def sanitized_params
-      @params.merge(
+      params = @params.merge(
         name:   "#{@params[:name]}-#{page_type}",
         title:  "#{@params[:title]} (#{page_type.capitalize})",
         page_type: page_type,
         multilingual_campaign: multilingual_campaign_uri
       )
+      params.delete(:campaign_id)
+      params
     end
 
     def multilingual_campaign_uri
