@@ -16,7 +16,7 @@ class QueueListener
         update_pages(params)
 
       when CREATE_PAGES
-        create_pages( params[:params] )
+        PageCreator.run(params[:params])
 
       when CREATE_ACTION
         create_action(params)
@@ -126,11 +126,6 @@ class QueueListener
     else
       client.create_action(params[:params].merge({ page: page_name }))
     end
-  end
-
-  def create_pages(params)
-    AkPageCreator.create_page(params.merge(page_type: 'petition'))
-    AkPageCreator.create_page(params.merge(page_type: 'donation'))
   end
 
   def extract_mailing_id(akid = '')
