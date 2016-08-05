@@ -60,8 +60,13 @@ class PageCreator
       @params.merge(
         name:   "#{@params[:name]}-#{page_type}",
         title:  "#{@params[:title]} (#{page_type.capitalize})",
-        page_type: page_type
+        page_type: page_type,
+        multilingual_campaign: multilingual_campaign_uri
       )
+    end
+
+    def multilingual_campaign_uri
+      CampaignRepository.get(@params[:campaign_id])
     end
 
     def page_type
