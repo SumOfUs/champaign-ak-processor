@@ -14,6 +14,7 @@ describe QueueListener do
       before do
         allow(client).to receive(:update_donation_page)
         allow(client).to receive(:update_petition_page)
+        CampaignRepository.set(234, "http://dummy-campaign")
       end
 
       let(:params) do
@@ -22,7 +23,8 @@ describe QueueListener do
           petition_uri:  "/rest/v1/petitionpage/1234/",
           donation_uri:  "/rest/v1/donationpage/5678/",
           params: {
-            tags: ["/rest/v1/tag/5678/"]
+            tags: ["/rest/v1/tag/5678/"],
+            campaign_id: 234
           }
         }
       end
@@ -30,7 +32,8 @@ describe QueueListener do
       it 'calls update_donation_page on client' do
         expected_params = {
           tags: ["/rest/v1/tag/5678/"],
-          id: '5678'
+          id: '5678',
+          multilingual_campaign: "http://dummy-campaign"
         }
 
         expect(client).to receive(:update_donation_page).with(expected_params)
@@ -40,7 +43,8 @@ describe QueueListener do
       it 'calls update_petition_page on client' do
         expected_params = {
           tags: ["/rest/v1/tag/5678/"],
-          id: '1234'
+          id: '1234',
+          multilingual_campaign: "http://dummy-campaign"
         }
 
         expect(client).to receive(:update_petition_page).with(expected_params)
