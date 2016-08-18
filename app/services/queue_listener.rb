@@ -9,6 +9,7 @@ class QueueListener
   SUBSCRIBE_MEMBER = 'subscribe_member'
   CREATE_CAMPAIGN = 'create_campaign'
   UPDATE_CAMPAIGN = 'update_campaign'
+  UPDATE_MEMBER = 'update_member'
 
   def perform(sqs_message, params)
     case params[:type]
@@ -35,6 +36,9 @@ class QueueListener
 
       when UPDATE_CAMPAIGN
         CampaignUpdater.run(params)
+
+      when UPDATE_MEMBER
+        update_member(params)
 
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
@@ -85,6 +89,10 @@ class QueueListener
     else
       client.create_action(params[:params].merge({ page: page_name }))
     end
+  end
+
+  def update_member(params)
+    client.update_user(params[:member])
   end
 
   def extract_mailing_id(akid = '')
