@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/multilingualcampaign/120/
+    body:
+      encoding: UTF-8
+      string: '{"name":"AKProcessor test: Updated campaign"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 204
+      message: NO CONTENT
+    headers:
+      Date:
+      - Tue, 02 Aug 2016 20:58:56 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-01.actionkit.com
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      Set-Cookie:
+      - sid=mgiqs7qlae5sgb55b0utdljvpmbtwmgh; expires=Wed, 03-Aug-2016 04:58:56 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 02 Aug 2016 20:58:56 GMT
+- request:
+    method: get
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/multilingualcampaign/120/
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 02 Aug 2016 20:58:57 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-02.actionkit.com
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      Cache-Control:
+      - no-cache
+      Set-Cookie:
+      - sid=90c4grsyw1k15mwmd2lmiwx9g1woz63x; expires=Wed, 03-Aug-2016 04:58:57 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: '{"created_at": "2016-08-02T19:05:16", "hidden": false, "id": 120, "name":
+        "AKProcessor test: Updated campaign", "resource_uri": "/rest/v1/multilingualcampaign/120/",
+        "updated_at": "2016-08-02T20:58:56"}'
+    http_version: 
+  recorded_at: Tue, 02 Aug 2016 20:58:57 GMT
+recorded_with: VCR 3.0.1

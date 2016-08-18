@@ -7,4 +7,8 @@ module RedisClient
       port: ENV["REDIS_PORT"]
     )
   end
+
+  def self.namespace=(namespace)
+    @client = Redis::Namespace.new(namespace, redis: client)
+  end
 end

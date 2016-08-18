@@ -4,7 +4,7 @@ describe ActionsCache::Store do
   describe :initialize do
     it 'sets the redis client instance on initialization' do
       actions_cache = ActionsCache::Store.new
-      expect(actions_cache.redis).to be_an_instance_of(Redis)
+      expect(actions_cache.redis).to be_an_instance_of(Redis::Namespace)
     end
 
     it 'defaults to a cache size of 100' do

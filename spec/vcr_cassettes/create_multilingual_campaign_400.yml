@@ -1,0 +1,39 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/multilingualcampaign/
+    body:
+      encoding: UTF-8
+      string: '{"name":""}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 400
+      message: BAD REQUEST
+    headers:
+      Date:
+      - Sun, 31 Jul 2016 21:53:57 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-01.actionkit.com
+      Vary:
+      - Cookie,Accept-Encoding,User-Agent
+      Set-Cookie:
+      - sid=kajzhi1uxh2tndvy2p8g319ytikbww4z; expires=Mon, 01-Aug-2016 05:53:57 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: '{"multilingualcampaign": {"name": ["This field is required."]}}'
+    http_version: 
+  recorded_at: Sun, 31 Jul 2016 21:53:57 GMT
+recorded_with: VCR 3.0.1
