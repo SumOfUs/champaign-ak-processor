@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'rails_helper'
 
 describe "REST" do
   let(:page) { Page.create(title: 'Foo', slug: 'foo-bar') }
