@@ -1,0 +1,41 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/user/8244194/
+    body:
+      encoding: UTF-8
+      string: '{"akid":"8244194","email":"weriopweirpwgklwrkpowiro@example.com","first_name":"Guybrush","last_name":"Threepwood","country":"United
+        Kingdom","postal":"12345","address1":"Jam Factory 123","address2":"Random
+        address"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 204
+      message: NO CONTENT
+    headers:
+      Date:
+      - Mon, 22 Aug 2016 13:17:38 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Machine-Id:
+      - web-g02-03.actionkit.com
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      Set-Cookie:
+      - sid=l5aoii2i254tt0ljunzt2dt0m2y738qs; expires=Mon, 22-Aug-2016 21:17:38 GMT;
+        httponly; Max-Age=28800; Path=/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Mon, 22 Aug 2016 13:17:38 GMT
+recorded_with: VCR 3.0.1

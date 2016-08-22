@@ -92,7 +92,10 @@ class QueueListener
   end
 
   def update_member(params)
-    client.update_user(params[:member])
+    res = client.update_user(params[:params]["akid"], params[:params])
+    unless res.success?
+      Rails.logger.error("Member update failed with #{res.parsed_response["errors"]}!")
+    end
   end
 
   def extract_mailing_id(akid = '')
