@@ -11,6 +11,7 @@ class QueueListener
   CREATE_CAMPAIGN = 'create_campaign'
   UPDATE_CAMPAIGN = 'update_campaign'
   UPDATE_MEMBER = 'update_member'
+  NEW_SURVEY_RESPONSE = 'new_survey_response'
 
   def perform(sqs_message, params)
     case params[:type]
@@ -43,6 +44,9 @@ class QueueListener
 
       when SUBSCRIPTION_CANCELLATION
         cancel_subscription(params[:params])
+
+      when NEW_SURVEY_RESPONSE
+        SurveyResponseProcessor.run(params)
 
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
