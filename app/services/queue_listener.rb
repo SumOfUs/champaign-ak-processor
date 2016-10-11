@@ -21,7 +21,7 @@ class QueueListener
         PageCreator.run(params[:params])
 
       when CREATE_ACTION
-        create_action(params)
+        ActionCreator.run(params)
 
       when CREATE_DONATION
         create_donation(params)
@@ -53,23 +53,6 @@ class QueueListener
 
   def cancel_subscription(params)
     client.cancel_subscription(params)
-  end
-
-  def create_action(params)
-    params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
-
-    action = Action.find_by_id(params[:meta][:action_id])
-    response = client.create_action(params[:params])
-    payload = params[:meta].merge(type: 'petition')
-
-    if action
-      action[:form_data][:ak_resource_id] = response['resource_uri']
-      action.save
-    end
-
-    Broadcast.emit(payload)
-    ActionsCache.append(payload)
-    response
   end
 
   def create_donation(params)
@@ -104,9 +87,5 @@ class QueueListener
     unless res.success?
       Rails.logger.error("Member update failed with #{res.parsed_response["errors"]}!")
     end
-  end
-
-  def extract_mailing_id(akid = '')
-    (akid.try(:split, '.') || []).first
   end
 end
