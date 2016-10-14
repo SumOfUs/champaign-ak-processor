@@ -20,7 +20,9 @@ class ActionCreator
     if action
       action[:form_data][:ak_resource_id] = response['resource_uri']
       action.save!
-      ActionRepository.set(params[:meta][:action_id], response['resource_uri'])
+      ActionRepository.set(params[:meta][:action_id],
+                           ak_id: response['resource_uri'],
+                           page_ak_id: response.parsed_response['page'])
     end
 
     Broadcast.emit(payload)
