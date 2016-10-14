@@ -21,7 +21,7 @@ describe "New Survey Response" do
 
   let(:data) do
     {
-      page:         "/rest/v1/petitionpage/16483/",
+      page:         "some-page-slug",
       name:         "Pablo José Francisco de María",
       postal:       "W1",
       address1:     "The Lodge",
@@ -54,8 +54,10 @@ describe "New Survey Response" do
       expect(action.reload.form_data['ak_resource_id']).to match(/rest\/v1\/petitionaction\//)
     end
 
-    it 'stores the new action ak_id in the ActionsRepository' do
-      expect(ActionRepository.get(action.id)).to be_present
+    it 'stores the new action data in the ActionsRepository' do
+      ak_action = ActionRepository.get(action.id)
+      expect(ak_action[:page_ak_id]).to match(/rest\/v1\/petitionpage\//)
+      expect(ak_action[:ak_id]).to be_present
     end
   end
 
@@ -73,12 +75,21 @@ describe "New Survey Response" do
       end
       expect(response.success?).to be_truthy
 
-      resource_uri = ActionRepository.get(action.id)
-      @action_ak_id = ActionKitConnector::Util.extract_id_from_resource_uri(resource_uri)
+      ak_action = ActionRepository.get(action.id)
+      @action_ak_id = ActionKitConnector::Util.extract_id_from_resource_uri(ak_action[:ak_id])
+      @page_ak_id = ak_action[:page_ak_id]
     end
 
     it "updates action kit" do
-      expect(Ak::Client.client).to receive(:update_petition_action).with(@action_ak_id, update_params[:params]).and_call_original
+      # It overrides `page` with the ak_page_id
+      ak_expected_params = update_params[:params].tap do |p|
+        p[:page] = @page_ak_id
+      end
+
+      expect(Ak::Client.client).to receive(:update_petition_action).
+        with(@action_ak_id, ak_expected_params).
+        and_call_original
+
       VCR.use_cassette("update_petition_action") do
         post '/message', update_params
       end
