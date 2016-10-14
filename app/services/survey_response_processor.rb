@@ -19,24 +19,31 @@ class SurveyResponseProcessor
 
   private
 
+  def new_action?
+    ak_action.blank?
+  end
+
   def update_action
-    response = Ak::Client.client.update_petition_action(existing_action_ak_id, @params[:params])
+    response = Ak::Client.client.update_petition_action(existing_action_ak_id, update_params)
     if !response.success?
       raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
     end
     response
   end
 
-  def new_action?
-    existing_action_ak_id.blank?
-  end
-
   def existing_action_ak_id
     @existing_action_ak_id ||= begin
-      resource_uri = ActionRepository.get(@params[:meta][:action_id])
-      if resource_uri.present?
-        ActionKitConnector::Util.extract_id_from_resource_uri(resource_uri)
-      end
+      ActionKitConnector::Util.extract_id_from_resource_uri(ak_action[:ak_id])
+    end
+  end
+
+  def ak_action
+    @ak_action ||= ActionRepository.get(@params[:meta][:action_id])
+  end
+
+  def update_params
+    @params[:params].clone.tap do |p|
+      p[:page] = @ak_action[:page_ak_id]
     end
   end
 end
