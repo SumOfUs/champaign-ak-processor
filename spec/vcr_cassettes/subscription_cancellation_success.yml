@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/profilecancelpush/
+    body:
+      encoding: UTF-8
+      string: '{"recurring_id":"g85dkg","canceled_by":"user"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Tue, 18 Oct 2016 00:02:22 GMT
+      Location:
+      - https://act.sumofus.org/rest/v1/transaction/1214247/
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=o2d3ctvj06w6rhn9j9ms27aafhd9l4rk; expires=Tue, 18-Oct-2016 08:02:22 GMT;
+        httponly; Max-Age=28800; Path=/
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      X-Machine-Id:
+      - ip-10-50-1-128
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 18 Oct 2016 00:02:22 GMT
+recorded_with: VCR 3.0.1
