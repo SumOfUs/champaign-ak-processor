@@ -6,6 +6,7 @@ class QueueListener
   CREATE_DONATION = 'donation'
   UPDATE_PAGES    = 'update_pages'
   SUBSCRIPTION_PAYMENT = 'subscription-payment'
+  SUBSCRIPTION_CANCELLATION = 'cancel_subscription'
   SUBSCRIBE_MEMBER = 'subscribe_member'
   CREATE_CAMPAIGN = 'create_campaign'
   UPDATE_CAMPAIGN = 'update_campaign'
@@ -40,12 +41,19 @@ class QueueListener
       when UPDATE_MEMBER
         update_member(params)
 
+      when SUBSCRIPTION_CANCELLATION
+        cancel_subscription(params[:params])
+
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
     end
   end
 
   private
+
+  def cancel_subscription(params)
+    client.cancel_subscription(params)
+  end
 
   def create_action(params)
     params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])

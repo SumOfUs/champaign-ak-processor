@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/SumOfUs/actionkit_connector.git
-  revision: 4f822b6de92807f3e654b5c4b6724577c99fe1c3
+  revision: d0a14ddd266abac6f650ecb4fb00baf30721acd3
   branch: master
   specs:
     actionkit_connector (0.4.4)
@@ -268,4 +268,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.13.1
+   1.13.2
