@@ -32,9 +32,8 @@ class SurveyResponseProcessor
   end
 
   def existing_action_ak_id
-    @existing_action_ak_id ||= begin
+    @existing_action_ak_id ||=
       ActionKitConnector::Util.extract_id_from_resource_uri(ak_action[:ak_id])
-    end
   end
 
   def ak_action
