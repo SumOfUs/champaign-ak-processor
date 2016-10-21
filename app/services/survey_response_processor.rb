@@ -12,6 +12,10 @@ class SurveyResponseProcessor
   def run
    if new_action?
      ActionCreator.run(@params)
+     # Updating action after just creating it since the
+     # the `fields` key is not being recorded in AK on creation,
+     # it only stores them on update requsts.
+     SurveyResponseProcessor.run(@params)
    else
      update_action
    end

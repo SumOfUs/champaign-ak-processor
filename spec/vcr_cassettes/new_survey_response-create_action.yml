@@ -1,0 +1,95 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/action/
+    body:
+      encoding: UTF-8
+      string: '{"page":"rod-test-survey-4-petition","name":"Pablo José Francisco de
+        María","postal":"W1","address1":"The Lodge","address2":"High Street","city":"London","country":"United
+        Kingdom","action_age":"101","action_foo":"Foo","action_bar":"Bar","ignored":"ignore
+        me","email":"omar@sumofus.org","source":"FB","akid":"3.4234.fsdf","mailing_id":"3"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 21 Oct 2016 22:35:09 GMT
+      Location:
+      - https://act.sumofus.org/rest/v1/petitionaction/75528607/
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=969ckqqmd7p8f6cu6x3hkspxlv8dgcds; expires=Sat, 22-Oct-2016 06:35:09 GMT;
+        httponly; Max-Age=28800; Path=/
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      X-Machine-Id:
+      - ip-10-50-1-128
+      Content-Length:
+      - '722'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"akid": "3.9159810.RHX_U9", "created_at": "2016-10-21T22:35:09.195931",
+        "created_user": false, "fields": {"age": "101", "bar": "Bar", "foo": "Foo"},
+        "id": 75528607, "ip_address": "190.194.213.78", "is_forwarded": false, "link":
+        null, "mailing": "/rest/v1/mailing/3/", "opq_id": "", "page": "/rest/v1/petitionpage/16626/",
+        "redirect_url": "/cms/thanks/rod-test-survey-4-petition?action_id=75528607&akid=3.9159810.RHX_U9&ar=1&rd=1",
+        "referring_mailing": null, "referring_user": null, "resource_uri": "/rest/v1/petitionaction/75528607/",
+        "source": "FB", "status": "complete", "subscribed_user": false, "taf_emails_sent":
+        null, "type": "Petition", "updated_at": "2016-10-21T22:35:09.257200", "user":
+        "/rest/v1/user/9159810/"}'
+    http_version: 
+  recorded_at: Fri, 21 Oct 2016 22:35:09 GMT
+- request:
+    method: put
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionaction/75528607/
+    body:
+      encoding: UTF-8
+      string: '{"page":"/rest/v1/petitionpage/16626/","name":"Pablo José Francisco
+        de María","postal":"W1","address1":"The Lodge","address2":"High Street","city":"London","country":"United
+        Kingdom","action_age":"101","action_foo":"Foo","action_bar":"Bar","ignored":"ignore
+        me","email":"omar@sumofus.org","source":"FB","akid":"3.4234.fsdf"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 204
+      message: NO CONTENT
+    headers:
+      Content-Length:
+      - '0'
+      Content-Type:
+      - text/plain
+      Date:
+      - Fri, 21 Oct 2016 22:35:10 GMT
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=afd8an8lvwkbh43kyctudd78ytlspead; expires=Sat, 22-Oct-2016 06:35:10 GMT;
+        httponly; Max-Age=28800; Path=/
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      X-Machine-Id:
+      - ip-10-50-2-90
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 21 Oct 2016 22:35:10 GMT
+recorded_with: VCR 3.0.1

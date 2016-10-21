@@ -21,7 +21,7 @@ describe "New Survey Response" do
 
   let(:data) do
     {
-      page:         "some-page-slug",
+      page:         "rod-test-survey-4-petition",
       name:         "Pablo José Francisco de María",
       postal:       "W1",
       address1:     "The Lodge",
@@ -39,9 +39,8 @@ describe "New Survey Response" do
   end
 
   context "Given an action doesn't exist" do
-
     before do
-      VCR.use_cassette("action_existing_page") do
+      VCR.use_cassette("new_survey_response-create_action") do
         post '/message', params
       end
     end
@@ -64,13 +63,13 @@ describe "New Survey Response" do
   context "Given the action already exists" do
     let(:update_params) do
       params.clone.tap do |p|
-        p[:params][:action_question_1] = '123'
+        p[:params][:fields][:age] = '123'
       end
     end
 
     before do
       # Create action
-      VCR.use_cassette("action_existing_page") do
+      VCR.use_cassette("new_survey_response-create_action") do
         post '/message', params
       end
       expect(response.success?).to be_truthy
@@ -90,13 +89,13 @@ describe "New Survey Response" do
         with(@action_ak_id, ak_expected_params).
         and_call_original
 
-      VCR.use_cassette("update_petition_action") do
+      VCR.use_cassette("new_survey_response-update_action") do
         post '/message', update_params
       end
     end
 
     it "responds successfully" do
-      VCR.use_cassette("update_petition_action") do
+      VCR.use_cassette("new_survey_response-update_action") do
         post '/message', update_params
       end
 
