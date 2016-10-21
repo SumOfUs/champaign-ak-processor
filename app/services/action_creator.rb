@@ -1,5 +1,7 @@
 class ActionCreator
   include Ak::Client
+  class Error < StandardError; end
+
   attr_reader :params
 
   def self.run(params)
@@ -13,9 +15,12 @@ class ActionCreator
   def run
     params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
 
-    action = Action.find_by_id(params[:meta][:action_id])
+    action = Action.find(params[:meta][:action_id])
+
     response = client.create_action(params[:params])
-    payload = params[:meta].merge(type: 'petition')
+    if !response.success?
+      raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
+    end
 
     if action
       action[:form_data][:ak_resource_id] = response['resource_uri']
@@ -25,6 +30,7 @@ class ActionCreator
                            page_ak_id: response.parsed_response['page'])
     end
 
+    payload = params[:meta].merge(type: 'petition')
     Broadcast.emit(payload)
     ActionsCache.append(payload)
     response
