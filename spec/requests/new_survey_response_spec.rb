@@ -80,9 +80,19 @@ describe "New Survey Response" do
     end
 
     it "updates action kit" do
-      # It overrides `page` with the ak_page_id
-      ak_expected_params = update_params[:params].tap do |p|
+      ak_expected_params = update_params[:params].clone.tap do |p|
+        # It overrides `page` with the ak_page_id
         p[:page] = @page_ak_id
+        # It moves every action_* param to a hash inside the `fields` key
+        # adding the `survey_` prefix
+        p[:fields] = {
+          'survey_age' => p[:action_age],
+          'survey_foo' => p[:action_foo],
+          'survey_bar' => p[:action_bar]
+        }
+        p.delete('action_age')
+        p.delete('action_foo')
+        p.delete('action_bar')
       end
 
       expect(Ak::Client.client).to receive(:update_petition_action).

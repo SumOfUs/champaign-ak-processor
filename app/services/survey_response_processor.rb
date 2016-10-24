@@ -11,11 +11,7 @@ class SurveyResponseProcessor
 
   def run
    if new_action?
-     ActionCreator.run(@params)
-     # Updating action after just creating it since the
-     # the `fields` key is not being recorded in AK on creation,
-     # it only stores them on update requsts.
-     SurveyResponseProcessor.run(@params)
+     ActionCreator.run(create_params)
    else
      update_action
    end
@@ -44,9 +40,44 @@ class SurveyResponseProcessor
     @ak_action ||= ActionRepository.get(@params[:meta][:action_id])
   end
 
+  # AK's API has an inconsistent format when it comes to creating vs updating actions with custom fields.
+  # * On creation: To pass a custom field it must be passed as a regular field prepending the `action_*` prefix.
+  # example: { action_my_field: 'hello world' }
+  # * On update: To pass a custom field it must be passed as a json object on the `fields` key.
+  # example: { field: { my_field: 'hello world' }
+  #
+  # We're also prepending the `survey_` prefix to all custom fields.
+
   def update_params
-    @params[:params].clone.tap do |p|
-      p[:page] = @ak_action[:page_ak_id]
+    params = @params[:params].clone
+    params[:page] = @ak_action[:page_ak_id]
+
+    # Move all params prefixed with `action_` to
+    # the fields key and remove the prefix
+    action_params = {}
+    params.each do |key, val|
+      if key =~ /\Aaction_.*/
+        new_key = key.gsub(/\Aaction_/, '')
+        action_params["survey_#{new_key}"] = val
+      end
     end
+    params[:fields] = action_params
+
+    params
+  end
+
+  # Replace `action_` prefix with `action_survey_` prefix
+  def create_params
+    params = @params.clone
+    params[:params] = params[:params].clone
+
+    action_keys = params[:params].select {|key, val| key =~ /\Aaction_.*/ }
+    action_keys.each do |key, val|
+      new_key = key.gsub(/\Aaction_/, "action_survey_")
+      params[:params][new_key] = val
+      params[:params].delete(key)
+    end
+
+    params
   end
 end
