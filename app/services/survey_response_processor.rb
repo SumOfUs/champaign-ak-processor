@@ -10,11 +10,14 @@ class SurveyResponseProcessor
   end
 
   def run
-   if new_action?
-     ActionCreator.run(create_params)
-   else
-     update_action
-   end
+    if new_action?
+      create_new_action
+    elsif member_email_changed?
+      delete_existing_action
+      create_new_action
+    else
+      update_action
+    end
   end
 
   private
@@ -23,12 +26,28 @@ class SurveyResponseProcessor
     ak_action.blank?
   end
 
+  def member_email_changed?
+    @params[:params][:email] != ak_action[:member_email]
+  end
+
+  def create_new_action
+    ActionCreator.run(create_params)
+  end
+
   def update_action
     response = Ak::Client.client.update_petition_action(existing_action_ak_id, update_params)
     if !response.success?
       raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
     end
     response
+  end
+
+  def delete_existing_action
+    response = Ak::Client.client.delete_action(existing_action_ak_id)
+    if !response.success?
+      raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
+    end
+    ActionRepository.delete(@params[:meta][:action_id])
   end
 
   def existing_action_ak_id
@@ -44,13 +63,13 @@ class SurveyResponseProcessor
   # * On creation: To pass a custom field it must be passed as a regular field prepending the `action_*` prefix.
   # example: { action_my_field: 'hello world' }
   # * On update: To pass a custom field it must be passed as a json object on the `fields` key.
-  # example: { field: { my_field: 'hello world' }
+  # example: { fields: { my_field: 'hello world' }
   #
   # We're also prepending the `survey_` prefix to all custom fields.
 
   def update_params
     params = @params[:params].clone
-    params[:page] = @ak_action[:page_ak_id]
+    params[:page] = ak_action[:page_ak_id]
 
     # Move all params prefixed with `action_` to
     # the fields key and remove the prefix

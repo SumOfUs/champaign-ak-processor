@@ -27,7 +27,8 @@ class ActionCreator
       action.save!
       ActionRepository.set(params[:meta][:action_id],
                            ak_id: response['resource_uri'],
-                           page_ak_id: response.parsed_response['page'])
+                           page_ak_id: response.parsed_response['page'],
+                           member_email: params[:params][:email])
     end
 
     payload = params[:meta].merge(type: 'petition')

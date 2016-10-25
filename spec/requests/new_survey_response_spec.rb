@@ -57,6 +57,7 @@ describe "New Survey Response" do
       ak_action = ActionRepository.get(action.id)
       expect(ak_action[:page_ak_id]).to match(%r{rest\/v1\/petitionpage\/})
       expect(ak_action[:ak_id]).to be_present
+      expect(ak_action[:member_email]).to eql "omar@sumofus.org"
     end
   end
 
@@ -110,6 +111,50 @@ describe "New Survey Response" do
       end
 
       expect(response).to be_success
+    end
+  end
+
+  context "Given the action already exists but the a new email is submited" do
+    before do
+      # Create action
+      VCR.use_cassette("new_survey_response-create_action") do
+        post '/message', params
+      end
+      expect(response.success?).to be_truthy
+
+      @ak_action = ActionRepository.get(action.id)
+      @action_ak_id = ActionKitConnector::Util.extract_id_from_resource_uri(@ak_action[:ak_id])
+
+      params[:params][:email] = 'processor1@test.com'
+    end
+
+    it "deletes the existing action" do
+      expect(Ak::Client.client).to receive(:delete_action).
+        with(@action_ak_id).
+        and_call_original
+
+      VCR.use_cassette("new_survey_response-delete_and_create_action") do
+        post '/message', params
+      end
+    end
+
+    it "creates a new action" do
+      expect_any_instance_of(ActionKitConnector::Client).to receive(:create_action).
+        and_call_original
+
+      VCR.use_cassette("new_survey_response-delete_and_create_action") do
+        post '/message', params
+      end
+    end
+
+    it "updates the ActionRepository" do
+      VCR.use_cassette("new_survey_response-delete_and_create_action") do
+        post '/message', params
+      end
+
+      updated_action = ActionRepository.get(action.id)
+      expect(@ak_action).not_to eql(updated_action)
+      expect(updated_action[:ak_id]).to match(%r{rest\/v1\/petitionaction\/})
     end
   end
 end
