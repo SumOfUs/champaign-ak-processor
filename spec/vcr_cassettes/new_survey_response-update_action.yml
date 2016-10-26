@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: put
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionaction/61821024/
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionaction/75528607/
     body:
       encoding: UTF-8
-      string: '{"page":"/rest/v1/petitionpage/8651/","name":"Pablo José Francisco
+      string: '{"page":"/rest/v1/petitionpage/16626/","name":"Pablo José Francisco
         de María","postal":"W1","address1":"The Lodge","address2":"High Street","city":"London","country":"United
         Kingdom","action_age":"101","action_foo":"Foo","action_bar":"Bar","ignored":"ignore
-        me","email":"omar@sumofus.org","source":"FB","akid":"3.4234.fsdf","action_question_1":"123"}'
+        me","email":"omar@sumofus.org","source":"FB","akid":"3.4234.fsdf"}'
     headers:
       Content-Type:
       - application/json
@@ -24,21 +24,21 @@ http_interactions:
       Content-Type:
       - text/plain
       Date:
-      - Fri, 14 Oct 2016 18:33:29 GMT
+      - Fri, 21 Oct 2016 22:38:59 GMT
       Server:
       - nginx
       Set-Cookie:
-      - sid=0urs8q459l2tjs88pud5eh8ocu35ic64; expires=Sat, 15-Oct-2016 02:33:29 GMT;
+      - sid=4yviti11gbia02gfsqnuack4e1e83qo1; expires=Sat, 22-Oct-2016 06:38:59 GMT;
         httponly; Max-Age=28800; Path=/
       Vary:
       - Accept,Cookie,Accept-Encoding,User-Agent
       X-Machine-Id:
-      - ip-10-50-1-128
+      - ip-10-50-2-90
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 14 Oct 2016 18:33:30 GMT
+  recorded_at: Fri, 21 Oct 2016 22:38:59 GMT
 recorded_with: VCR 3.0.1

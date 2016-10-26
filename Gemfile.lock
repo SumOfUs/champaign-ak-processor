@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/SumOfUs/actionkit_connector.git
-  revision: fbc1b57b90af7a594c1d4bcfea1e76b835bdefd4
+  revision: 79b56fc15aa6efad97235e37f61a074816fe6249
   branch: master
   specs:
     actionkit_connector (0.4.4)
@@ -173,7 +173,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
-    redis (3.2.2)
+    redis (3.3.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
     rspec (3.4.0)

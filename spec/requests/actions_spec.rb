@@ -211,8 +211,8 @@ describe "REST" do
           end
         end
 
-        it 'cannot find page' do
-          expect(subject[:page]).to match(/Unable to find a page/)
+        it 'returns 500 Internal Server Error' do
+          expect(response).to have_http_status(:internal_server_error)
         end
       end
     end
