@@ -37,7 +37,7 @@ class SurveyResponseProcessor
   def update_action
     response = Ak::Client.client.update_petition_action(existing_action_ak_id, update_params)
     if !response.success?
-      raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
+      raise Error.new("Error while updating AK action. HTTP Response code: #{response.code}, body: #{response.body}")
     end
     response
   end
@@ -45,7 +45,7 @@ class SurveyResponseProcessor
   def delete_existing_action
     response = Ak::Client.client.delete_action(existing_action_ak_id)
     if !response.success?
-      raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
+      raise Error.new("Error while deleting AK action. HTTP Response code: #{response.code}, body: #{response.body}")
     end
     ActionRepository.delete(@params[:meta][:action_id])
   end
