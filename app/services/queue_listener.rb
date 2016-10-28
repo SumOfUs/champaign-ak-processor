@@ -56,7 +56,10 @@ class QueueListener
   private
 
   def cancel_subscription(params)
-    client.cancel_subscription(params)
+    res = client.cancel_subscription(params)
+    unless res.success?
+      Rails.logger.error("Marking recurring donation cancelled failed with #{res.parsed_response}!")
+    end
   end
 
   def create_donation(params)

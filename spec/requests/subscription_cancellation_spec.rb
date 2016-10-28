@@ -19,10 +19,11 @@ describe "REST" do
       end
     end
 
-    it 'sends body with error in case of missing parameters' do
+    it 'Logs an error in case of missing parameters' do
       VCR.use_cassette('subscription cancellation failure') do
+        expect(Rails.logger).to receive(:error).with("Marking recurring donation cancelled failed with"\
+        " {\"canceled_by\"=>[\"The canceled_by parameter is required.\"]}!")
         post '/message', bad_params
-        expect(response.body).to include('The canceled_by parameter is required.')
       end
     end
   end
