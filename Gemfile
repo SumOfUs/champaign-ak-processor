@@ -13,6 +13,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'redis'
 gem 'actionkit_connector', github: 'SumOfUs/actionkit_connector', branch: 'master'
+gem 'airbrake'
 
 gem 'puma', '~> 2.15.3'
 gem 'aws-sdk'
