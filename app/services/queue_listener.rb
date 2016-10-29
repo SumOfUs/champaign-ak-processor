@@ -1,5 +1,6 @@
 class QueueListener
   include Ak::Client
+  class Error < StandardError; end
 
   CREATE_PAGES    = 'create'
   CREATE_ACTION   = 'action'
@@ -58,7 +59,7 @@ class QueueListener
   def cancel_subscription(params)
     res = client.cancel_subscription(params)
     unless res.success?
-      Rails.logger.error("Marking recurring donation cancelled failed with #{res.parsed_response}!")
+      raise Error.new("Marking recurring donation cancelled failed. HTTP Response code: #{res.code}, body: #{res.body}")
     end
   end
 
