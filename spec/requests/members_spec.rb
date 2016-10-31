@@ -44,9 +44,8 @@ describe "REST" do
       end
       it 'returns errors if the update was unsuccessful but sets status as 200 so the message does not get reprocessed' do
         VCR.use_cassette("member_update_failure") do
-          expect(Rails.logger).to receive(:error).with("Member update failed with {\"email\"=>[\"Conflict on unique key 'email' for value 'test@example.com'\"]}!")
           post '/message', bad_params
-          expect(response.status).to eq(200)
+          expect(response.status).to eq(500)
         end
       end
     end

@@ -1,5 +1,6 @@
 class QueueListener
   include Ak::Client
+  class Error < StandardError; end
 
   CREATE_PAGES    = 'create'
   CREATE_ACTION   = 'action'
@@ -56,7 +57,10 @@ class QueueListener
   private
 
   def cancel_subscription(params)
-    client.cancel_subscription(params)
+    res = client.cancel_subscription(params)
+    unless res.success?
+      raise Error.new("Marking recurring donation cancelled failed. HTTP Response code: #{res.code}, body: #{res.body}")
+    end
   end
 
   def create_donation(params)
@@ -80,7 +84,7 @@ class QueueListener
   def subscribe_member(params)
     page_name = ENV['AK_SUBSCRIPTION_PAGE_NAME']
     if page_name.blank?
-      Rails.logger.error("Your ActionKit page for subscriptions from the home page has not been set!")
+      raise Error.new("Your ActionKit page for subscriptions from the home page has not been set!")
     else
       client.create_action(params[:params].merge({ page: page_name }))
     end
@@ -89,7 +93,7 @@ class QueueListener
   def update_member(params)
     res = client.update_user(params[:params]["akid"], params[:params])
     unless res.success?
-      Rails.logger.error("Member update failed with #{res.parsed_response["errors"]}!")
+      raise Error.new("Member update failed with #{res.parsed_response["errors"]}!")
     end
   end
 end
