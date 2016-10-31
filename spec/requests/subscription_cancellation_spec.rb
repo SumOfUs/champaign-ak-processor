@@ -19,10 +19,9 @@ describe "REST" do
       end
     end
 
-    it 'raises an error in case of missing parameters' do
+    it 'sends back 500 in case of missing parameters' do
       VCR.use_cassette('subscription cancellation failure') do
-        #TODO: I can't get an error assertion to work here. Errors get caught in request specs. Not sure where to put this spec, so if you have good ideas, do tell.
-        expect { post '/message', bad_params }.to raise_error(QueueListener::Error, "Marking recurring donation cancelled failed. HTTP Response code: 400, body: {\"canceled_by\": [\"The canceled_by parameter is required.\"]}")
+        post '/message', bad_params
         expect(response.status).to be 500
       end
     end
