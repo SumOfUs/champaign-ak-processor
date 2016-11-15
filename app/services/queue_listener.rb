@@ -84,11 +84,11 @@ class QueueListener
   def subscribe_member(params)
     language = params[:params][:language].try(:upcase)
     page_name = ENV["AK_SUBSCRIPTION_PAGE_#{language}"] || ENV['AK_SUBSCRIPTION_PAGE_EN']
-    if page_name.blank?
-      raise Error.new("Your ActionKit page for subscriptions from the home page has not been set!")
-    else
-      client.create_action(params[:params].merge({ page: page_name }))
-    end
+    unset_message = "Your ActionKit page for subscriptions from the home page has not been set for locales '#{language}' or 'EN'"
+    raise Error.new(unset_message) if page_name.blank?
+    res = client.create_action(params[:params].merge({ page: page_name }))
+    raise Error.new("Member subscription failed with #{res.parsed_response['errors']}!") unless res.success?
+    res
   end
 
   def update_member(params)

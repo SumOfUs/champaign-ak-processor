@@ -105,16 +105,18 @@ describe QueueListener do
         }
       end
       let(:params) { { type: 'subscribe_member', params: internal_params } }
-      let(:error_msg) { "Your ActionKit page for subscriptions from the home page has not been set!" }
+      let(:unset_msg) { "Your ActionKit page for subscriptions from the home page has not been set for locales '' or 'EN'" }
+      let(:api_fail_msg) { "Member subscription failed with PARSED_ERRORS!" }
+      let(:res) { double(success?: true, parsed_response: {'errors' => 'PARSED_ERRORS' }) }
 
       before :each do
-        allow(client).to receive(:create_action)
+        allow(client).to receive(:create_action){ res }
       end
 
       it 'raises an error when there is no language or AK_SUBSCRIPTION_PAGE_EN' do
         allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_EN"){ nil }
         allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_"){ nil }
-        expect{ subject.perform('subscribe_member', params) }.to raise_error(error_msg)
+        expect{ subject.perform('subscribe_member', params) }.to raise_error(unset_msg)
       end
 
       it "uses the English subscription page if no language given" do
@@ -137,6 +139,13 @@ describe QueueListener do
         internal_params[:language] = 'de'
         expect{ subject.perform('subscribe_member', params) }.not_to raise_error
         expect(client).to have_received(:create_action).with(internal_params.merge(page: 'registration_german'))
+      end
+
+      it 'raises an error when the API call is not successful' do
+        allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_EN"){ 'registration' }
+        allow(res).to receive(:success?){ false }
+        internal_params[:language] = 'EN'
+        expect{ subject.perform('subscribe_member', params) }.to raise_error(api_fail_msg)
       end
     end
   end
