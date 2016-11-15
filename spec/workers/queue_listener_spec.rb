@@ -94,6 +94,51 @@ describe QueueListener do
         end
       end
     end
+
+    describe 'subscribe member' do
+      let(:internal_params) do
+        {
+          email: "guybrush_threepwood@example.com",
+          name: "Guybrush Threepwood",
+          country: "United Kingdom",
+          postal: "12345"
+        }
+      end
+      let(:params) { { type: 'subscribe_member', params: internal_params } }
+      let(:error_msg) { "Your ActionKit page for subscriptions from the home page has not been set!" }
+
+      before :each do
+        allow(client).to receive(:create_action)
+      end
+
+      it 'raises an error when there is no language or AK_SUBSCRIPTION_PAGE_EN' do
+        allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_EN"){ nil }
+        allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_"){ nil }
+        expect{ subject.perform('subscribe_member', params) }.to raise_error(error_msg)
+      end
+
+      it "uses the English subscription page if no language given" do
+        allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_EN"){ 'registration' }
+        allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_"){ nil }
+        expect{ subject.perform('subscribe_member', params) }.not_to raise_error
+        expect(client).to have_received(:create_action).with(internal_params.merge(page: 'registration'))
+      end
+
+      it "uses the English subscription page if current language doesn't have one" do
+        allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_EN"){ "registration" }
+        allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_DE"){ nil }
+        internal_params[:language] = 'DE'
+        expect{ subject.perform('subscribe_member', params) }.not_to raise_error
+        expect(client).to have_received(:create_action).with(internal_params.merge(page: 'registration'))
+      end
+
+      it "uses the right subscription page if current language has one" do
+        allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_DE"){ "registration_german" }
+        internal_params[:language] = 'de'
+        expect{ subject.perform('subscribe_member', params) }.not_to raise_error
+        expect(client).to have_received(:create_action).with(internal_params.merge(page: 'registration_german'))
+      end
+    end
   end
 end
 

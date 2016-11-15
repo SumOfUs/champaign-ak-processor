@@ -38,10 +38,11 @@ describe "REST" do
           allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_NAME"){""}
           allow(ENV).to receive(:[]).with("HOME"){"/root"}
         end
-        
-        it 'sends an error code if that the default subscription page is not set' do
+
+        it 'raises an error if the page is not set' do
           post '/message', params
-          expect(response.status).to eq(500)
+          expect(response.status).to eq 500
+          expect(response.body).to include("Your ActionKit page for subscriptions from the home page has not been set!")
         end
       end
     end
