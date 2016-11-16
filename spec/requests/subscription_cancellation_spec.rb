@@ -11,7 +11,7 @@ describe "REST" do
       { type: 'cancel_subscription', params: { recurring_id: 'g85dkg'} }
     end
 
-    it 'Cancels the subscription with a success code from the client' do
+    it 'cancels the subscription with a success code from the client' do
       VCR.use_cassette('subscription cancellation success') do
         post '/message', params
         expect(response.status).to eq(200)
@@ -19,10 +19,10 @@ describe "REST" do
       end
     end
 
-    it 'sends body with error in case of missing parameters' do
+    it 'sends back 500 in case of missing parameters' do
       VCR.use_cassette('subscription cancellation failure') do
         post '/message', bad_params
-        expect(response.body).to include('The canceled_by parameter is required.')
+        expect(response.status).to be 500
       end
     end
   end
