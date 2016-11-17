@@ -82,7 +82,7 @@ class QueueListener
   end
 
   def subscribe_member(params)
-    language = params[:params][:language].try(:upcase)
+    language = params[:params][:locale].try(:upcase)
     page_name = ENV["AK_SUBSCRIPTION_PAGE_#{language}"] || ENV['AK_SUBSCRIPTION_PAGE_EN']
     unset_message = "Your ActionKit page for subscriptions from the home page has not been set for locales '#{language}' or 'EN'"
     raise Error.new(unset_message) if page_name.blank?
