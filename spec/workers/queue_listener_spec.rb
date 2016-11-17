@@ -113,30 +113,30 @@ describe QueueListener do
         allow(client).to receive(:create_action){ res }
       end
 
-      it 'raises an error when there is no language or AK_SUBSCRIPTION_PAGE_EN' do
+      it 'raises an error when there is no locale or AK_SUBSCRIPTION_PAGE_EN' do
         allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_EN"){ nil }
         allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_"){ nil }
         expect{ subject.perform('subscribe_member', params) }.to raise_error(unset_msg)
       end
 
-      it "uses the English subscription page if no language given" do
+      it "uses the English subscription page if no locale given" do
         allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_EN"){ 'registration' }
         allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_"){ nil }
         expect{ subject.perform('subscribe_member', params) }.not_to raise_error
         expect(client).to have_received(:create_action).with(internal_params.merge(page: 'registration'))
       end
 
-      it "uses the English subscription page if current language doesn't have one" do
+      it "uses the English subscription page if current locale doesn't have one" do
         allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_EN"){ "registration" }
         allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_DE"){ nil }
-        internal_params[:language] = 'DE'
+        internal_params[:locale] = 'DE'
         expect{ subject.perform('subscribe_member', params) }.not_to raise_error
         expect(client).to have_received(:create_action).with(internal_params.merge(page: 'registration'))
       end
 
-      it "uses the right subscription page if current language has one" do
+      it "uses the right subscription page if current locale has one" do
         allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_DE"){ "registration_german" }
-        internal_params[:language] = 'de'
+        internal_params[:locale] = 'de'
         expect{ subject.perform('subscribe_member', params) }.not_to raise_error
         expect(client).to have_received(:create_action).with(internal_params.merge(page: 'registration_german'))
       end
@@ -144,7 +144,7 @@ describe QueueListener do
       it 'raises an error when the API call is not successful' do
         allow(ENV).to receive(:[]).with("AK_SUBSCRIPTION_PAGE_EN"){ 'registration' }
         allow(res).to receive(:success?){ false }
-        internal_params[:language] = 'EN'
+        internal_params[:locale] = 'EN'
         expect{ subject.perform('subscribe_member', params) }.to raise_error(api_fail_msg)
       end
     end

@@ -16,6 +16,7 @@ describe "REST" do
           email: "guybrush_threepwood@example.com",
           name: "Guybrush Threepwood",
           country: "United Kingdom",
+          locale: 'en',
           postal: "12345"
         }
       }
