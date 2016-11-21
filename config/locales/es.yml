@@ -1,0 +1,4 @@
+es:
+  page_follow_up:
+    email_subject: "Thanks for your donation! #TODO: Add ES translation"
+    email_body: "Sample Email body"
