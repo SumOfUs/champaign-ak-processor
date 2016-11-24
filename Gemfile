@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 ruby '2.3.0'
-gem 'envyable', require: 'envyable/rails-now', group: [:test, :development]
 gem 'rails', '4.2.5'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
@@ -23,6 +22,7 @@ gem 'pusher'
 gem 'lograge'
 
 group :development, :test do
+  gem 'envyable', require: 'envyable/rails-now'
   gem 'byebug'
   gem 'guard-rspec', require: false
   gem 'redis-namespace'

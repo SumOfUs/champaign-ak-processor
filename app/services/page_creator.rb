@@ -1,4 +1,6 @@
 class PageCreator
+  class Error < StandardError; end
+
   def self.run(params)
     new(params).run
   end
@@ -10,10 +12,14 @@ class PageCreator
 
   def run
     @page = Page.find @page_id
-    success = Donation.run(@page, @params)
-    create_donation_form if success
-    success = Petition.run(@page, @params)
-    create_petition_form if success
+    Donation.run(@page, @params)
+    create_donation_form
+    PageFollowUpCreator.run(
+      page_ak_uri:   @page.ak_donation_resource_uri,
+      language_code: @page.language.try(:code)
+    )
+    Petition.run(@page, @params)
+    create_petition_form
   end
 
   def create_donation_form
@@ -40,20 +46,15 @@ class PageCreator
     private
 
     def handle_response(response)
-      case response.response
-        when Net::HTTPCreated
-          @page.update!(
-            "ak_#{page_type}_resource_uri" => response.headers['location'],
-            status: 'success'
-          )
-          true
-        when Net::HTTPBadRequest
-          @page.update!(
-            status: 'failed',
-            messages: response.parsed_response
-          )
-          false
+      if !response.success?
+        @page.update!(status: 'failed', messages: response.parsed_response)
+        raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
       end
+
+      @page.update!(
+        "ak_#{page_type}_resource_uri" => response.headers['location'],
+        status: 'success'
+      )
     end
 
     def sanitized_params

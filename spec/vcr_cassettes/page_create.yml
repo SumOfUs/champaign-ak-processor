@@ -2,11 +2,11 @@
 http_interactions:
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/
     body:
       encoding: UTF-8
-      string: '{"page_id":"4","name":"this-page-does-not-exist-13172404-petition","title":"Foo
-        Bar","language":"/rest/v1/language/100/","page_type":"petition"}'
+      string: '{"page_id":"1","name":"this-page-does-not-exist-13172406-donation","title":"Foo
+        Bar (Donation)","url":"http://example.com","language":"/rest/v1/language/100/","page_type":"donation","multilingual_campaign":"https://act.sumofus.org/rest/v1/multilingualcampaign/139/","hpc_rule":"/rest/v1/donationhpcrule/22/"}'
     headers:
       Content-Type:
       - application/json
@@ -17,35 +17,37 @@ http_interactions:
       code: 201
       message: CREATED
     headers:
-      Date:
-      - Wed, 09 Mar 2016 15:30:31 GMT
       Content-Type:
       - text/html; charset=utf-8
+      Date:
+      - Mon, 21 Nov 2016 23:22:13 GMT
+      Location:
+      - https://act.sumofus.org/rest/v1/donationpage/16943/
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=r0s1h7o0gpu678ly64gq6ae3u6urbzw8; expires=Tue, 22-Nov-2016 07:22:13 GMT;
+        httponly; Max-Age=28800; Path=/
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      X-Machine-Id:
+      - ip-10-50-2-90
       Content-Length:
       - '0'
       Connection:
       - keep-alive
-      X-Machine-Id:
-      - web-g02-03.actionkit.com
-      Vary:
-      - Accept,Cookie,Accept-Encoding,User-Agent
-      Location:
-      - https://act.sumofus.org/rest/v1/petitionpage/12574/
-      Set-Cookie:
-      - sid=9em4qs4p03c8nj0gm118msvp9r5lz19y; expires=Wed, 09-Mar-2016 23:16:46 GMT;
-        httponly; Max-Age=28800; Path=/
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 15:16:46 GMT
+  recorded_at: Mon, 21 Nov 2016 23:22:13 GMT
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/pagefollowup/
     body:
       encoding: UTF-8
-      string: '{"page_id":"4","name":"this-page-does-not-exist-13172404-donation","title":"Foo
-        Bar","language":"/rest/v1/language/100/","page_type":"donation","hpc_rule":"/rest/v1/donationhpcrule/22/"}'
+      string: '{"url":"https://not.used.com","send_confirmation":true,"page":"https://act.sumofus.org/rest/v1/donationpage/16943/","email_wrapper":"https://act.sumofus.org/rest/v1/emailwrapper/25/","email_from_line":"https://act.sumofus.org/rest/v1/fromline/62/","email_subject":"Thanks
+        for your donation!","email_body":"En body"}'
     headers:
       Content-Type:
       - application/json
@@ -56,26 +58,69 @@ http_interactions:
       code: 201
       message: CREATED
     headers:
-      Date:
-      - Wed, 09 Mar 2016 15:30:32 GMT
       Content-Type:
       - text/html; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      X-Machine-Id:
-      - web-g02-03.actionkit.com
+      Date:
+      - Mon, 21 Nov 2016 23:22:14 GMT
+      Location:
+      - https://act.sumofus.org/rest/v1/pagefollowup/3753/
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=wi77s0upx25be8gsxfe9umi3jyvb4unp; expires=Tue, 22-Nov-2016 07:22:14 GMT;
+        httponly; Max-Age=28800; Path=/
       Vary:
       - Accept,Cookie,Accept-Encoding,User-Agent
-      Location:
-      - https://act.sumofus.org/rest/v1/donationpage/12575/
-      Set-Cookie:
-      - sid=kv2zzlciw03750k8f991qdrkm4di36y8; expires=Wed, 09-Mar-2016 23:16:47 GMT;
-        httponly; Max-Age=28800; Path=/
+      X-Machine-Id:
+      - ip-10-50-2-90
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 15:16:47 GMT
+  recorded_at: Mon, 21 Nov 2016 23:22:14 GMT
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/
+    body:
+      encoding: UTF-8
+      string: '{"page_id":"1","name":"this-page-does-not-exist-13172406-petition","title":"Foo
+        Bar (Petition)","url":"http://example.com","language":"/rest/v1/language/100/","page_type":"petition","multilingual_campaign":"https://act.sumofus.org/rest/v1/multilingualcampaign/139/"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Mon, 21 Nov 2016 23:22:15 GMT
+      Location:
+      - https://act.sumofus.org/rest/v1/petitionpage/16944/
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=fx7b22r7gc1d0pul0yky18kktzhtas3l; expires=Tue, 22-Nov-2016 07:22:15 GMT;
+        httponly; Max-Age=28800; Path=/
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      X-Machine-Id:
+      - ip-10-50-2-90
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Mon, 21 Nov 2016 23:22:15 GMT
 recorded_with: VCR 3.0.1
