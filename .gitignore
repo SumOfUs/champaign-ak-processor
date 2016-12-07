@@ -14,8 +14,9 @@
 .idea/*
 *.iml
 
-config/env.yml
+# Environment
 ./env.yml
+env.yml
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

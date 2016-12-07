@@ -19,7 +19,7 @@ class ActionCreator
 
     response = client.create_action(params[:params])
     if !response.success?
-      raise Error.new("Error while createing AK action. HTTP Response code: #{response.code}, body: #{response.body}")
+      raise Error.new("Error while creating AK action. HTTP Response code: #{response.code}, body: #{response.body}")
     end
 
     if action
