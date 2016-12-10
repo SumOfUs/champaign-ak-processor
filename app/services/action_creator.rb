@@ -13,6 +13,7 @@ class ActionCreator
   end
 
   def run
+    byebug
     params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
 
     action = Action.find(params[:meta][:action_id])
