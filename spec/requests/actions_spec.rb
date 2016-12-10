@@ -215,6 +215,39 @@ describe "REST" do
           expect(response).to have_http_status(:internal_server_error)
         end
       end
+
+      context 'for invalid US zip codes' do
+        let(:data) do
+          {
+              page:         "foo-bar",
+              name:         "Pablo José Francisco de María",
+              postal:       "aBcEr2",
+              address1:     "Cookie Factory",
+              address2:     "Lombard Street",
+              city:         "San Francisco",
+              country:      "United States",
+              email:        "test@example.com",
+              source:       'FB',
+              akid:         '3.4234.fsdf'
+          }
+        end
+
+        let(:action_type) { 'action' }
+
+        subject(:body) { JSON.parse(response.body).deep_symbolize_keys }
+        subject(:fields) { body.fetch(:fields) }
+
+        before do
+          VCR.use_cassette("action_invalid_zip") do
+            post '/message', params
+          end
+        end
+
+        it 'uses a default postal if a US action is posted with an invalid zip code' do
+          #TODO: assertions
+        end
+
+      end
     end
   end
 end

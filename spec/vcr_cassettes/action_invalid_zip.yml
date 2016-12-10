@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/action/
+    body:
+      encoding: UTF-8
+      string: '{"page":"foo-bar","name":"Pablo José Francisco de María","postal":"20001","address1":"Cookie
+        Factory","address2":"Lombard Street","city":"San Francisco","country":"United
+        States","email":"test@example.com","source":"FB","akid":"3.4234.fsdf","mailing_id":"3"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 10 Dec 2016 01:26:13 GMT
+      Location:
+      - https://act.sumofus.org/rest/v1/petitionaction/78376366/
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=pzk26ru03vrnnglb74n6rz00pql0g7ki; expires=Sat, 10-Dec-2016 09:26:13 GMT;
+        httponly; Max-Age=28800; Path=/
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      X-Machine-Id:
+      - ip-10-50-1-128
+      Content-Length:
+      - '654'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"akid": "3.991564.oQWhY6", "created_at": "2016-12-10T01:26:13.367246",
+        "created_user": false, "fields": {}, "id": 78376366, "ip_address": "24.5.77.14",
+        "is_forwarded": false, "link": null, "mailing": "/rest/v1/mailing/3/", "opq_id":
+        "", "page": "/rest/v1/petitionpage/8651/", "redirect_url": "/cms/thanks/foo-bar?action_id=78376366&akid=3.991564.oQWhY6&ar=1&rd=1",
+        "referring_mailing": null, "referring_user": null, "resource_uri": "/rest/v1/petitionaction/78376366/",
+        "source": "FB", "status": "complete", "subscribed_user": true, "taf_emails_sent":
+        null, "type": "Petition", "updated_at": "2016-12-10T01:26:13.450157", "user":
+        "/rest/v1/user/991564/"}'
+    http_version: 
+  recorded_at: Sat, 10 Dec 2016 01:26:13 GMT
+recorded_with: VCR 3.0.1
