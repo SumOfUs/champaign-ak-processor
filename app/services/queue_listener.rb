@@ -23,7 +23,7 @@ class QueueListener
         PageCreator.run(params[:params])
 
       when CREATE_ACTION
-        ActionCreator.run(params)
+        ActionCreator.run(action_params(params))
 
       when CREATE_DONATION
         create_donation(params)
@@ -90,7 +90,7 @@ class QueueListener
     page_name = ENV["AK_SUBSCRIPTION_PAGE_#{language}"] || ENV['AK_SUBSCRIPTION_PAGE_EN']
     unset_message = "Your ActionKit page for subscriptions from the home page has not been set for locales '#{language}' or 'EN'"
     raise Error.new(unset_message) if page_name.blank?
-    res = client.create_action(params[:params].merge({ page: page_name }))
+    res = client.create_action(action_params(params)[:params].merge({ page: page_name }))
     raise Error.new("Member subscription failed with #{res.parsed_response['errors']}!") unless res.success?
     res
   end
@@ -101,4 +101,25 @@ class QueueListener
       raise Error.new("Member update failed with #{res.parsed_response["errors"]}!")
     end
   end
+
+  def action_params(params)
+    country = params[:params][:country]
+    raise Error.new("Generic action processing attempted without a country in the request.") unless country.present?
+    if country == "United States"
+      params[:params][:postal] = verify_zip(params[:params][:postal])
+    end
+    params
+  end
+
+  def verify_zip(postal)
+    first_five = postal[0,5]
+    return '20001' unless is_valid_zip(first_five)
+    first_five
+  end
+
+  def is_valid_zip(postal)
+    # Postal is an integer written as a string and five characters long
+    (postal.to_i.to_s == postal) && (postal.length == 5)
+  end
+
 end
