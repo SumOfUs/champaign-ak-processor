@@ -167,16 +167,29 @@ describe QueueListener do
 
       let(:action) { Action.create(form_data: {}) }
       let(:params) { { type: 'action', params: internal_params, meta: { action_id: action.id} } }
-      let(:res) { double(success?: true, :[] => 'resource_uri', parsed_response: {'errors' => 'PARSED_ERRORS' }) }
+      let(:res) { double(success?: true, parsed_response: {'errors' => 'PARSED_ERRORS' }) }
 
-      before :each do
+      before do
         allow(client).to receive(:create_action){ res }
+        allow(res).to receive(:[]).with('resource_uri'){'resource_uri'}
+        allow(ENV).to receive(:[]).and_call_original
+        allow(ENV).to receive(:[]).with("BYPASS_ZIP_VALIDATION"){ 'true' }
       end
 
-      it 'falls back to a default zip code' do
-        expect{ subject.perform('action', params) }.not_to raise_error
-        expect(client).to have_received(:create_action).with(internal_params)
+      context 'Environment variables are correctly set' do
+        it 'falls back to a default zip code' do
+          allow(ENV).to receive(:[]).with("DEFAULT_US_ZIP"){ '20001' }
+          expect{ subject.perform('action', params) }.not_to raise_error
+          expect(client).to have_received(:create_action).with(internal_params)
+        end
       end
+
+      context 'With default us zip value missing' do
+        it 'complains about missing configuration' do
+          expect{ subject.perform('action', params) }.to raise_error /Your default US zip code has not been set/
+        end
+      end
+
     end
   end
 end
