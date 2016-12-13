@@ -216,12 +216,12 @@ describe "REST" do
         end
       end
 
-      context 'for invalid US zip codes' do
+      context 'for absent US zip codes' do
         let(:data) do
           {
               page:         "foo-bar",
               name:         "Pablo José Francisco de María",
-              postal:       "aBcEr2",
+              postal:       "",
               address1:     "Cookie Factory",
               address2:     "Lombard Street",
               city:         "San Francisco",
@@ -234,19 +234,13 @@ describe "REST" do
 
         let(:action_type) { 'action' }
 
-        subject(:body) { JSON.parse(response.body).deep_symbolize_keys }
-        subject(:fields) { body.fetch(:fields) }
-
-        before do
-          VCR.use_cassette("action_invalid_zip") do
+        it 'bypasses zip code invalidation by using a default postal if a US action is posted with an absent zip code' do
+          VCR.use_cassette("us_action_absent_zip") do
             post '/message', params
+            expect(response.status).to eq 200
           end
-        end
 
-        it 'uses a default postal if a US action is posted with an invalid zip code' do
-          #TODO: assertions
         end
-
       end
     end
   end
