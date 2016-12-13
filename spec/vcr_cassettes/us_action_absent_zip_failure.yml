@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/action/
+    body:
+      encoding: UTF-8
+      string: '{"page":"foo-bar","name":"Pablo José Francisco de María","postal":"a232ba","address1":"Cookie
+        Factory","address2":"Lombard Street","city":"San Francisco","country":"United
+        States","email":"test@example.com","source":"FB","akid":"3.4234.fsdf","mailing_id":"3"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 400
+      message: BAD REQUEST
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 13 Dec 2016 19:08:45 GMT
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=7v7fol2vuocavk7web6890sxezbhdxq1; expires=Wed, 14-Dec-2016 03:08:45 GMT;
+        httponly; Max-Age=28800; Path=/
+      Vary:
+      - Cookie,Accept-Encoding,User-Agent
+      X-Machine-Id:
+      - ip-10-50-1-128
+      Content-Length:
+      - '48'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"errors": {"postal": ["ZIP Code is invalid."]}}'
+    http_version: 
+  recorded_at: Tue, 13 Dec 2016 19:08:45 GMT
+recorded_with: VCR 3.0.1
