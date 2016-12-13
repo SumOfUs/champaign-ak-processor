@@ -148,6 +148,36 @@ describe QueueListener do
         expect{ subject.perform('subscribe_member', params) }.to raise_error(api_fail_msg)
       end
     end
+
+    describe 'creating a US action with an invalid zip code' do
+      let(:internal_params) do
+        {
+            page:         "foo-bar",
+            name:         "Pablo José Francisco de María",
+            postal:       "abc123",
+            address1:     "Mill st 123",
+            address2:     "apt 1043",
+            city:         "London",
+            country:      "United States",
+            email:        "test@example.com",
+            source:       'FB',
+            akid:         '3.4234.fsdf'
+        }
+      end
+
+      let(:action) { Action.create(form_data: {}) }
+      let(:params) { { type: 'action', params: internal_params, meta: { action_id: action.id} } }
+      let(:res) { double(success?: true, :[] => 'resource_uri', parsed_response: {'errors' => 'PARSED_ERRORS' }) }
+
+      before :each do
+        allow(client).to receive(:create_action){ res }
+      end
+
+      it 'falls back to a default zip code' do
+        expect{ subject.perform('action', params) }.not_to raise_error
+        expect(client).to have_received(:create_action).with(internal_params)
+      end
+    end
   end
 end
 
