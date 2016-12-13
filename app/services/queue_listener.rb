@@ -105,7 +105,8 @@ class QueueListener
   def action_params(params)
     country = params[:params][:country]
     raise Error.new("Generic action processing attempted without a country in the request.") unless country.present?
-    if country == "United States"
+    if country == "United States" && ENV['BYPASS_ZIP_VALIDATION']
+      raise Error.new("Your default US zip code has not been set!") unless ENV['DEFAULT_US_ZIP'].present?
       params[:params][:postal] = verify_zip(params[:params][:postal])
     end
     params
@@ -113,13 +114,13 @@ class QueueListener
 
   def verify_zip(postal)
     first_five = postal[0,5]
-    return '20001' unless is_valid_zip(first_five)
+    return ENV['DEFAULT_US_ZIP'] unless is_valid_zip(first_five)
     first_five
   end
 
   def is_valid_zip(postal)
     # Postal is an integer written as a string and five characters long
-    (postal.to_i.to_s == postal) && (postal.length == 5)
+    postal =~ /\A\d{5}\Z/
   end
 
 end
