@@ -16,7 +16,6 @@ class ActionCreator
     params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
 
     action = Action.find(params[:meta][:action_id])
-
     response = client.create_action(params[:params])
     if !response.success?
       raise Error.new("Error while creating AK action. HTTP Response code: #{response.code}, body: #{response.body}")

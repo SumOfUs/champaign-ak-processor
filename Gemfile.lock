@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/SumOfUs/actionkit_connector.git
-  revision: 79b56fc15aa6efad97235e37f61a074816fe6249
+  revision: c49c3ebde5664969fc6d9bb9ddb1d5664e983d9a
   branch: master
   specs:
     actionkit_connector (0.4.4)
@@ -125,7 +125,7 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
-    multi_xml (0.5.5)
+    multi_xml (0.6.0)
     nenv (0.3.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)

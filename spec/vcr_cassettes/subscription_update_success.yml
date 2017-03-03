@@ -1,0 +1,123 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/profileupdatepush/
+    body:
+      encoding: UTF-8
+      string: '{"recurring_id":"g85dkg","amount":"10"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Fri, 03 Mar 2017 15:42:13 GMT
+      Location:
+      - https://act.sumofus.org/rest/v1/transaction/1455867/
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=irgpv0hd1orrdxwy90dqonq20vbaxx8u; expires=Fri, 03-Mar-2017 23:42:13 GMT;
+        httponly; Max-Age=28800; Path=/
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      X-Machine-Id:
+      - ip-10-50-2-184
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 03 Mar 2017 15:42:13 GMT
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/profileupdatepush/
+    body:
+      encoding: UTF-8
+      string: '{"recurring_id":"g85dkg","amount":"10"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Fri, 03 Mar 2017 15:42:14 GMT
+      Location:
+      - https://act.sumofus.org/rest/v1/transaction/1455868/
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=afqzi4qh9x8ij1mg2jn1v9kebvm58eyd; expires=Fri, 03-Mar-2017 23:42:14 GMT;
+        httponly; Max-Age=28800; Path=/
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      X-Machine-Id:
+      - ip-10-50-2-184
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 03 Mar 2017 15:42:14 GMT
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/profileupdatepush/
+    body:
+      encoding: UTF-8
+      string: '{"recurring_id":"g85dkg","amount":"10"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Fri, 03 Mar 2017 15:42:30 GMT
+      Location:
+      - https://act.sumofus.org/rest/v1/transaction/1455869/
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=pno7xz4dirj0wwwnf8d9gvvr4iwe7g6g; expires=Fri, 03-Mar-2017 23:42:30 GMT;
+        httponly; Max-Age=28800; Path=/
+      Vary:
+      - Accept,Cookie,Accept-Encoding,User-Agent
+      X-Machine-Id:
+      - ip-10-50-1-105
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 03 Mar 2017 15:42:30 GMT
+recorded_with: VCR 3.0.1
