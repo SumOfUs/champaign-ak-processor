@@ -13,6 +13,7 @@ class QueueListener
   UPDATE_CAMPAIGN = 'update_campaign'
   UPDATE_MEMBER = 'update_member'
   NEW_SURVEY_RESPONSE = 'new_survey_response'
+  RECURRING_PAYMENT_UPDATE = 'recurring_payment_update'
 
   def perform(sqs_message, params)
     case params[:type]
@@ -48,6 +49,9 @@ class QueueListener
 
       when NEW_SURVEY_RESPONSE
         SurveyResponseProcessor.run(params)
+
+      when RECURRING_PAYMENT_UPDATE
+        update_recurring_payment(params)
 
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
@@ -99,6 +103,13 @@ class QueueListener
     res = client.update_user(params[:params]["akid"], params[:params])
     unless res.success?
       raise Error.new("Member update failed with #{res.parsed_response["errors"]}!")
+    end
+  end
+
+  def update_recurring_payment(params)
+    res = client.update_recurring_payment(params[:params])
+    unless res.success?
+      raise Error.new("Updating recurring payment failed with #{res.parsed_response['errors']}")
     end
   end
 
