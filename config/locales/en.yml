@@ -5,7 +5,7 @@ en:
       <p>Hi there {{ user.first_name|capfirst|default:"friend" }},</p>
       <p>Thank you so much for your donation. I can’t tell you how much it means to us here at SumOfUs. By donating, you’re leading the charge to stop big corporations from behaving badly. Now more than ever, this is work that needs to be done.</p>
       <p>Your donation will help to power our campaigning. We’ve included the receipt below.</p>
-      <p>We do not accept money from corporations or governments. That is why your support is so critical. Together we are building a movement that demands that people are always put above profit. We stand toe to toe against the world’s powerful corporations in the world to protect our rights and our democracy.</p>
+      <p>We do not accept money from corporations or governments. That is why your support is so critical. Together we are building a movement that demands that people are always put above profit. We stand toe to toe against the world’s most powerful corporations to protect our rights and our democracy.</p>
       <p>Thanks so much for all that you do,</p>
       <p>China and the team at SumOfUs</p>
       <p></p>
