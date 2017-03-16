@@ -3,9 +3,9 @@ de:
     email_subject: "Vielen Dank für Ihre Spende"
     email_body: |
       <p>{{ user.first_name|capfirst|default:"Hallo" }},</p>
-      <p>Danke, dass Sie SumOfUs unterstützen. Mit Ihrer Spende helfen Sie uns dabei, die größten Konzerne der Welt zur Verantwortung zu ziehen. Gemeinsam arbeiten wir für eine gerechtere und bessere Welt. Wir sind sehr froh, Sie an unserer Seite wissen. Denn je mehr Menschen sich engagieren, desto mehr können wir bewegen.</p>
+      <p>danke, dass Sie SumOfUs unterstützen. Mit Ihrer Spende helfen Sie uns dabei, die größten Konzerne der Welt zur Verantwortung zu ziehen. Gemeinsam arbeiten wir für eine gerechtere und bessere Welt. Wir sind sehr froh, Sie an unserer Seite wissen. Denn je mehr Menschen sich engagieren, desto mehr können wir bewegen.</p>
       <p>Ein Beleg für Ihre Spende ist unten in dieser E-Mail angefügt.</p>
-      <p>Wir nehmen kein Geld von Regierungen oder Konzernen an. Deswegen ist die Unterstützung von Ihnen und jedem einzelnen SumOfUs-Mitglied so wichtig. Gemeinsam bauen wir eine Bewegung auf, die sich überall auf der Welt dafür einsetzt, dass Menschen mehr zählen als Profite.</p>
+      <p>Wir nehmen kein Geld von Regierungen oder Konzernen an. Deswegen ist die Unterstützung von Ihnen und jedem einzelnen SumOfUs-Mitglied so wichtig. Zusammen bauen wir eine Gemeinschaft auf, die sich überall auf der Welt dafür einsetzt, dass Menschen mehr zählen als Profite.</p>
       <p>Vielen Dank für alles,</p>
       <p>China und das Team von SumOfUs</p>
       <p></p>
