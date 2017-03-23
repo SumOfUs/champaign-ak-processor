@@ -10,7 +10,7 @@ de:
       <p>China und das Team von SumOfUs</p>
       <p></p>
       <hr />
-      <p><strong>Spendenquittung</strong></p>
+      <p><strong>Ihre Spende</strong></p>
       <p>{% if order.card_num_last_four = "DDEB" %}{% if order.currency = "GBP" %}<img src="https://s3.amazonaws.com/s3.sumofus.org/images/bacslogo.jpg" alt="" /></p>
       <p><strong>Wichtig: Dies ist eine Best&auml;tigung, dass ein SEPA-Lastschrift-Mandat f&uuml;r SumOfUs eingerichtet wurde.</strong></p>
       <p>vielen Dank f&uuml;r Ihre Spende an SumOfUs.</p>
