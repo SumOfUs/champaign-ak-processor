@@ -15,12 +15,12 @@ class ActionCreator
   def run
     params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
 
-    action = Action.find(params[:meta][:action_id])
     response = client.create_action(params[:params])
     if !response.success?
       raise Error.new("Error while creating AK action. HTTP Response code: #{response.code}, body: #{response.body}")
     end
 
+    action = Action.find_by_id(params[:meta][:action_id])
     if action
       action[:form_data][:ak_resource_id] = response['resource_uri']
       action.save!
