@@ -35,7 +35,7 @@ class SurveyResponseProcessor
   end
 
   def update_action
-    response = Ak::Client.client.update_petition_action(existing_action_ak_id, update_params)
+    response = Ak::Client.client.update_petition_action(ak_action[:ak_id], update_params)
     if !response.success?
       raise Error.new("Error while updating AK action. HTTP Response code: #{response.code}, body: #{response.body}")
     end
@@ -43,16 +43,11 @@ class SurveyResponseProcessor
   end
 
   def delete_existing_action
-    response = Ak::Client.client.delete_action(existing_action_ak_id)
+    response = Ak::Client.client.delete_action(ak_action[:ak_id])
     if !response.success?
       raise Error.new("Error while deleting AK action. HTTP Response code: #{response.code}, body: #{response.body}")
     end
     ActionRepository.delete(@params[:meta][:action_id])
-  end
-
-  def existing_action_ak_id
-    @existing_action_ak_id ||=
-      ActionKitConnector::Util.extract_id_from_resource_uri(ak_action[:ak_id])
   end
 
   def ak_action
@@ -66,10 +61,9 @@ class SurveyResponseProcessor
   # example: { fields: { my_field: 'hello world' }
   #
   # We're also prepending the `survey_` prefix to all custom fields.
-
   def update_params
     params = @params[:params].clone
-    params[:page] = ak_action[:page_ak_id]
+    params[:page] = ak_action[:page_ak_id] #TODO rename to page_ak_uri
 
     # Move all params prefixed with `action_` to
     # the fields key and remove the prefix

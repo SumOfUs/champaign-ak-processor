@@ -56,10 +56,10 @@ class QueueListener
         update_recurring_payment(params)
 
       when NEW_CALL
-        CallCreator.run(params)
+        ActionCreator.run(params)
 
       when UPDATE_CALL
-        CallUpdater.run(params)
+        ActionUpdater.run(params)
 
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"

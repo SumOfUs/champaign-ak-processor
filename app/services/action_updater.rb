@@ -1,17 +1,17 @@
 class ActionUpdater
   class Error < StandardError; end
 
-  def self.run(*params)
-    new(*params).run
+  def self.run(params)
+    new(params).run
   end
 
-  def initialize(action_ak_id, params)
-    @ak_id = action_ak_id
+  def initialize(params)
     @params = params
   end
 
   def run
-    response = Ak::Client.client.update_petition_action(@ak_id, update_params)
+    ak_id = ActionRepository.get!(@params[:meta][:action_id])[:ak_id]
+    response = Ak::Client.client.update_petition_action(ak_id, update_params)
     if !response.success?
       raise Error.new("Error while updating AK action. HTTP Response code: #{response.code}, body: #{response.body}")
     end
