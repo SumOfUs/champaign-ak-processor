@@ -3,8 +3,8 @@ class ActionRepository
 
   # ch_id => champaign id
   # ak id => action_kit id
-  def self.set(ch_id, ak_id:, page_ak_id:, member_email:)
-    redis.hmset("action:#{ch_id}", :ak_id, ak_id, :page_ak_id, page_ak_id, :member_email, member_email)
+  def self.set(ch_id, ak_id:, page_ak_uri:, member_email:)
+    redis.hmset("action:#{ch_id}", :ak_id, ak_id, :page_ak_uri, page_ak_uri, :member_email, member_email)
   end
 
   def self.get(ch_id)

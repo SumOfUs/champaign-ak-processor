@@ -63,7 +63,7 @@ class SurveyResponseProcessor
   # We're also prepending the `survey_` prefix to all custom fields.
   def update_params
     params = @params[:params].clone
-    params[:page] = ak_action[:page_ak_id] #TODO rename to page_ak_uri
+    params[:page] = ak_action[:page_ak_uri]
 
     # Move all params prefixed with `action_` to
     # the fields key and remove the prefix

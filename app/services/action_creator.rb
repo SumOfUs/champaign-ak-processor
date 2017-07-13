@@ -27,7 +27,7 @@ class ActionCreator
       ak_id = ActionKitConnector::Util.extract_id_from_resource_uri(response['resource_uri'])
       ActionRepository.set(params[:meta][:action_id],
                            ak_id: ak_id,
-                           page_ak_id: response.parsed_response['page'],
+                           page_ak_uri: response.parsed_response['page'],
                            member_email: params[:params][:email])
     end
 

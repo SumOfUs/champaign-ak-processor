@@ -55,7 +55,7 @@ describe "New Survey Response" do
 
     it 'stores the new action data in the ActionsRepository' do
       ak_action = ActionRepository.get(action.id)
-      expect(ak_action[:page_ak_id]).to match(%r{rest\/v1\/petitionpage\/})
+      expect(ak_action[:page_ak_uri]).to match(%r{rest\/v1\/petitionpage\/})
       expect(ak_action[:ak_id]).to be_present
       expect(ak_action[:member_email]).to eql "omar@sumofus.org"
     end
@@ -80,8 +80,8 @@ describe "New Survey Response" do
 
     it "updates action kit" do
       ak_expected_params = update_params[:params].clone.tap do |p|
-        # It overrides `page` with the ak_page_id
-        p[:page] = @ak_action[:page_ak_id]
+        # It overrides `page` with the page_ak_uri
+        p[:page] = @ak_action[:page_ak_uri]
         # It moves every action_* param to a hash inside the `fields` key
         # adding the `survey_` prefix
         p[:fields] = {
