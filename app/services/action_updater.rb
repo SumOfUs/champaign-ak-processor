@@ -22,7 +22,9 @@ class ActionUpdater
 
   def update_params
     update_params = sanitize_action_fields(@params[:params])
-    update_params[:fields] = flatten_nested_params(update_params[:fields])
+    if update_params[:fields].present?
+      update_params[:fields] = flatten_nested_params(update_params[:fields])
+    end
     # AK responds with an error if we send this param, removing it in case it's present
     update_params.delete(:page)
     update_params
@@ -34,7 +36,7 @@ class ActionUpdater
   # * On update: To pass a custom field it must be passed as a json object on the `fields` key.
   # example: { fields: { my_field: 'hello world' }
   def sanitize_action_fields(params)
-    params = params.clone
+    params = params.clone.with_indifferent_access
     action_params = {}
     params.each do |key, val|
       if key =~ /\Aaction_.*/
@@ -46,7 +48,7 @@ class ActionUpdater
       key =~ /\Aaction_.*/
     end
 
-    params[:fields] = action_params
+    params[:fields] = action_params if action_params.any?
     params
   end
 
