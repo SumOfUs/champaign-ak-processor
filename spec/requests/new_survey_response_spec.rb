@@ -49,13 +49,9 @@ describe "New Survey Response" do
       expect(response).to be_success
     end
 
-    it 'stores resource ID in champaign action' do
-      expect(action.reload.form_data['ak_resource_id']).to match(%r{rest\/v1\/petitionaction\/})
-    end
-
     it 'stores the new action data in the ActionsRepository' do
       ak_action = ActionRepository.get(action.id)
-      expect(ak_action[:page_ak_id]).to match(%r{rest\/v1\/petitionpage\/})
+      expect(ak_action[:page_ak_uri]).to match(%r{rest\/v1\/petitionpage\/})
       expect(ak_action[:ak_id]).to be_present
       expect(ak_action[:member_email]).to eql "omar@sumofus.org"
     end
@@ -75,15 +71,13 @@ describe "New Survey Response" do
       end
       expect(response.success?).to be_truthy
 
-      ak_action = ActionRepository.get(action.id)
-      @action_ak_id = ActionKitConnector::Util.extract_id_from_resource_uri(ak_action[:ak_id])
-      @page_ak_id = ak_action[:page_ak_id]
+      @ak_action = ActionRepository.get(action.id)
     end
 
     it "updates action kit" do
       ak_expected_params = update_params[:params].clone.tap do |p|
-        # It overrides `page` with the ak_page_id
-        p[:page] = @page_ak_id
+        # It overrides `page` with the page_ak_uri
+        p[:page] = @ak_action[:page_ak_uri]
         # It moves every action_* param to a hash inside the `fields` key
         # adding the `survey_` prefix
         p[:fields] = {
@@ -97,7 +91,7 @@ describe "New Survey Response" do
       end
 
       expect(Ak::Client.client).to receive(:update_petition_action).
-        with(@action_ak_id, ak_expected_params).
+        with(@ak_action[:ak_id], ak_expected_params).
         and_call_original
 
       VCR.use_cassette("new_survey_response-update_action") do
@@ -123,14 +117,12 @@ describe "New Survey Response" do
       expect(response.success?).to be_truthy
 
       @ak_action = ActionRepository.get(action.id)
-      @action_ak_id = ActionKitConnector::Util.extract_id_from_resource_uri(@ak_action[:ak_id])
-
       params[:params][:email] = 'processor1@test.com'
     end
 
     it "deletes the existing action" do
       expect(Ak::Client.client).to receive(:delete_action).
-        with(@action_ak_id).
+        with(@ak_action[:ak_id]).
         and_call_original
 
       VCR.use_cassette("new_survey_response-delete_and_create_action") do
@@ -154,7 +146,7 @@ describe "New Survey Response" do
 
       updated_action = ActionRepository.get(action.id)
       expect(@ak_action).not_to eql(updated_action)
-      expect(updated_action[:ak_id]).to match(%r{rest\/v1\/petitionaction\/})
+      expect(updated_action[:ak_id]).to be_present
     end
   end
 end

@@ -166,10 +166,6 @@ describe "REST" do
           end
         end
 
-        it 'stores resource ID in champaign action' do
-          expect(action.reload.form_data['ak_resource_id']).to match(/rest\/v1\/petitionaction\//)
-        end
-
         it 'publishes action' do
           expect(Broadcast).to have_received(:emit).with(
             hash_including({ foo: 'bar', type: 'petition' })

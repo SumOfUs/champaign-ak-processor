@@ -13,6 +13,8 @@ class QueueListener
   UPDATE_CAMPAIGN = 'update_campaign'
   UPDATE_MEMBER = 'update_member'
   NEW_SURVEY_RESPONSE = 'new_survey_response'
+  NEW_CALL = 'new_call'
+  UPDATE_CALL = 'update_call'
   RECURRING_PAYMENT_UPDATE = 'recurring_payment_update'
 
   def perform(sqs_message, params)
@@ -52,6 +54,12 @@ class QueueListener
 
       when RECURRING_PAYMENT_UPDATE
         update_recurring_payment(params)
+
+      when NEW_CALL
+        ActionCreator.run(params)
+
+      when UPDATE_CALL
+        ActionUpdater.run(params)
 
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
