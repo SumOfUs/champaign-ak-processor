@@ -49,10 +49,6 @@ describe "New Survey Response" do
       expect(response).to be_success
     end
 
-    it 'stores resource ID in champaign action' do
-      expect(action.reload.form_data['ak_resource_id']).to match(%r{rest\/v1\/petitionaction\/})
-    end
-
     it 'stores the new action data in the ActionsRepository' do
       ak_action = ActionRepository.get(action.id)
       expect(ak_action[:page_ak_uri]).to match(%r{rest\/v1\/petitionpage\/})

@@ -20,10 +20,7 @@ class ActionCreator
       raise Error.new("Error while creating AK action. HTTP Response code: #{response.code}, body: #{response.body}")
     end
 
-    action = Action.find_by_id(params[:meta][:action_id])
-    if action
-      action[:form_data][:ak_resource_id] = response['resource_uri']
-      action.save!
+    if params[:meta][:action_id].present?
       ak_id = ActionKitConnector::Util.extract_id_from_resource_uri(response['resource_uri'])
       ActionRepository.set(params[:meta][:action_id],
                            ak_id: ak_id,
