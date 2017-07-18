@@ -2,63 +2,48 @@ class QueueListener
   include Ak::Client
   class Error < StandardError; end
 
-  CREATE_PAGES    = 'create'
-  CREATE_ACTION   = 'action'
-  CREATE_DONATION = 'donation'
-  UPDATE_PAGES    = 'update_pages'
-  SUBSCRIPTION_PAYMENT = 'subscription-payment'
-  SUBSCRIPTION_CANCELLATION = 'cancel_subscription'
-  SUBSCRIBE_MEMBER = 'subscribe_member'
-  CREATE_CAMPAIGN = 'create_campaign'
-  UPDATE_CAMPAIGN = 'update_campaign'
-  UPDATE_MEMBER = 'update_member'
-  NEW_SURVEY_RESPONSE = 'new_survey_response'
-  NEW_CALL = 'new_call'
-  UPDATE_CALL = 'update_call'
-  RECURRING_PAYMENT_UPDATE = 'recurring_payment_update'
-
   def perform(sqs_message, params)
     case params[:type]
-      when UPDATE_PAGES
+      when 'update_pages', 'page:update'
         PageUpdater.run(params)
 
-      when CREATE_PAGES
+      when 'create', 'page:new'
         PageCreator.run(params[:params])
 
-      when CREATE_ACTION
+      when 'action', 'action:new'
         ActionCreator.run(action_params(params))
 
-      when CREATE_DONATION
+      when 'donation', 'donation:new'
         create_donation(params)
 
-      when SUBSCRIPTION_PAYMENT
+      when 'subscription-payment', 'subscription-payment:new'
         create_payment(params)
 
-      when SUBSCRIBE_MEMBER
+      when 'subscribe_member', 'member-subscription:new'
         subscribe_member(params)
 
-      when CREATE_CAMPAIGN
+      when 'create_campaign', 'campaign:new'
         CampaignCreator.run(params)
 
-      when UPDATE_CAMPAIGN
+      when 'update_campaign', 'campaign:update'
         CampaignUpdater.run(params)
 
-      when UPDATE_MEMBER
+      when 'update_member', 'member:update'
         update_member(params)
 
-      when SUBSCRIPTION_CANCELLATION
+      when 'cancel_subscription', 'subscription:cancel'
         cancel_subscription(params[:params])
 
-      when NEW_SURVEY_RESPONSE
+      when 'new_survey_response', 'survey-response:new'
         SurveyResponseProcessor.run(params)
 
-      when RECURRING_PAYMENT_UPDATE
+      when 'recurring_payment_update', 'recurring-payment:update'
         update_recurring_payment(params)
 
-      when NEW_CALL
+      when 'new_call', 'call:new'
         ActionCreator.run(params)
 
-      when UPDATE_CALL
+      when 'update_call', 'call:update'
         ActionUpdater.run(params)
 
       else
