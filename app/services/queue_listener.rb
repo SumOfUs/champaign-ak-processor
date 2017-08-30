@@ -77,7 +77,7 @@ class QueueListener
   def create_payment(params)
     res = client.create_recurring_payment(params[:params])
     unless res.success?
-      raise Error.new("Managing recurring subscription payment failed with #{res.parsed_response['errors']}!")
+      raise Error.new("Managing recurring subscription payment failed with:\n #{res.parsed_response}")
     end
     res
   end
