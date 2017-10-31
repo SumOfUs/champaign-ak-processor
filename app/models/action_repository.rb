@@ -1,7 +1,7 @@
 class ActionRepository
   class NotFoundError < StandardError; end
 
-  EXPIRATION_IN_SECONDS = 10 * 60
+  EXPIRATION_IN_SECONDS = 60 * 60 * 24
 
   # ch_id => champaign id
   # ak id => action_kit id
