@@ -15,6 +15,7 @@ class ActionCreator
   def run
     params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
     params[:params][:referring_mailing_id] = extract_mailing_id(params[:params][:referring_akid])
+    params[:params][:referring_user_id] = extract_user_id(params[:params][:referring_akid])
 
     response = client.create_action(params[:params])
     if !response.success?
@@ -39,5 +40,9 @@ class ActionCreator
 
   def extract_mailing_id(akid = '')
     (akid.try(:split, '.') || []).first
+  end
+
+  def extract_user_id(akid = '')
+    (akid.try(:split, '.') || [])[1]
   end
 end

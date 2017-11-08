@@ -15,8 +15,11 @@ class DonationCreator
   def run
     params[:params][:action] ||= {}
     params[:params][:action][:fields] ||= {}
-    params[:params][:action][:fields][:mailing_id] = extract_mailing_id(params[:params][:akid])
-    params[:params][:action][:fields][:referring_mailing_id] = extract_mailing_id(params[:params][:referring_akid])
+    params[:params][:action][:fields].merge!(
+      mailing_id:           extract_mailing_id(params[:params][:akid]),
+      referring_mailing_id: extract_mailing_id(params[:params][:referring_akid]),
+      referring_user_id:    extract_user_id(params[:params][:referring_akid])
+    )
 
     response = client.create_donation(params[:params])
     if !response.success?
@@ -34,5 +37,9 @@ class DonationCreator
 
   def extract_mailing_id(akid = '')
     (akid.try(:split, '.') || []).first
+  end
+
+  def extract_user_id(akid = '')
+    (akid.try(:split, '.') || [])[1]
   end
 end
