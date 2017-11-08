@@ -14,6 +14,7 @@ class ActionCreator
 
   def run
     params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
+    params[:params][:referring_mailing_id] = extract_mailing_id(params[:params][:referring_akid])
 
     response = client.create_action(params[:params])
     if !response.success?
