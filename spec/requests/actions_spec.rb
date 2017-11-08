@@ -80,10 +80,6 @@ describe "REST" do
         end
       end
 
-      it 'stores resource ID in champaign action' do
-        expect(action.reload.form_data['ak_resource_id']).to match(/rest\/v1\/donationaction\//)
-      end
-
       it "registers as complete" do
         expect(subject.fetch(:status)).to eq("complete")
       end
