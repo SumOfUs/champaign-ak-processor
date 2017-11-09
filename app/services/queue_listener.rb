@@ -14,7 +14,7 @@ class QueueListener
         ActionCreator.run(action_params(params))
 
       when 'donation', 'donation:new'
-        create_donation(params)
+        DonationCreator.run(params)
 
       when 'subscription-payment', 'subscription-payment:new'
         create_payment(params)
@@ -58,20 +58,6 @@ class QueueListener
     unless res.success?
       raise Error.new("Marking recurring donation cancelled failed. HTTP Response code: #{res.code}, body: #{res.body}")
     end
-  end
-
-  def create_donation(params)
-    order = params[:params][:order]
-    action = Action.find_by_id(params[:meta][:action_id])
-    response = client.create_donation(params[:params])
-
-    if action
-      action[:form_data][:ak_resource_id] = response['resource_uri']
-      action.save
-    end
-
-    Broadcast.emit( params[:meta].merge(type: 'donation', amount: order[:amount], currency: order[:currency] ) )
-    response
   end
 
   def create_payment(params)
