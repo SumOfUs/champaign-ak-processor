@@ -1,10 +1,14 @@
 class ActionRepository
   class NotFoundError < StandardError; end
 
+  EXPIRATION_IN_SECONDS = 60 * 60 * 24
+
   # ch_id => champaign id
   # ak id => action_kit id
   def self.set(ch_id, ak_id:, page_ak_uri:, member_email:)
-    redis.hmset("action:#{ch_id}", :ak_id, ak_id, :page_ak_uri, page_ak_uri, :member_email, member_email)
+    key = "action:#{ch_id}"
+    redis.hmset(key, :ak_id, ak_id, :page_ak_uri, page_ak_uri, :member_email, member_email)
+    redis.expire key, EXPIRATION_IN_SECONDS
   end
 
   def self.get(ch_id)
