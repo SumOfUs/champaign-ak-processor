@@ -4,7 +4,7 @@ describe QueueListener do
   let(:client) { double }
 
   before do
-    allow(ActionKitConnector::Client).to receive(:new){ client }
+    allow(ActionKitConnector::Client).to receive(:new) { client }
   end
 
   subject { QueueListener.new }
