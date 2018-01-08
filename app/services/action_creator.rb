@@ -1,6 +1,11 @@
 class ActionCreator
   include Ak::Client
   class Error < StandardError; end
+  class APIError < Error
+    def initialize(message, http_response)
+      super("#{message}. HTTP Response code: #{http_response.code}, body: #{http_response.body}")
+    end
+  end
 
   attr_reader :params
 
@@ -14,16 +19,23 @@ class ActionCreator
 
   def run
     params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
-    params[:params][:referring_mailing_id] = extract_mailing_id(params[:params][:referring_akid])
-    params[:params][:referring_user_id] = extract_user_id(params[:params][:referring_akid])
 
     response = client.create_action(params[:params])
     if !response.success?
-      raise Error.new("Error while creating AK action. HTTP Response code: #{response.code}, body: #{response.body}")
+      raise APIError.new("Error while creating AK action", response)
+    end
+
+    ak_id = ActionKitConnector::Util.extract_id_from_resource_uri(response['resource_uri'])
+
+    # Nullifying mailing_id if referring_akid is pressent
+    if params[:params][:referring_akid].present?
+      update_response = client.update_petition_action(ak_id, mailing: nil)
+      if !update_response.success?
+        raise APIError.new("Error while updating AK action", response)
+      end
     end
 
     if params[:meta][:action_id].present?
-      ak_id = ActionKitConnector::Util.extract_id_from_resource_uri(response['resource_uri'])
       ActionRepository.set(params[:meta][:action_id],
                            ak_id: ak_id,
                            page_ak_uri: response.parsed_response['page'],
