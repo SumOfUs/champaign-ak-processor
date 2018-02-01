@@ -1,7 +1,7 @@
 class Share::Button < ActiveRecord::Base
   belongs_to :page
   scope :with_page, -> { includes(:page) }
-  scope :where_page_is_active, -> { where(pages: {active: true}) }
+  scope :where_page_is_active, -> { where(pages: {status: 'published'}) }
 
 
   def self.ids_of_active_buttons
