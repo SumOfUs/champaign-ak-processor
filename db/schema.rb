@@ -169,26 +169,33 @@ ActiveRecord::Schema.define(version: 20160125211650) do
   end
 
   create_table "pages", force: :cascade do |t|
-    t.integer  "language_id"
-    t.integer  "campaign_id"
-    t.string   "title",                                          null: false
-    t.string   "slug",                                           null: false
+    t.integer "language_id"
+    t.integer "campaign_id"
+    t.string "title", null: false
+    t.string "slug", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "compiled_html"
-    t.string   "status",                     default: "pending"
-    t.text     "messages"
-    t.text     "content",                    default: ""
-    t.boolean  "featured",                   default: false
-    t.boolean  "active",                     default: false
-    t.integer  "liquid_layout_id"
-    t.integer  "follow_up_liquid_layout_id"
-    t.integer  "action_count",               default: 0
-    t.integer  "primary_image_id"
-    t.string   "ak_petition_resource_uri"
-    t.string   "ak_donation_resource_uri"
-    t.integer  "follow_up_plan",             default: 0,         null: false
-    t.integer  "follow_up_page_id"
+    t.text "compiled_html"
+    t.string "status", default: "pending"
+    t.text "messages"
+    t.text "content", default: ""
+    t.boolean "featured", default: false
+    t.integer "liquid_layout_id"
+    t.integer "follow_up_liquid_layout_id"
+    t.integer "action_count", default: 0
+    t.integer "primary_image_id"
+    t.string "ak_petition_resource_uri"
+    t.string "ak_donation_resource_uri"
+    t.integer "follow_up_plan", default: 0, null: false
+    t.integer "follow_up_page_id"
+    t.text "javascript"
+    t.integer "publish_status", default: 1, null: false
+    t.integer "optimizely_status", default: 0, null: false
+    t.string "canonical_url"
+    t.boolean "allow_duplicate_actions", default: false
+    t.boolean "enforce_styles", default: false, null: false
+    t.text "notes"
+    t.integer "publish_actions", default: 0, null: false
   end
 
   add_index "pages", ["follow_up_liquid_layout_id"], name: "index_pages_on_follow_up_liquid_layout_id", using: :btree
