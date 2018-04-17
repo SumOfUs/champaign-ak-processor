@@ -20,10 +20,7 @@ class ActionCreator
   def run
     params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
 
-    if params[:params][:country] == 'United Kingdom'
-      params[:params][:user_uk_parliamentary_constituency] = GetConstituency.for(params[:params][:postal])
-    end
-
+    CountryService.extend_with_local_data(params)
 
     response = client.create_action(params[:params])
     if !response.success?
