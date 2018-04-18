@@ -4,6 +4,7 @@ describe "New Survey Response" do
   before do
     allow(Broadcast).to receive(:emit)
     allow(ActionsCache).to receive(:append)
+    allow(GetConstituency).to receive(:for)
   end
 
   let(:action) { Action.create(form_data: {}) }

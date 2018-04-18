@@ -20,6 +20,8 @@ class ActionCreator
   def run
     params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
 
+    CountryService.extend_with_local_data(params)
+
     response = client.create_action(params[:params])
     if !response.success?
       raise APIError.new("Error while creating AK action", response)
