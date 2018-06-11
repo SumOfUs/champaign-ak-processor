@@ -1,4 +1,5 @@
 class PageFollowUpCreator
+  class Error < StandardError; end
   def self.run(params)
     new(params).run
   end
