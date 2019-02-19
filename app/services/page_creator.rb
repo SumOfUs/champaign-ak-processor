@@ -12,12 +12,20 @@ class PageCreator
 
   def run
     @page = Page.find @page_id
+    create_donation_page
+    create_petition_page
+  end
+
+  def create_donation_page
     Donation.run(@page, @params)
     create_donation_form
     PageFollowUpCreator.run(
-      page_ak_uri:   @page.ak_donation_resource_uri,
-      language_code: @page.language.try(:code)
+        page_ak_uri:   @page.ak_donation_resource_uri,
+        language_code: @page.language.try(:code)
     )
+  end
+
+  def create_petition_page
     Petition.run(@page, @params)
     create_petition_form
   end

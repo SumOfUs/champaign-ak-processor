@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/
+    body:
+      encoding: UTF-8
+      string: '{"page_id":4699,"name":"aidez-nous-a-reveler-le-cruel-secret-des-poussins-de-mcdonald-s-1-donation","title":"Aidez-nous
+        à révéler le cruel secret des poussins de McDonald''s (Donation)","language":"/rest/v1/language/100/","tags":null,"url":"https://actions.sumofus.org/a/aidez-nous-a-reveler-le-cruel-secret-des-poussins-de-mcdonald-s-1","hosted_with":"/rest/v1/hostingplatform/2/","page_type":"donation","multilingual_campaign":null,"hpc_rule":"/rest/v1/donationhpcrule/22/"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 400
+      message: BAD REQUEST
+    headers:
+      Date:
+      - Tue, 19 Feb 2019 14:28:31 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      Vary:
+      - Cookie, Origin
+    body:
+      encoding: UTF-8
+      string: '{"donationpage": {"name": ["Page with this Short name already exists."]}}'
+    http_version: 
+  recorded_at: Tue, 19 Feb 2019 14:28:31 GMT
+recorded_with: VCR 3.0.1

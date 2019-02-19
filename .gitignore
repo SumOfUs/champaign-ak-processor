@@ -17,6 +17,7 @@
 # Environment
 ./env.yml
 env.yml
+.env
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
