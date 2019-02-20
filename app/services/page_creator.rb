@@ -12,8 +12,8 @@ class PageCreator
 
   def run
     @page = Page.find @page_id
-    Petition.run(@page, @params)
     Donation.run(@page, @params)
+    Petition.run(@page, @params)
     PageFollowUpCreator.run(
         page_ak_uri:   @page.ak_donation_resource_uri,
         language_code: @page.language.try(:code)
@@ -76,7 +76,7 @@ class PageCreator
       return if page_exists
       response = handle_response(client.create_petition_page(sanitized_params))
       return response unless response.success?
-      FormCreator::Petition.run(champaign_uri: @params[:url], page_ak_uri: response.headers['location'])
+      FormCreator::Petition.run(champaign_uri: @params[:url], page_ak_uri: @page.ak_petition_resource_uri)
     end
 
   end
@@ -86,7 +86,7 @@ class PageCreator
       return if page_exists
       response = handle_response(client.create_donation_page(sanitized_params))
       return response unless response.success?
-      FormCreator::Donation.run(champaign_uri: @params[:url], page_ak_uri: response.headers['location'])
+      FormCreator::Donation.run(champaign_uri: @params[:url], page_ak_uri: @page.ak_donation_resource_uri)
     end
 
     private
