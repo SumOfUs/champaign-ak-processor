@@ -12,16 +12,12 @@ class PageCreator
 
   def run
     @page = Page.find @page_id
-    create_donation_page
-    create_petition_page
-  end
-
-  def create_donation_page
-    Donation.run(@page, @params)
-  end
-
-  def create_petition_page
     Petition.run(@page, @params)
+    Donation.run(@page, @params)
+    PageFollowUpCreator.run(
+        page_ak_uri:   @page.ak_donation_resource_uri,
+        language_code: @page.language.try(:code)
+    )
   end
 
   class Base
@@ -43,14 +39,16 @@ class PageCreator
 
     def handle_response(response)
       if !response.success?
-        @page.update!(status: 'failed', messages: response.parsed_response)
+        page_update = {status: 'failed', messages: response.parsed_response}
         Rails.logger.error("HTTP Response code: #{response.code}, body: #{response.body}")
+      else
+        page_update = {
+            "ak_#{page_type}_resource_uri" => response.headers['location'],
+            "status" => "success"
+        }.with_indifferent_access
       end
-
-      @page.update!({
-        "ak_#{page_type}_resource_uri" => response.headers['location'],
-        "status" => "success"
-                    }.with_indifferent_access)
+      @page.update!(page_update)
+      return response
     end
 
     def sanitized_params
@@ -76,8 +74,8 @@ class PageCreator
   class Petition < Base
     def run
       return if page_exists
-      response = client.create_petition_page(sanitized_params)
-      handle_response(response)
+      response = handle_response(client.create_petition_page(sanitized_params))
+      return response unless response.success?
       FormCreator::Petition.run(champaign_uri: @params[:url], page_ak_uri: response.headers['location'])
     end
 
@@ -86,14 +84,9 @@ class PageCreator
   class Donation < Base
     def run
       return if page_exists
-      response = client.create_donation_page(sanitized_params)
-      handle_response(response)
+      response = handle_response(client.create_donation_page(sanitized_params))
+      return response unless response.success?
       FormCreator::Donation.run(champaign_uri: @params[:url], page_ak_uri: response.headers['location'])
-      PageFollowUpCreator.run(
-          page_ak_uri:   @page.ak_donation_resource_uri,
-          language_code: @page.language.try(:code)
-      )
-
     end
 
     private

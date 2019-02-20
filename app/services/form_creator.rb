@@ -25,13 +25,22 @@ class FormCreator
 
   class Petition < FormCreator
     def run
-      client.create_petitionform(sanitized_params)
+      response = client.create_petitionform(sanitized_params)
+      if !response.success?
+        Rails.logger.error("Failure creating petition fomr - code: #{response.code}, body: #{response.body}")
+      end
+      response
     end
   end
 
   class Donation < FormCreator
     def run
-      client.create_donationform(sanitized_params)
+      response = client.create_donationform(sanitized_params)
+      if !response.success?
+        Rails.logger.error("Failure creating donation form - code: #{response.code}, body: #{response.body}")
+      end
+      response
     end
   end
+
 end

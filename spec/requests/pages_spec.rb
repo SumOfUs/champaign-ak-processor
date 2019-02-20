@@ -5,11 +5,11 @@ describe "REST" do
 
   before do
     allow_any_instance_of( ActionKitConnector::Client ).to(
-      receive(:create_petitionform)
+      receive(:create_petitionform).and_return(double(success?: true))
     )
 
     allow_any_instance_of( ActionKitConnector::Client ).to(
-      receive(:create_donationform)
+      receive(:create_donationform).and_return(double(success?: true))
     )
   end
 

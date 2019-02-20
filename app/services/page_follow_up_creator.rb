@@ -10,10 +10,10 @@ class PageFollowUpCreator
 
   def run
     response = Ak::Client.client.create_page_follow_up(create_params)
-
     if !response.success?
-      raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
+      Rails.logger.error("HTTP Response code: #{response.code}, body: #{response.body}")
     end
+    response
   end
 
   private

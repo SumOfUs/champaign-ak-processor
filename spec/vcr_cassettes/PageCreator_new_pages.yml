@@ -1,0 +1,147 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/
+    body:
+      encoding: UTF-8
+      string: '{"page_id":12345643,"name":"super-random-horsey-pony-donation","title":"Vote
+        for this super random horsey pony! (Donation)","language":"/rest/v1/language/100/","tags":null,"url":"https://actions.sumofus.org/a/super-random-horsey-pony","hosted_with":"/rest/v1/hostingplatform/2/","page_type":"donation","multilingual_campaign":null,"hpc_rule":"/rest/v1/donationhpcrule/22/"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Wed, 20 Feb 2019 12:46:21 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      Vary:
+      - Accept, Cookie, Origin
+      Location:
+      - https://act.sumofus.org/rest/v1/donationpage/23604/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Wed, 20 Feb 2019 12:46:22 GMT
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationform/
+    body:
+      encoding: UTF-8
+      string: '{"page":"https://act.sumofus.org/rest/v1/donationpage/23604/","client_hosted":true,"client_url":"https://actions.sumofus.org/a/super-random-horsey-pony","ask_text":"Dummy
+        ask","thank_you_text":"Dummy thank you","statement_text":"Dummy statement"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 400
+      message: BAD REQUEST
+    headers:
+      Date:
+      - Wed, 20 Feb 2019 12:47:52 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      Vary:
+      - Cookie, Origin
+    body:
+      encoding: UTF-8
+      string: '{"donationform": {"errors": ["The templateset you selected does not
+        support Braintree v.zero, which is required by this page''s payment account.
+        Try a different templateset, or go to Action basics to change payment accounts."]}}'
+    http_version: 
+  recorded_at: Wed, 20 Feb 2019 12:47:52 GMT
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/
+    body:
+      encoding: UTF-8
+      string: '{"page_id":12345643,"name":"super-random-horsey-pony-petition","title":"Vote
+        for this super random horsey pony! (Petition)","language":"/rest/v1/language/100/","tags":null,"url":"https://actions.sumofus.org/a/super-random-horsey-pony","hosted_with":"/rest/v1/hostingplatform/2/","page_type":"petition","multilingual_campaign":null}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Wed, 20 Feb 2019 13:05:17 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      Vary:
+      - Accept, Cookie, Origin
+      Location:
+      - https://act.sumofus.org/rest/v1/petitionpage/23605/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Wed, 20 Feb 2019 13:05:17 GMT
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionform/
+    body:
+      encoding: UTF-8
+      string: '{"page":"https://act.sumofus.org/rest/v1/petitionpage/23605/","client_hosted":true,"client_url":"https://actions.sumofus.org/a/super-random-horsey-pony","ask_text":"Dummy
+        ask","thank_you_text":"Dummy thank you","statement_text":"Dummy statement"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Wed, 20 Feb 2019 13:09:46 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      Vary:
+      - Accept, Cookie, Origin
+      Location:
+      - https://act.sumofus.org/rest/v1/petitionform/7695/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Wed, 20 Feb 2019 13:09:46 GMT
+recorded_with: VCR 3.0.1
