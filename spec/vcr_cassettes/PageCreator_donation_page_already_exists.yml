@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/
     body:
       encoding: UTF-8
       string: '{"page_id":4699,"name":"aidez-nous-a-reveler-le-cruel-secret-des-poussins-de-mcdonald-s-1-donation","title":"Aidez-nous
@@ -14,13 +14,13 @@ http_interactions:
       - UTF-8
   response:
     status:
-      code: 400
-      message: BAD REQUEST
+      code: 201
+      message: CREATED
     headers:
       Date:
-      - Tue, 19 Feb 2019 14:28:31 GMT
+      - Wed, 20 Feb 2019 08:55:14 GMT
       Content-Type:
-      - application/json
+      - text/html; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
@@ -28,10 +28,48 @@ http_interactions:
       Server:
       - openresty
       Vary:
-      - Cookie, Origin
+      - Accept, Cookie, Origin
+      Location:
+      - https://act.sumofus.org/rest/v1/petitionpage/23597/
     body:
       encoding: UTF-8
-      string: '{"donationpage": {"name": ["Page with this Short name already exists."]}}'
+      string: ''
     http_version: 
-  recorded_at: Tue, 19 Feb 2019 14:28:31 GMT
+  recorded_at: Wed, 20 Feb 2019 08:55:14 GMT
+- request:
+    method: post
+    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionform/
+    body:
+      encoding: UTF-8
+      string: '{"page":"https://act.sumofus.org/rest/v1/petitionpage/23597/","client_hosted":true,"client_url":"https://actions.sumofus.org/a/aidez-nous-a-reveler-le-cruel-secret-des-poussins-de-mcdonald-s-1","ask_text":"Dummy
+        ask","thank_you_text":"Dummy thank you","statement_text":"Dummy statement"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Wed, 20 Feb 2019 12:03:22 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      Vary:
+      - Accept, Cookie, Origin
+      Location:
+      - https://act.sumofus.org/rest/v1/petitionform/7693/
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Wed, 20 Feb 2019 12:03:22 GMT
 recorded_with: VCR 3.0.1

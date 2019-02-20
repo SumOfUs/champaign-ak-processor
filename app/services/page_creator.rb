@@ -18,26 +18,10 @@ class PageCreator
 
   def create_donation_page
     Donation.run(@page, @params)
-    create_donation_form
-    PageFollowUpCreator.run(
-        page_ak_uri:   @page.ak_donation_resource_uri,
-        language_code: @page.language.try(:code)
-    )
   end
 
   def create_petition_page
     Petition.run(@page, @params)
-    create_petition_form
-  end
-
-  def create_donation_form
-    params = { url: @params[:url], page: @page.ak_donation_resource_uri }
-    FormCreator::Donation.run(params)
-  end
-
-  def create_petition_form
-    params = { url: @params[:url], page: @page.ak_petition_resource_uri }
-    FormCreator::Petition.run(params)
   end
 
   class Base
@@ -53,16 +37,20 @@ class PageCreator
 
     private
 
+    def page_exists
+      !@page.send("ak_#{page_type}_resource_uri").blank?
+    end
+
     def handle_response(response)
       if !response.success?
         @page.update!(status: 'failed', messages: response.parsed_response)
-        raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
+        Rails.logger.error("HTTP Response code: #{response.code}, body: #{response.body}")
       end
 
-      @page.update!(
+      @page.update!({
         "ak_#{page_type}_resource_uri" => response.headers['location'],
-        status: 'success'
-      )
+        "status" => "success"
+                    }.with_indifferent_access)
     end
 
     def sanitized_params
@@ -81,32 +69,34 @@ class PageCreator
     end
 
     def page_type
-      raise "Not Implemented"
+      self.class.name.demodulize.underscore
     end
   end
 
   class Petition < Base
     def run
+      return if page_exists
       response = client.create_petition_page(sanitized_params)
       handle_response(response)
+      FormCreator::Petition.run(champaign_uri: @params[:url], page_ak_uri: response.headers['location'])
     end
 
-    def page_type
-      'petition'
-    end
   end
 
   class Donation < Base
     def run
+      return if page_exists
       response = client.create_donation_page(sanitized_params)
       handle_response(response)
+      FormCreator::Donation.run(champaign_uri: @params[:url], page_ak_uri: response.headers['location'])
+      PageFollowUpCreator.run(
+          page_ak_uri:   @page.ak_donation_resource_uri,
+          language_code: @page.language.try(:code)
+      )
+
     end
 
     private
-
-    def page_type
-      'donation'
-    end
 
     def sanitized_params
       super.merge(
