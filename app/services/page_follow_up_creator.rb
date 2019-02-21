@@ -11,9 +11,8 @@ class PageFollowUpCreator
   def run
     response = Ak::Client.client.create_page_follow_up(create_params)
     if !response.success?
-      Rails.logger.error("HTTP Response code: #{response.code}, body: #{response.body}")
+      raise Error.new("Failed creating page follow up resource - HTTP Response code: #{response.code}, body: #{response.body}")
     end
-    response
   end
 
   private

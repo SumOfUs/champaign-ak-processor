@@ -14,9 +14,17 @@ class PageCreator
     @page = Page.find @page_id
     Donation.run(@page, @params)
     Petition.run(@page, @params)
+    unless @page.ak_donation_resource_uri.blank? || @page.ak_petition_resource_uri.blank?
+      @page.update!(messages: nil, status: 'success')
+    end
+    if @page.status == 'failed'
+      # Trigger an error response and automatic retries from the Elastic Beanstalk worker.
+      # @page.messages will contain information on which resource type failed to create.
+      raise Error.new(@page.messages)
+    end
     PageFollowUpCreator.run(
-        page_ak_uri:   @page.ak_donation_resource_uri,
-        language_code: @page.language.try(:code)
+      page_ak_uri:   @page.ak_donation_resource_uri,
+      language_code: @page.language.try(:code)
     )
   end
 
@@ -39,13 +47,11 @@ class PageCreator
 
     def handle_response(response)
       if !response.success?
-        page_update = {status: 'failed', messages: response.parsed_response}
-        Rails.logger.error("HTTP Response code: #{response.code}, body: #{response.body}")
+        error_str = "Failed creating AK #{page_type} resource: #{response.parsed_response}"
+        page_update = { status: 'failed', messages: error_str }
+        Rails.logger.error("#{error_str}. HTTP Response code: #{response.code}, body: #{response.body}")
       else
-        page_update = {
-            "ak_#{page_type}_resource_uri" => response.headers['location'],
-            "status" => "success"
-        }.with_indifferent_access
+        page_update = { "ak_#{page_type}_resource_uri" => response.headers['location'] }
       end
       @page.update!(page_update)
       return response
