@@ -24,13 +24,13 @@ gem 'lograge'
 group :development, :test do
   gem 'envyable', require: 'envyable/rails-now'
   gem 'byebug'
+  gem 'database_cleaner'
   gem 'guard-rspec', require: false
   gem 'redis-namespace'
 end
 
 group :test do
   gem 'rspec-rails', '~> 3.3'
-  gem 'database_cleaner'
   gem 'webmock'
   gem 'vcr'
 end
