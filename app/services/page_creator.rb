@@ -13,23 +13,19 @@ class PageCreator
   def run
     @page = Page.find @page_id
     Donation.run(@page, @params)
-    create_donation_form
+    Petition.run(@page, @params)
+    unless @page.ak_donation_resource_uri.blank? || @page.ak_petition_resource_uri.blank?
+      @page.update!(messages: nil, status: 'success')
+    end
+    if @page.status == 'failed'
+      # Trigger an error response and automatic retries from the Elastic Beanstalk worker.
+      # @page.messages will contain information on which resource type failed to create.
+      raise Error.new(@page.messages)
+    end
     PageFollowUpCreator.run(
       page_ak_uri:   @page.ak_donation_resource_uri,
       language_code: @page.language.try(:code)
     )
-    Petition.run(@page, @params)
-    create_petition_form
-  end
-
-  def create_donation_form
-    params = { url: @params[:url], page: @page.ak_donation_resource_uri }
-    FormCreator::Donation.run(params)
-  end
-
-  def create_petition_form
-    params = { url: @params[:url], page: @page.ak_petition_resource_uri }
-    FormCreator::Petition.run(params)
   end
 
   class Base
@@ -45,16 +41,20 @@ class PageCreator
 
     private
 
+    def page_exists
+      !@page.send("ak_#{page_type}_resource_uri").blank?
+    end
+
     def handle_response(response)
       if !response.success?
-        @page.update!(status: 'failed', messages: response.parsed_response)
-        raise Error.new("HTTP Response code: #{response.code}, body: #{response.body}")
+        error_str = "Failed creating AK #{page_type} resource: #{response.parsed_response}"
+        page_update = { status: 'failed', messages: error_str }
+        Rails.logger.error("#{error_str}. HTTP Response code: #{response.code}, body: #{response.body}")
+      else
+        page_update = { "ak_#{page_type}_resource_uri" => response.headers['location'] }
       end
-
-      @page.update!(
-        "ak_#{page_type}_resource_uri" => response.headers['location'],
-        status: 'success'
-      )
+      @page.update!(page_update)
+      return response
     end
 
     def sanitized_params
@@ -73,32 +73,29 @@ class PageCreator
     end
 
     def page_type
-      raise "Not Implemented"
+      self.class.name.demodulize.underscore
     end
   end
 
   class Petition < Base
     def run
-      response = client.create_petition_page(sanitized_params)
-      handle_response(response)
+      return if page_exists
+      response = handle_response(client.create_petition_page(sanitized_params))
+      return response unless response.success?
+      FormCreator::Petition.run(champaign_uri: @params[:url], page_ak_uri: @page.ak_petition_resource_uri)
     end
 
-    def page_type
-      'petition'
-    end
   end
 
   class Donation < Base
     def run
-      response = client.create_donation_page(sanitized_params)
-      handle_response(response)
+      return if page_exists
+      response = handle_response(client.create_donation_page(sanitized_params))
+      return response unless response.success?
+      FormCreator::Donation.run(champaign_uri: @params[:url], page_ak_uri: @page.ak_donation_resource_uri)
     end
 
     private
-
-    def page_type
-      'donation'
-    end
 
     def sanitized_params
       super.merge(

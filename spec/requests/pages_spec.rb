@@ -5,11 +5,11 @@ describe "REST" do
 
   before do
     allow_any_instance_of( ActionKitConnector::Client ).to(
-      receive(:create_petitionform)
+      receive(:create_petitionform).and_return(double(success?: true))
     )
 
     allow_any_instance_of( ActionKitConnector::Client ).to(
-      receive(:create_donationform)
+      receive(:create_donationform).and_return(double(success?: true))
     )
   end
 
@@ -99,7 +99,7 @@ describe "REST" do
     end
   end
 
-  describe "POST /petitionpage" do
+  describe "creating page resources for a new page" do
     before { CampaignRepository.set(345, "https://act.sumofus.org/rest/v1/multilingualcampaign/139/") }
 
     let(:params) do
@@ -210,7 +210,7 @@ describe "REST" do
       end
     end
 
-    context "with invalid slug" do
+    context "with an unsuccessful request (invalid slug)" do
       before do
         params[:slug] = '}not-valid-chars{'
 
@@ -219,12 +219,59 @@ describe "REST" do
         end
       end
 
-      describe 'recording AK resource to page' do
-        it 'records status' do
-          expect(subject.status).to eq("failed")
+      it 'records the failed AK status on the page' do
+        expect(subject.status).to eq("failed")
+      end
+
+    end
+
+    context "when it fails to create resources or update the AK resource URIs on the page" do
+      let!(:language) { Language.create(code: 'en', name: 'English') }
+
+      let!(:new_page) { Page.create(
+          id: 12345643,
+          title: 'Vote for this super random horsey pony!',
+          slug: 'super-random-horsey-pony',
+          ak_donation_resource_uri: nil,
+          ak_petition_resource_uri: nil,
+          language: language
+      )}
+
+      let(:params) do
+        {
+          type: 'create',
+          params: {
+            page_id: 12345643,
+            name: "super-random-horsey-pony",
+            title: "Vote for this super random horsey pony!",
+            language: "/rest/v1/language/100/",
+            tags: nil,
+            url: "https://actions.sumofus.org/a/super-random-horsey-pony",
+            hosted_with: "/rest/v1/hostingplatform/2/",
+            campaign_id: nil
+          }
+        }
+      end
+
+      it "sends back an error code so the Elastic Beanstalk worker will trigger retry logic" do
+        VCR.use_cassette('PageCreator new pages', :record => :new_episodes) do
+          allow_any_instance_of(ActionKitConnector::Client).to receive(:create_petition_page).and_return(
+                   double(success?: false,
+                          parsed_response: "The request couldn't be satisfied.",
+                          code: 500,
+                          body: 'Iamafailedresponse'
+                   ))
+          post "/message", params
+          new_page.reload
+          expect(new_page.ak_donation_resource_uri).to eq "https://act.sumofus.org/rest/v1/donationpage/23604/"
+          expect(new_page.ak_petition_resource_uri).to eq nil
+          expect(new_page.messages).to eq "Failed creating AK petition resource: The request couldn't be satisfied."
+          expect(new_page.status).to eq 'failed'
+          expect(response.code).to eq('500')
         end
       end
     end
+
   end
 end
 

@@ -6,16 +6,17 @@ class FormCreator
   end
 
   def initialize(params)
-    @params = params
+    @champaign_uri = params[:champaign_uri]
+    @page_ak_uri = params[:page_ak_uri]
   end
 
   private
 
   def sanitized_params
     {
-      page:           @params[:page],
+      page:           @page_ak_uri,
       client_hosted:  true,
-      client_url:     @params[:url],
+      client_url:     @champaign_uri,
       ask_text:       'Dummy ask',
       thank_you_text: 'Dummy thank you',
       statement_text: 'Dummy statement'
@@ -24,13 +25,22 @@ class FormCreator
 
   class Petition < FormCreator
     def run
-      client.create_petitionform(sanitized_params)
+      response = client.create_petitionform(sanitized_params)
+      if !response.success?
+        Rails.logger.error("Failure creating petition fomr - code: #{response.code}, body: #{response.body}")
+      end
+      response
     end
   end
 
   class Donation < FormCreator
     def run
-      client.create_donationform(sanitized_params)
+      response = client.create_donationform(sanitized_params)
+      if !response.success?
+        Rails.logger.error("Failure creating donation form - code: #{response.code}, body: #{response.body}")
+      end
+      response
     end
   end
+
 end
