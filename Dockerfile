@@ -1,4 +1,4 @@
-FROM ruby:2.3.0
+FROM ruby:2.4.1
 RUN apt-get update -qq && apt-get install -y nodejs netcat
 
 RUN mkdir /myapp
