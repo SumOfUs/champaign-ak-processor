@@ -3,7 +3,7 @@ processor:
   links:
     - db
     - redis
-  command: /myapp/circle/run-tests
+  command: /myapp/.circleci/run-tests
   env_file:
     - test.env
 
