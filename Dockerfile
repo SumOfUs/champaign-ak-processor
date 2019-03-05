@@ -1,11 +1,12 @@
-FROM ruby:2.3.0
-RUN apt-get update -qq && apt-get install -y nodejs netcat
+FROM ruby:2.4.1
+RUN apt-get update -qq && apt-get install -y nodejs
 
 RUN mkdir /myapp
 
 WORKDIR /tmp
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
+RUN gem install bundler
 RUN bundle install --jobs 4
 
 EXPOSE 3000

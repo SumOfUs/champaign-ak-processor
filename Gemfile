@@ -1,17 +1,16 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
-gem 'rails', '4.2.10'
+ruby '2.4.1'
+gem 'rails', '5.2'
 gem 'pg'
-gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'redis'
-gem 'actionkit_connector', github: 'SumOfUs/actionkit_connector', branch: 'master'
+gem 'actionkit_connector', git: 'https://github.com/SumOfUs/actionkit_connector.git', branch: 'master'
 gem 'airbrake'
 
 gem 'puma', '~> 2.15.3'
@@ -30,7 +29,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.3'
+  gem 'rspec-rails'
   gem 'webmock'
   gem 'vcr'
 end
