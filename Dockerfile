@@ -6,8 +6,7 @@ RUN mkdir /myapp
 WORKDIR /tmp
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
-RUN gem install bundler
-RUN bundle install --jobs 4
+RUN bundle install --jobs 4 --deployment
 
 EXPOSE 3000
 ADD . /myapp

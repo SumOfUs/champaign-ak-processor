@@ -10,13 +10,14 @@ export PAPERTRAIL_PORT=$(cut -d ":" -f 2 <<< $4)
 export PAPERTRAIL_SYSTEM=$3
 
 # Set the right place for paper trail logging
-cat ../.ebextensions/02_papertrail.config | envsubst '$PAPERTRAIL_HOST:$PAPERTRAIL_PORT:$PAPERTRAIL_SYSTEM' >tmp
-mv tmp ../.ebextensions/02_papertrail.config
+cat .ebextensions/02_papertrail.config | envsubst '$PAPERTRAIL_HOST:$PAPERTRAIL_PORT:$PAPERTRAIL_SYSTEM' >tmp
+mv tmp .ebextensions/02_papertrail.config
+cat .circleci/Dockerrun.aws.json.template | envsubst > Dockerrun.aws.json
 
 # Prepare the source bundle .zip
 EB_BUCKET=champaign.dockerrun.files
 echo 'Shipping source bundle to S3...'
-zip -r9 $SHA1-config.zip Dockerrun.aws.json ../.ebextensions/
+zip -r9 $SHA1-config.zip Dockerrun.aws.json .ebextensions/
 SOURCE_BUNDLE=$SHA1-config.zip
 
 aws configure set default.region $AWS_REGION

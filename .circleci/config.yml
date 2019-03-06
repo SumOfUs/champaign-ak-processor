@@ -15,7 +15,7 @@ jobs:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install gems
-          command: bundle install --path vendor/bundle
+          command: bundle install --jobs 4 --deployment
       - save_cache:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
@@ -40,15 +40,12 @@ jobs:
           AK_SUBSCRIPTION_PAGE_EN: 'registration'
           AK_SUBSCRIPTION_PAGE_DE: 'registration_german'
           AK_SUBSCRIPTION_PAGE_FR: 'registration_french'
-          REDIS_URI: redis
-          REDIS_PORT: 6379
           AWS_REGION: us-west-2
           CONSTITUENCIES_TABLE: UkConstituencies
-
       - image: circleci/postgres:9.4-alpine-ram
         environment:
           POSTGRES_USER: champaign
-          POSTGRES_DB: champaign
+          POSTGRES_DB: champaign_test
       - image: redis
     steps:
       - checkout
@@ -127,7 +124,7 @@ workflows:
           filters:
             branches:
               only:
-                - development
+                - feature.circleci-2
 
 # OLD BELOW THIS
 
