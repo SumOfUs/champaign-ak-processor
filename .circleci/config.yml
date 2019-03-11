@@ -124,48 +124,4 @@ workflows:
           filters:
             branches:
               only:
-                - feature.circleci-2
-
-# OLD BELOW THIS
-
-machine:
-  services:
-    - docker
-
-dependencies:
-  override:
-    - docker info
-    # our circle setup uses compose - install it
-    - sudo pip install --upgrade docker-compose==1.2.0
-    # install AWS CLI
-    - sudo pip install awscli
-    # build the image
-    - docker build -t soutech/champaign-ak-processor:$CIRCLE_SHA1 .
-
-test:
-  override:
-    # tests the built image
-    - cat docker-compose-template.yml | envsubst > docker-compose.yml
-    - cat Dockerrun.aws.json.template | envsubst > Dockerrun.aws.json
-    - annotate-output docker-compose -f docker-compose.yml run processor
-
-database:
-  override:
-    - echo "Look in run-tests for database setup for testing environment."
-
-deployment:
-  production:
-  # push to Docker Hub and deploy new version on AWS
-    branch: master
-    commands:
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push soutech/champaign-ak-processor
-      - ./deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-production' 'logs3.papertrailapp.com:44107'
-  staging:
-    branch: development
-    commands:
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push soutech/champaign-ak-processor
-      - ./deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-staging' 'logs3.papertrailapp.com:34848'
-
-
+                - development
