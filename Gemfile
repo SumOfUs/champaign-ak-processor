@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.4.1'
 gem 'rails', '4.2.10'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
@@ -11,7 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'redis'
-gem 'actionkit_connector', github: 'SumOfUs/actionkit_connector', branch: 'master'
+gem 'actionkit_connector', git: 'https://github.com/SumOfUs/actionkit_connector.git', branch: 'master'
 gem 'airbrake'
 
 gem 'puma', '~> 2.15.3'

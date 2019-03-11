@@ -35,7 +35,8 @@ describe "New Survey Response" do
       ignored:      "ignore me",
       email:        "omar@sumofus.org",
       source:       'FB',
-      akid:         '3.4234.fsdf'
+      akid:         '3.4234.fsdf',
+      fields:       {}
     }
   end
 
