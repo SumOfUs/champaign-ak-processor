@@ -1,16 +1,14 @@
-FROM ruby:2.3.0
-RUN apt-get update -qq && apt-get install -y nodejs netcat
+FROM ruby:2.4.1
+RUN apt-get update -qq && apt-get install -y nodejs
 
-RUN mkdir /myapp
+ENV APP_ROOT /champaign-ak-processor
 
-WORKDIR /tmp
-COPY Gemfile Gemfile
-COPY Gemfile.lock Gemfile.lock
-RUN bundle install --jobs 4
+RUN mkdir $APP_ROOT
+ADD . $APP_ROOT
+WORKDIR $APP_ROOT
+
+RUN bundle install --jobs 4 --deployment && bundle package
 
 EXPOSE 3000
-ADD . /myapp
-WORKDIR /myapp
-
 CMD bundle exec puma -C config/puma.rb
 

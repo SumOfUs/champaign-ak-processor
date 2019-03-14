@@ -4,7 +4,7 @@ development: &default
   database: champaign
   pool: 5
   username: <%= ENV['PG_USERNAME'] %>
-  host: <%= ENV['PG_HOST'] %>
+  host: <%= ENV.fetch('PG_HOST', 'localhost') %>
 
 test:
   <<: *default

@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/SumOfUs/actionkit_connector.git
-  revision: c49c3ebde5664969fc6d9bb9ddb1d5664e983d9a
+  remote: https://github.com/SumOfUs/actionkit_connector.git
+  revision: f78d643aaaad14c5cfd1116df35a6b5101aa5a48
   branch: master
   specs:
     actionkit_connector (0.4.4)
@@ -271,7 +271,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 2.3.0p0
+   ruby 2.4.1p111
 
 BUNDLED WITH
-   1.13.6
+   1.15.4
