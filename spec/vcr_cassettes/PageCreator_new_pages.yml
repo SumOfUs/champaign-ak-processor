@@ -160,7 +160,7 @@ http_interactions:
         is so critical. Together we are building a movement that demands that people
         are always put above profit. We stand toe to toe against the world’s most
         powerful corporations to protect our rights and our democracy.\u003c/p\u003e\n\u003cp\u003eThanks
-        so much for all that you do,\u003c/p\u003e\n\u003cp\u003eChina and the team
+        so much for all that you do,\u003c/p\u003e\n\u003cp\u003eJohn and the team
         at SumOfUs\u003c/p\u003e\n\u003cp\u003e\u003c/p\u003e\n\u003chr /\u003e\n\u003cp\u003e\u003cstrong\u003eDonation
         receipt\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e{% if order.card_num_last_four
         = \"DDEB\" %}{% if order.currency = \"GBP\" %}\u003cimg src=\"https://s3.amazonaws.com/s3.sumofus.org/images/bacslogo.jpg\"
