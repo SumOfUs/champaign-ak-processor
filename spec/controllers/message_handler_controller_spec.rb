@@ -11,7 +11,7 @@ describe MessageHandlerController do
 
     it 'delegates to queue listener class' do
       expect(queue).to receive(:perform).with(nil, hash_including({'foo' => 'bar'}))
-      post :handle, foo: :bar
+      post :handle, params: { foo: :bar }
     end
 
     it 'renders nothing' do

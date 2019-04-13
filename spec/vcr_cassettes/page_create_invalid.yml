@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/
+    uri: https://act.sumofus.org/rest/v1/petitionpage/
     body:
       encoding: UTF-8
       string: '{"page_id":"4","name":"this-page-does-not-exist-13172402-petition","title":"Foo
@@ -39,7 +39,7 @@ http_interactions:
   recorded_at: Wed, 24 Feb 2016 13:20:25 GMT
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/
+    uri: https://act.sumofus.org/rest/v1/donationpage/
     body:
       encoding: UTF-8
       string: '{"page_id":"4","name":"this-page-does-not-exist-13172402-donation","title":"Foo

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: put
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionaction/75528607/
+    uri: https://act.sumofus.org/rest/v1/petitionaction/75528607/
     body:
       encoding: UTF-8
       string: '{"page":"/rest/v1/petitionpage/16626/","name":"Pablo José Francisco

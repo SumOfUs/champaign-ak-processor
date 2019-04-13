@@ -13,7 +13,9 @@ describe "REST" do
 
     it 'cancels the subscription with a success code from the client' do
       VCR.use_cassette('subscription cancellation success') do
-        post '/message', params
+        post "/message", params: params.to_json, headers: {
+          'CONTENT_TYPE' => 'application/json'
+        }
         expect(response.status).to eq(200)
         expect(response.body).to eq('null')
       end
@@ -21,7 +23,9 @@ describe "REST" do
 
     it 'sends back 500 in case of missing parameters' do
       VCR.use_cassette('subscription cancellation failure') do
-        post '/message', bad_params
+        post "/message", params: bad_params.to_json, headers: {
+          'CONTENT_TYPE' => 'application/json'
+        }
         expect(response.status).to be 500
       end
     end

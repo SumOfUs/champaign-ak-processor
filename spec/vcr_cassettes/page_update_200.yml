@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: put
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/12853/
+    uri: https://act.sumofus.org/rest/v1/petitionpage/12853/
     body:
       encoding: UTF-8
       string: '{"title":"house of cards (Petition)","id":"12853"}'
@@ -38,7 +38,7 @@ http_interactions:
   recorded_at: Thu, 31 Mar 2016 13:12:16 GMT
 - request:
     method: put
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/12854/
+    uri: https://act.sumofus.org/rest/v1/donationpage/12854/
     body:
       encoding: UTF-8
       string: '{"title":"house of cards (Petition)","id":"12854"}'

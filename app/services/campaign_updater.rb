@@ -14,7 +14,7 @@ class CampaignUpdater
 
   def run
     ak_campaign_uri = CampaignRepository.get!(@campaign_id)
-    ak_campaign_id = ActionKitConnector::Util.extract_id_from_resource_uri(ak_campaign_uri)
+    ak_campaign_id = ::ActionKitConnector::Util.extract_id_from_resource_uri(ak_campaign_uri)
 
     response = client.update_multilingual_campaign(ak_campaign_id, sanitized_params)
     if response.success?

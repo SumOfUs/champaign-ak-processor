@@ -38,13 +38,17 @@ describe "REST" do
       it 'updates the user on ActionKit' do
         VCR.use_cassette("member_update_success") do
           expect(Rails.logger).to_not receive(:error)
-          post '/message', params
+          post "/message", params: params.to_json, headers: {
+            'CONTENT_TYPE' => 'application/json'
+          }
           expect(response.status).to eq(200)
         end
       end
       it 'returns errors if the update was unsuccessful but sets status as 200 so the message does not get reprocessed' do
         VCR.use_cassette("member_update_failure") do
-          post '/message', bad_params
+          post "/message", params: bad_params.to_json, headers: {
+            'CONTENT_TYPE' => 'application/json'
+          }
           expect(response.status).to eq(500)
         end
       end

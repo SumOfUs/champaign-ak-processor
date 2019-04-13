@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/
+    uri: https://act.sumofus.org/rest/v1/donationpage/
     body:
       encoding: UTF-8
       string: '{"page_id":"1","name":"this-page-does-not-exist-13172406-donation","title":"Foo
@@ -43,7 +43,7 @@ http_interactions:
   recorded_at: Mon, 21 Nov 2016 23:22:13 GMT
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/pagefollowup/
+    uri: https://act.sumofus.org/rest/v1/pagefollowup/
     body:
       encoding: UTF-8
       string: '{"url":"https://not.used.com","send_confirmation":true,"page":"https://act.sumofus.org/rest/v1/donationpage/16943/","email_wrapper":"https://act.sumofus.org/rest/v1/emailwrapper/25/","email_from_line":"https://act.sumofus.org/rest/v1/fromline/62/","email_subject":"Thanks
@@ -84,7 +84,7 @@ http_interactions:
   recorded_at: Mon, 21 Nov 2016 23:22:14 GMT
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/
+    uri: https://act.sumofus.org/rest/v1/petitionpage/
     body:
       encoding: UTF-8
       string: '{"page_id":"1","name":"this-page-does-not-exist-13172406-petition","title":"Foo

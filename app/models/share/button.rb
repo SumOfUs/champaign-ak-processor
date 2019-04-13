@@ -1,4 +1,4 @@
-class Share::Button < ActiveRecord::Base
+class Share::Button < ApplicationRecord
   belongs_to :page
   scope :with_page, -> { includes(:page) }
   scope :where_page_is_active, -> { where(pages: {status: 'published'}) }

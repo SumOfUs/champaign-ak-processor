@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/action/
+    uri: https://act.sumofus.org/rest/v1/action/
     body:
       encoding: UTF-8
       string: '{"page":"rod-test-survey-4-petition","name":"Pablo José Francisco de
@@ -53,7 +53,7 @@ http_interactions:
   recorded_at: Fri, 21 Oct 2016 22:35:09 GMT
 - request:
     method: put
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionaction/75528607/
+    uri: https://act.sumofus.org/rest/v1/petitionaction/75528607/
     body:
       encoding: UTF-8
       string: '{"page":"/rest/v1/petitionpage/16626/","name":"Pablo José Francisco

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/recurringpaymentpush/
+    uri: https://act.sumofus.org/rest/v1/recurringpaymentpush/
     body:
       encoding: UTF-8
       string: '{"recurring_id":"d53gs5"}'

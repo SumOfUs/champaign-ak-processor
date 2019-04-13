@@ -6,7 +6,7 @@ class PageCreator
   end
 
   def initialize(params)
-    @params = params
+    @params = params.to_h
     @page_id = params.fetch(:page_id)
   end
 

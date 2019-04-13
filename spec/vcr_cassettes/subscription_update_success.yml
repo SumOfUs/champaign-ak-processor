@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/profileupdatepush/
+    uri: https://act.sumofus.org/rest/v1/profileupdatepush/
     body:
       encoding: UTF-8
       string: '{"recurring_id":"g85dkg","amount":"10"}'
@@ -42,7 +42,7 @@ http_interactions:
   recorded_at: Fri, 03 Mar 2017 15:42:13 GMT
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/profileupdatepush/
+    uri: https://act.sumofus.org/rest/v1/profileupdatepush/
     body:
       encoding: UTF-8
       string: '{"recurring_id":"g85dkg","amount":"10"}'
@@ -82,7 +82,7 @@ http_interactions:
   recorded_at: Fri, 03 Mar 2017 15:42:14 GMT
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/profileupdatepush/
+    uri: https://act.sumofus.org/rest/v1/profileupdatepush/
     body:
       encoding: UTF-8
       string: '{"recurring_id":"g85dkg","amount":"10"}'

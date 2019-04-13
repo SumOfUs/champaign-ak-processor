@@ -26,7 +26,7 @@ describe "REST" do
 
         it 'creates a new member' do
           VCR.use_cassette("home_page_subscription_success") do
-            post '/message', params
+            post '/message', params: params
             expect(response.status).to eq(200)
             expect(body['subscribed_user']).to eq(true)
             expect(body['created_user']).to eq(true)
@@ -41,7 +41,7 @@ describe "REST" do
         end
 
         it 'raises an error if the page is not set' do
-          post '/message', params
+          post '/message', params: params
           expect(response.status).to eq 500
           expect(response.body).to include("Your ActionKit page for subscriptions from the home page has not been set!")
         end

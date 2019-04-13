@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/multilingualcampaign/
+    uri: https://act.sumofus.org/rest/v1/multilingualcampaign/
     body:
       encoding: UTF-8
       string: '{"name":"Test Campaign 4"}'

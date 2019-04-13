@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: put
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage//
+    uri: https://act.sumofus.org/rest/v1/petitionpage//
     body:
       encoding: UTF-8
       string: '{"tags":["/rest/v1/tag/5678/"],"id":null}'
@@ -36,7 +36,7 @@ http_interactions:
   recorded_at: Fri, 26 Feb 2016 11:31:08 GMT
 - request:
     method: put
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage//
+    uri: https://act.sumofus.org/rest/v1/donationpage//
     body:
       encoding: UTF-8
       string: '{"tags":["/rest/v1/tag/5678/"],"id":null}'

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationpage/
+    uri: https://act.sumofus.org/rest/v1/donationpage/
     body:
       encoding: UTF-8
       string: '{"page_id":12345643,"name":"super-random-horsey-pony-donation","title":"Vote
@@ -38,7 +38,7 @@ http_interactions:
   recorded_at: Wed, 20 Feb 2019 12:46:22 GMT
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/donationform/
+    uri: https://act.sumofus.org/rest/v1/donationform/
     body:
       encoding: UTF-8
       string: '{"page":"https://act.sumofus.org/rest/v1/donationpage/23604/","client_hosted":true,"client_url":"https://actions.sumofus.org/a/super-random-horsey-pony","ask_text":"Dummy
@@ -74,7 +74,7 @@ http_interactions:
   recorded_at: Wed, 20 Feb 2019 12:47:52 GMT
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionpage/
+    uri: https://act.sumofus.org/rest/v1/petitionpage/
     body:
       encoding: UTF-8
       string: '{"page_id":12345643,"name":"super-random-horsey-pony-petition","title":"Vote
@@ -110,7 +110,7 @@ http_interactions:
   recorded_at: Wed, 20 Feb 2019 13:05:17 GMT
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionform/
+    uri: https://act.sumofus.org/rest/v1/petitionform/
     body:
       encoding: UTF-8
       string: '{"page":"https://act.sumofus.org/rest/v1/petitionpage/23605/","client_hosted":true,"client_url":"https://actions.sumofus.org/a/super-random-horsey-pony","ask_text":"Dummy
@@ -146,7 +146,7 @@ http_interactions:
   recorded_at: Wed, 20 Feb 2019 13:09:46 GMT
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/pagefollowup/
+    uri: https://act.sumofus.org/rest/v1/pagefollowup/
     body:
       encoding: UTF-8
       string: '{"url":"https://not.used.com","send_confirmation":true,"page":"https://act.sumofus.org/rest/v1/donationpage/23604/","email_wrapper":"https://act.sumofus.org/rest/v1/emailwrapper/25/","email_from_line":"https://act.sumofus.org/rest/v1/fromline/62/","email_subject":"Thanks

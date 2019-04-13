@@ -3,10 +3,11 @@ require 'rails_helper'
 
 describe Share::Button do
   describe '.ids_of_active_buttons' do
-    subject {described_class.ids_of_active_buttons }
+    subject { described_class.ids_of_active_buttons }
 
-    let!(:active_page)     { Page.create(title: 'Foo', slug: 'foo', status: 'published') }
-    let!(:inactive_page)   { Page.create(title: 'Foo', slug: 'foo', status: 'pending') }
+    let!(:language) { Language.create(code: 'en', name: 'English') }
+    let!(:active_page)     { Page.create(title: 'Foo', slug: 'foo', status: 'published', language: language) }
+    let!(:inactive_page)   { Page.create(title: 'Foo', slug: 'foo', status: 'pending', language: language) }
     let!(:active_button)   { Share::Button.create(page: active_page) }
     let!(:inactive_button) { Share::Button.create(page: inactive_page) }
 

@@ -1,3 +1,3 @@
-class Page < ActiveRecord::Base
+class Page < ApplicationRecord
   belongs_to :language
 end

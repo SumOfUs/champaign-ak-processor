@@ -6,7 +6,7 @@ class SurveyResponseProcessor
   end
 
   def initialize(params)
-    @params = params
+    @params = params.to_h
   end
 
   def run

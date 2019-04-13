@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/action/
+    uri: https://act.sumofus.org/rest/v1/action/
     body:
       encoding: UTF-8
       string: '{"email":"test@sou.com","page":"petition-test-rodri-petition","referring_akid":"35578.11727499.ygNy8N","mailing_id":null}'
@@ -48,7 +48,7 @@ http_interactions:
   recorded_at: Thu, 21 Dec 2017 00:16:01 GMT
 - request:
     method: put
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/petitionaction/95878314/
+    uri: https://act.sumofus.org/rest/v1/petitionaction/95878314/
     body:
       encoding: UTF-8
       string: '{"mailing":null}'

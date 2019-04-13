@@ -1,5 +1,4 @@
-FROM ruby:2.4.1
-RUN apt-get update -qq && apt-get install -y nodejs
+FROM soutech/ruby:2.6-alpine-node
 
 ENV APP_ROOT /champaign-ak-processor
 

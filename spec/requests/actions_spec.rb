@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe "REST" do
+describe 'REST' do
   before do
     allow(Broadcast).to receive(:emit)
     allow(ActionsCache).to receive(:append)
@@ -32,14 +34,16 @@ describe "REST" do
 
       before do
         VCR.use_cassette('recurring_payment_push_200') do
-          post '/message', params
+            post '/message', params: params.to_json, headers: {
+              'CONTENT_TYPE' => 'application/json'
+            }
         end
       end
 
       # Confirm transaction has been created here:
       #   https://act.sumofus.org/rest/v1/donationaction/67503908/
       #
-      it "is successful" do
+      it 'is successful' do
         expect(response.status).to eq(200)
       end
     end
@@ -47,7 +51,6 @@ describe "REST" do
 
   describe 'POST /donationpush' do
     describe 'ActionKit' do
-
       let(:data) do
         {
           donationpage: {
@@ -56,12 +59,12 @@ describe "REST" do
           },
 
           order: {
-            amount:         "34.00",
-            card_code:      "007",
-            card_num:       "4111111111111111",
-            exp_date_month: "12",
-            exp_date_year:  "2015",
-            currency:       "GBP"
+            amount: '34.00',
+            card_code: '007',
+            card_num: '4111111111111111',
+            exp_date_month: '12',
+            exp_date_year: '2015',
+            currency: 'GBP'
           },
 
           user: {
@@ -77,40 +80,41 @@ describe "REST" do
 
       before do
         VCR.use_cassette('donation_push_existing_user') do
-          post '/message', params
+          headers = { 'CONTENT_TYPE' => 'application/json' }
+          post '/message', params: params.to_json, headers: headers
         end
       end
 
-      it "registers as complete" do
-        expect(subject.fetch(:status)).to eq("complete")
+      it 'registers as complete' do
+        expect(subject.fetch(:status)).to eq('complete')
       end
 
-      it "registers type of action" do
-        expect(subject.fetch(:type)).to eq("Donation")
+      it 'registers type of action' do
+        expect(subject.fetch(:type)).to eq('Donation')
       end
 
       it 'publishes action' do
         expect(Broadcast).to have_received(:emit).with(
-          hash_including( foo: 'bar', type: 'donation', amount: '34.00', currency: 'GBP' )
+          hash_including(foo: 'bar', type: 'donation', amount: '34.00', currency: 'GBP')
         )
       end
 
-      describe "recorded order" do
+      describe 'recorded order' do
         subject { body.fetch(:order) }
 
-        it "has correct donation total" do
+        it 'has correct donation total' do
           expect(subject.fetch(:total)).to eq('34.00')
         end
 
-        it "has currency" do
+        it 'has currency' do
           expect(subject.fetch(:currency)).to eq('GBP')
         end
 
-        it "has total as USD" do
-          expect( Float(subject.fetch(:total_converted)) ).to be > 34.00
+        it 'has total as USD' do
+          expect(Float(subject.fetch(:total_converted))).to be > 34.00
         end
 
-        it "has credit card for default payment_method" do
+        it 'has credit card for default payment_method' do
           expect(subject.fetch(:payment_method)).to eq('cc')
         end
       end
@@ -119,11 +123,13 @@ describe "REST" do
         before do
           data[:donationpage][:payment_account] = 'PayPal EUR'
           VCR.use_cassette('donation_push_paypal') do
-            post '/message', params
+            post '/message', params: params.to_json, headers: {
+              'CONTENT_TYPE' => 'application/json'
+            }
           end
         end
 
-        it "has PayPal account type" do
+        it 'has PayPal account type' do
           expect(subject[:order].fetch(:account)).to eq('PayPal EUR')
         end
       end
@@ -132,23 +138,22 @@ describe "REST" do
 
   describe 'POST /action' do
     describe 'ActionKit' do
-
       let(:data) do
         {
-          page:         "foo-bar",
-          name:         "Pablo José Francisco de María",
-          postal:       "W1",
-          address1:     "The Lodge",
-          address2:     "High Street",
-          city:         "London",
-          country:      "United Kingdom",
-          action_age:   "101",
-          action_foo:   "Foo",
-          action_bar:   "Bar",
-          ignored:      "ignore me",
-          email:        "omar@sumofus.org",
-          source:       'FB',
-          akid:         '3.4234.fsdf'
+          page: 'foo-bar',
+          name: 'Pablo José Francisco de María',
+          postal: 'W1',
+          address1: 'The Lodge',
+          address2: 'High Street',
+          city: 'London',
+          country: 'United Kingdom',
+          action_age: '101',
+          action_foo: 'Foo',
+          action_bar: 'Bar',
+          ignored: 'ignore me',
+          email: 'omar@sumofus.org',
+          source: 'FB',
+          akid: '3.4234.fsdf'
         }
       end
 
@@ -158,14 +163,16 @@ describe "REST" do
 
       context 'for valid page' do
         before do
-          VCR.use_cassette("action_existing_page") do
-            post '/message', params
+          VCR.use_cassette('action_existing_page') do
+            post '/message', params: params.to_json, headers: {
+              'CONTENT_TYPE' => 'application/json'
+            }
           end
         end
 
         it 'publishes action' do
           expect(Broadcast).to have_received(:emit).with(
-            hash_including({ foo: 'bar', type: 'petition' })
+            hash_including(foo: 'bar', type: 'petition')
           )
         end
 
@@ -183,7 +190,7 @@ describe "REST" do
           end
 
           it "records 'action_*' fields" do
-            expect(fields).to eq({age: '101', foo: 'Foo', bar: 'Bar'})
+            expect(fields).to eq(age: '101', foo: 'Foo', bar: 'Bar')
           end
         end
 
@@ -198,9 +205,11 @@ describe "REST" do
 
       context 'for missing page' do
         before do
-          VCR.use_cassette("action_missing_page") do
+          VCR.use_cassette('action_missing_page') do
             data[:page] = 'i-do-not-exist-anywhere'
-            post '/message', params
+            post '/message', params: params.to_json, headers: {
+              'CONTENT_TYPE' => 'application/json'
+            }
           end
         end
 
@@ -212,16 +221,16 @@ describe "REST" do
       describe 'for invalid US zip codes' do
         let(:data) do
           {
-              page:         "foo-bar",
-              name:         "Pablo José Francisco de María",
-              postal:       "a232ba",
-              address1:     "Cookie Factory",
-              address2:     "Lombard Street",
-              city:         "San Francisco",
-              country:      "United States",
-              email:        "test@example.com",
-              source:       'FB',
-              akid:         '3.4234.fsdf'
+            page: 'foo-bar',
+            name: 'Pablo José Francisco de María',
+            postal: 'a232ba',
+            address1: 'Cookie Factory',
+            address2: 'Lombard Street',
+            city: 'San Francisco',
+            country: 'United States',
+            email: 'test@example.com',
+            source: 'FB',
+            akid: '3.4234.fsdf'
           }
         end
 
@@ -229,11 +238,13 @@ describe "REST" do
 
         context 'configuration is set to bypass zip validation with a default US zip code' do
           it 'bypasses zip code invalidation by using a default postal if a US action is posted with an absent zip code' do
-            VCR.use_cassette("us_action_absent_zip") do
+            VCR.use_cassette('us_action_absent_zip') do
               allow(ENV).to receive(:[]).and_call_original
-              allow(ENV).to receive(:[]).with("BYPASS_ZIP_VALIDATION"){ 'true' }
-              allow(ENV).to receive(:[]).with("DEFAULT_US_ZIP"){ '20001' }
-              post '/message', params
+              allow(ENV).to receive(:[]).with('BYPASS_ZIP_VALIDATION') { 'true' }
+              allow(ENV).to receive(:[]).with('DEFAULT_US_ZIP') { '20001' }
+              post '/message', params: params.to_json, headers: {
+                'CONTENT_TYPE' => 'application/json'
+              }
               expect(response.status).to eq 200
             end
           end
@@ -241,14 +252,13 @@ describe "REST" do
 
         context 'configuration is not set to bypass zip validation' do
           it 'responds with validation error' do
-            VCR.use_cassette("us_action_absent_zip_failure") do
-              post '/message', params
+            VCR.use_cassette('us_action_absent_zip_failure') do
+              post '/message', params: params
               expect(response.status).to eq 500
               expect(response.body).to match /ZIP Code is invalid./
             end
           end
         end
-
       end
     end
   end

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/action/
+    uri: https://act.sumofus.org/rest/v1/action/
     body:
       encoding: UTF-8
       string: '{"page":"foo-bar","name":"Pablo José Francisco de María","postal":"W1","address1":"The

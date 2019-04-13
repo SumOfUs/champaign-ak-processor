@@ -43,7 +43,9 @@ describe "New Survey Response" do
   context "Given an action doesn't exist" do
     before do
       VCR.use_cassette("new_survey_response-create_action") do
-        post '/message', params
+        post '/message', params: params.to_json, headers: {
+          'CONTENT_TYPE' => 'application/json'
+        }
       end
     end
 
@@ -69,7 +71,9 @@ describe "New Survey Response" do
     before do
       # Create action
       VCR.use_cassette("new_survey_response-create_action") do
-        post '/message', params
+        post '/message', params: params.to_json, headers: {
+          'CONTENT_TYPE' => 'application/json'
+        }
       end
       expect(response.success?).to be_truthy
 
@@ -97,13 +101,17 @@ describe "New Survey Response" do
         and_call_original
 
       VCR.use_cassette("new_survey_response-update_action") do
-        post '/message', update_params
+        post '/message', params: update_params.to_json, headers: {
+          'CONTENT_TYPE' => 'application/json'
+        }
       end
     end
 
     it "responds successfully" do
       VCR.use_cassette("new_survey_response-update_action") do
-        post '/message', update_params
+        post '/message', params: update_params.to_json, headers: {
+          'CONTENT_TYPE' => 'application/json'
+        }
       end
 
       expect(response).to be_success
@@ -114,7 +122,9 @@ describe "New Survey Response" do
     before do
       # Create action
       VCR.use_cassette("new_survey_response-create_action") do
-        post '/message', params
+        post '/message', params: params.to_json, headers: {
+          'CONTENT_TYPE' => 'application/json'
+        }
       end
       expect(response.success?).to be_truthy
 
@@ -128,7 +138,9 @@ describe "New Survey Response" do
         and_call_original
 
       VCR.use_cassette("new_survey_response-delete_and_create_action") do
-        post '/message', params
+        post '/message', params: params.to_json, headers: {
+          'CONTENT_TYPE' => 'application/json'
+        }
       end
     end
 
@@ -137,13 +149,17 @@ describe "New Survey Response" do
         and_call_original
 
       VCR.use_cassette("new_survey_response-delete_and_create_action") do
-        post '/message', params
+        post '/message', params: params.to_json, headers: {
+          'CONTENT_TYPE' => 'application/json'
+        }
       end
     end
 
     it "updates the ActionRepository" do
       VCR.use_cassette("new_survey_response-delete_and_create_action") do
-        post '/message', params
+        post '/message', params: params.to_json, headers: {
+          'CONTENT_TYPE' => 'application/json'
+        }
       end
 
       updated_action = ActionRepository.get(action.id)

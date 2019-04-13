@@ -5,5 +5,11 @@ class MessageHandlerController < ApplicationController
     response = QueueListener.new.perform(nil, params)
     render json: response, status: 200
   end
+
+  # private
+
+  # def params
+  #   params.permit(%i[type params meta])
+  # end
 end
 

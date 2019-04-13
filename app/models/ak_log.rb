@@ -1,2 +1,2 @@
-class AkLog < ActiveRecord::Base
+class AkLog < ApplicationRecord
 end

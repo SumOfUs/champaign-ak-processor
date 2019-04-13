@@ -9,7 +9,7 @@ describe "REST" do
 
     it 'updates the subscription with a success code from the client' do
       VCR.use_cassette('subscription update success') do
-        post '/message', params
+        post '/message', params: params
         expect(response.status).to eq(200)
         expect(response.body).to eq('null')
       end

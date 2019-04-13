@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: put
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/user/8244194/
+    uri: https://act.sumofus.org/rest/v1/user/8244194/
     body:
       encoding: UTF-8
       string: '{"akid":"8244194","email":"weriopweirpwgklwrkpowiro@example.com","first_name":"Guybrush","last_name":"Threepwood","country":"United

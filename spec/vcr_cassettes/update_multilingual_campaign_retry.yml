@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/multilingualcampaign/
+    uri: https://act.sumofus.org/rest/v1/multilingualcampaign/
     body:
       encoding: UTF-8
       string: '{"name":"Test Campaign 1236"}'
@@ -40,7 +40,7 @@ http_interactions:
   recorded_at: Thu, 04 Aug 2016 20:49:41 GMT
 - request:
     method: put
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/multilingualcampaign/120/
+    uri: https://act.sumofus.org/rest/v1/multilingualcampaign/120/
     body:
       encoding: UTF-8
       string: '{"name":"Test Campaign 1236"}'
@@ -79,7 +79,7 @@ http_interactions:
   recorded_at: Thu, 04 Aug 2016 20:49:43 GMT
 - request:
     method: put
-    uri: https://<AK_USERNAME>:<AK_PASSWORD>@act.sumofus.org/rest/v1/multilingualcampaign/120/
+    uri: https://act.sumofus.org/rest/v1/multilingualcampaign/120/
     body:
       encoding: UTF-8
       string: '{"name":"Test Campaign 1236-123"}'

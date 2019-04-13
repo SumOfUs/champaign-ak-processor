@@ -27,7 +27,7 @@ class ActionCreator
       raise APIError.new("Error while creating AK action", response)
     end
 
-    ak_id = ActionKitConnector::Util.extract_id_from_resource_uri(response['resource_uri'])
+    ak_id = ::ActionKitConnector::Util.extract_id_from_resource_uri(response['resource_uri'])
 
     # Nullifying mailing_id if referring_akid is pressent
     if params[:params][:referring_akid].present?
