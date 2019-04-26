@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ActionCreator
   include Ak::Client
   class Error < StandardError; end
@@ -23,17 +25,17 @@ class ActionCreator
     CountryService.extend_with_local_data(params)
 
     response = client.create_action(params[:params])
-    if !response.success?
-      raise APIError.new("Error while creating AK action", response)
+    unless response.success?
+      raise APIError.new('Error while creating AK action', response)
     end
 
-    ak_id = ::ActionKitConnector::Util.extract_id_from_resource_uri(response['resource_uri'])
+    ak_id = response['action_id']
 
     # Nullifying mailing_id if referring_akid is pressent
     if params[:params][:referring_akid].present?
       update_response = client.update_petition_action(ak_id, mailing: nil)
-      if !update_response.success?
-        raise APIError.new("Error while updating AK action", response)
+      unless update_response.success?
+        raise APIError.new('Error while updating AK action', response)
       end
     end
 

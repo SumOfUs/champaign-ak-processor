@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ActionUpdater
   class Error < StandardError; end
 
@@ -12,9 +14,10 @@ class ActionUpdater
   def run
     ak_id = ActionRepository.get!(@params[:meta][:action_id])[:ak_id]
     response = Ak::Client.client.update_petition_action(ak_id, update_params)
-    if !response.success?
-      raise Error.new("Error while updating AK action. HTTP Response code: #{response.code}, body: #{response.body}")
+    unless response.success?
+      raise Error, "Error while updating AK action. HTTP Response code: #{response.code}, body: #{response.body}"
     end
+
     response
   end
 
@@ -36,16 +39,16 @@ class ActionUpdater
   # * On update: To pass a custom field it must be passed as a json object on the `fields` key.
   # example: { fields: { my_field: 'hello world' }
   def sanitize_action_fields(params)
-    params = params.clone.with_indifferent_access
+    params = params.to_h.with_indifferent_access
     action_params = {}
     params.each do |key, val|
-      if key =~ /\Aaction_.*/
-        new_key = key.gsub(/\Aaction_/, '')
+      if /^action_.*/.match?(key)
+        new_key = key.gsub(/^action_/, '')
         action_params[new_key] = val
       end
     end
-    params.delete_if do |key, val|
-      key =~ /\Aaction_.*/
+    params.delete_if do |key, _val|
+      key =~ /^action_.*/
     end
 
     params[:fields] = action_params if action_params.any?
@@ -56,12 +59,12 @@ class ActionUpdater
   def flatten_nested_params(params)
     flat_params = params.clone
     params.each do |key, val|
-      if val.is_a?(Hash)
-        val.each do |inner_key, inner_val|
-          flat_params["#{key}_#{inner_key}"] = inner_val.to_s
-        end
-        flat_params.delete(key)
+      next unless val.is_a?(Hash)
+
+      val.each do |inner_key, inner_val|
+        flat_params["#{key}_#{inner_key}"] = inner_val.to_s
       end
+      flat_params.delete(key)
     end
     flat_params
   end
