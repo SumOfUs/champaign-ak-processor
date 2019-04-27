@@ -50,7 +50,7 @@ describe "New Survey Response" do
     end
 
     it 'responds successfully' do
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'stores the new action data in the ActionsRepository' do
@@ -75,7 +75,7 @@ describe "New Survey Response" do
           'CONTENT_TYPE' => 'application/json'
         }
       end
-      expect(response.success?).to be_truthy
+      expect(response.successful?).to be_truthy
 
       @ak_action = ActionRepository.get(action.id)
     end
@@ -114,7 +114,7 @@ describe "New Survey Response" do
         }
       end
 
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -126,7 +126,7 @@ describe "New Survey Response" do
           'CONTENT_TYPE' => 'application/json'
         }
       end
-      expect(response.success?).to be_truthy
+      expect(response.successful?).to be_truthy
 
       @ak_action = ActionRepository.get(action.id)
       params[:params][:email] = 'processor1@test.com'
