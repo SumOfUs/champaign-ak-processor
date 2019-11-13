@@ -24,7 +24,21 @@ class ActionCreator
 
     CountryService.extend_with_local_data(params)
 
+    # This is where we write the action to ActionKit
+
     response = client.create_action(params[:params])
+
+    # response body looks like this:
+    #
+    # { "akid": ".15434964.kQEpgE",
+    #   "created_at": "2019-11-13T16:29:16.247009",
+    #   "created_user": true, "fields": {}, "id": 142270177, "ip_address": "51.7.78.188",...}
+    #
+    #  Relevent property here is `created_user`, so I'm thinking when it's true
+    #  we take out the member ID from the `akid` and then update the relevent member
+    #  on champaign, by executing the update action (currently missing) in `Api::MembersController`
+
+
     unless response.success?
       raise APIError.new('Error while creating AK action', response)
     end
