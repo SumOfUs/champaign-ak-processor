@@ -27,7 +27,16 @@ class ActionCreator
     # This is where we write the action to ActionKit
 
     response = client.create_action(params[:params])
-
+    unless response.success?
+      raise APIError.new('Error while creating AK action', response)
+    end
+    if response.body.created_user
+      # verify that this gets the akid correctly
+      params = { akid: extract_user_id(response.body.akid) }
+      champaign_id = params[:params][:id]
+      res = HTTParty.patch("#{ENV['CHAMPAIGN_HOST']}/api/member/#{champaign_id}", body: params)
+      raise Error.new(res.errors) unless reponse.errors.blank?
+    end
     # response body looks like this:
     #
     # { "akid": ".15434964.kQEpgE",
@@ -39,9 +48,6 @@ class ActionCreator
     #  on champaign, by executing the update action (currently missing) in `Api::MembersController`
 
 
-    unless response.success?
-      raise APIError.new('Error while creating AK action', response)
-    end
 
     ak_id = ::ActionKitConnector::Util.extract_id_from_resource_uri(response['resource_uri'])
 
