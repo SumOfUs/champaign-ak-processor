@@ -25,29 +25,21 @@ class ActionCreator
     CountryService.extend_with_local_data(params)
 
     # This is where we write the action to ActionKit
-
     response = client.create_action(params[:params])
     unless response.success?
       raise APIError.new('Error while creating AK action', response)
     end
-    if response.body.created_user
-      # verify that this gets the akid correctly
-      params = { akid: extract_user_id(response.body.akid) }
-      champaign_id = params[:params][:id]
-      res = HTTParty.patch("#{ENV['CHAMPAIGN_HOST']}/api/member/#{champaign_id}", body: params)
-      raise Error.new(res.errors) unless reponse.errors.blank?
+    response_hash = JSON.parse(response.body).with_indifferent_access
+
+    # If this is the first action of the user, update their AKID on the member record on Champaign
+    if response_hash[:created_user] && params[:meta][:member_id].present?
+      champaign_id = params[:meta][:member_id]
+      res = HTTParty.patch("#{ENV['CHAMPAIGN_HOST']}/api/members/#{champaign_id}", {
+        body: { akid: extract_user_id(response_hash[:akid]) },
+        headers: {"X-Api-Key" => ENV['CHAMPAIGN_API_KEY']}
+      })
+      raise Error.new(res[:errors]) unless res[:errors].blank?
     end
-    # response body looks like this:
-    #
-    # { "akid": ".15434964.kQEpgE",
-    #   "created_at": "2019-11-13T16:29:16.247009",
-    #   "created_user": true, "fields": {}, "id": 142270177, "ip_address": "51.7.78.188",...}
-    #
-    #  Relevent property here is `created_user`, so I'm thinking when it's true
-    #  we take out the member ID from the `akid` and then update the relevent member
-    #  on champaign, by executing the update action (currently missing) in `Api::MembersController`
-
-
 
     ak_id = ::ActionKitConnector::Util.extract_id_from_resource_uri(response['resource_uri'])
 

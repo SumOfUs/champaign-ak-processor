@@ -37,12 +37,12 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"akid": "35578.14220077.4687fQ", "created_at": "2017-12-21T00:16:01.756340",
-        "created_user": false, "fields": {}, "id": 95878314, "ip_address": "190.194.200.217",
+        "created_user": true, "fields": {}, "id": 95878314, "ip_address": "190.194.200.217",
         "is_forwarded": true, "link": null, "mailing": "/rest/v1/mailing/35578/",
         "opq_id": "", "page": "/rest/v1/petitionpage/19891/", "redirect_url": "/cms/thanks/petition-test-rodri-petition?action_id=95878314&akid=35578.14220077.4687fQ&ar=1&rd=1",
         "referring_mailing": "/rest/v1/mailing/35578/", "referring_user": "/rest/v1/user/11727499/",
         "resource_uri": "/rest/v1/petitionaction/95878314/", "source": "restful_api",
-        "status": "complete", "subscribed_user": false, "taf_emails_sent": null, "type":
+        "status": "complete", "subscribed_user": true, "taf_emails_sent": null, "type":
         "Petition", "updated_at": "2017-12-21T00:16:01.781799", "user": "/rest/v1/user/14220077/"}'
     http_version: 
   recorded_at: Thu, 21 Dec 2017 00:16:01 GMT
@@ -81,4 +81,49 @@ http_interactions:
       string: ''
     http_version: 
   recorded_at: Thu, 21 Dec 2017 00:16:03 GMT
-recorded_with: VCR 3.0.1
+- request:
+    method: patch
+    uri: https://action-staging.sumofus.org/api/members/1
+    body:
+      encoding: UTF-8
+      string: akid=14220077
+    headers:
+      X-Api-Key:
+      - "<CHAMPAIGN_API_KEY"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"b0b8d297061bd7a9ac817aebd8c9ed6e"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - fe95d306-5e25-4da8-be42-9764a5dfc5ff
+      X-Runtime:
+      - '0.463717'
+      Vary:
+      - Origin
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"member":{"id":1,"actionkit_user_id":"14220077","email":"tuuli@sumofus.org","consented":null,"country":"AT","first_name":"tuuli","last_name":"","city":null,"postal":"","title":null,"address1":null,"address2":null,"created_at":"2019-10-22T09:34:22.110Z","updated_at":"2019-11-19T08:40:41.114Z","donor_status":"recurring_donor","more":{"name":"tuuli","action_mobile":"desktop","action_referer":"http://localhost:3000/a/eoy-layout-page","action_phone_number":"","action_express_donation":1},"consented_updated_at":null,"opt_out_eoy_donation":0}}'
+    http_version: 
+  recorded_at: Tue, 19 Nov 2019 09:15:23 GMT
+recorded_with: VCR 4.0.0

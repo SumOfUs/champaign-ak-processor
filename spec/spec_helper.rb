@@ -9,6 +9,7 @@ VCR.configure do |config|
   config.filter_sensitive_data("<AK_USERNAME>") { ENV['AK_USERNAME'] }
   config.filter_sensitive_data("<AK_PASSWORD>") { ENV['AK_PASSWORD'] }
   config.filter_sensitive_data("<SP_API_KEY>") {ENV['SHARE_PROGRESS_API_KEY']}
+  config.filter_sensitive_data("<CHAMPAIGN_API_KEY") { ENV['CHAMPAIGN_API_KEY'] }
 
   # Removes all private data (Basic Auth, Set-Cookie headers...)
   config.before_record do |i|
