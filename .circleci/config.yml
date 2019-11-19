@@ -64,8 +64,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/circleci-champaign-ak-processor
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - run:
           name: Docker build
           command: .circleci/build.sh
