@@ -24,9 +24,21 @@ class ActionCreator
 
     CountryService.extend_with_local_data(params)
 
+    # This is where we write the action to ActionKit
     response = client.create_action(params[:params])
     unless response.success?
       raise APIError.new('Error while creating AK action', response)
+    end
+    response_hash = JSON.parse(response.body).with_indifferent_access
+
+    # If this is the first action of the user, update their AKID on the member record on Champaign
+    if response_hash[:created_user] && params[:meta][:member_id].present?
+      champaign_id = params[:meta][:member_id]
+      res = HTTParty.patch("#{ENV['CHAMPAIGN_HOST']}/api/members/#{champaign_id}", {
+        body: { akid: extract_user_id(response_hash[:akid]) },
+        headers: {"X-Api-Key" => ENV['CHAMPAIGN_API_KEY']}
+      })
+      raise Error.new(res[:errors]) unless res[:errors].blank?
     end
 
     ak_id = ::ActionKitConnector::Util.extract_id_from_resource_uri(response['resource_uri'])

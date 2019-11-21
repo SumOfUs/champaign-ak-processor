@@ -15,7 +15,9 @@ describe ActionCreator do
           :page => 'petition-test-rodri-petition',
           :referring_akid => '35578.11727499.ygNy8N'
         },
-        meta: {}
+        meta: {
+          :member_id => '1'
+        }
       }
     end
 
@@ -33,6 +35,15 @@ describe ActionCreator do
         .and_call_original
       response = ActionCreator.run(params)
       expect(response).to be_success
+    end
+
+    it "updates the AKID on the member on Champaign if it is a new member" do
+      expect(HTTParty).to receive(:patch).with(
+          "https://action-staging.sumofus.org/api/members/1",
+          {:body=>{:akid=>"14220077"},
+           :headers=>{"X-Api-Key"=>"supersecretapikey"}}
+      ).and_return({ member: { email: params[:email]} })
+      ActionCreator.run(params)
     end
   end
 end
