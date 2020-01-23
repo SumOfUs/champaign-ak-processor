@@ -27,6 +27,14 @@ class DonationCreator
     end
 
     order = params[:params][:order]
+
+    begin
+      updator = GocardlessTransactionUpdator.new(order[:trans_id], response.parsed_response)
+      updator.update
+    rescue => e
+      Rails.logger.error "Error occurred updating gocardless transaction #{e.try(:message)}"
+    end
+
     Broadcast.emit(
       params[:meta].merge(type: 'donation', amount: order[:amount], currency: order[:currency] )
     )
