@@ -46,6 +46,9 @@ class QueueListener
       when 'update_call', 'call:update'
         ActionUpdater.run(params)
 
+      when 'payment-status-update'
+        PaymentStatusUpdator.run(params)
+
       else
         raise ArgumentError, "Unsupported message type: #{params[:type]}"
     end
