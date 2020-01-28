@@ -13,8 +13,8 @@ http_interactions:
       - UTF-8
   response:
     status:
-      code: 401
-      message: UNAUTHORIZED
+      code: 204
+      message: NOCONTENT
     headers:
       Date:
       - Mon, 27 Jan 2020 12:59:22 GMT
@@ -33,6 +33,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Mon, 27 Jan 2020 12:59:22 GMT
 recorded_with: VCR 4.0.0
