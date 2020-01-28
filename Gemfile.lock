@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/SumOfUs/actionkit_connector.git
-  revision: c0b350c693d5a1d6f09d802faa634b84f755e569
-  branch: development
+  revision: c3167b113e7365369d5ac0e40f6c00a2511e93c7
+  branch: master
   specs:
     actionkit_connector (0.4.4)
       httparty (~> 0.13)
