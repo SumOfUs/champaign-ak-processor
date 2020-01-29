@@ -8,7 +8,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootsnap'
 
 gem 'redis'
-gem 'actionkit_connector', git: 'https://github.com/SumOfUs/actionkit_connector.git', branch: 'master'
+gem 'actionkit_connector', git: 'https://github.com/SumOfUs/actionkit_connector.git', branch: 'development'
 gem 'airbrake'
 
 gem 'puma', '~> 3.12.0'
