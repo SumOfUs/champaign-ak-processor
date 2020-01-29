@@ -17,6 +17,8 @@ describe PaymentStatusUpdator do
   before do
     allow(Ak::Client.client).to receive(:update_donation_action).
                                 and_return(successful_response)
+    allow(Ak::Client.client).to receive(:update_transaction).
+                                and_return(successful_response)
   end
 
   it 'updates the ak donation action payment_gateway_status' do
