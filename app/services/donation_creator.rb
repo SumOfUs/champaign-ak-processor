@@ -27,12 +27,8 @@ class DonationCreator
     end
 
     order = params[:params][:order]
-
-    begin
-      updator = GocardlessTransactionUpdator.new(gocardless_transaction_id: order[:trans_id], actionkit_response: response.parsed_response)
-      updator.update
-    rescue => e
-      Rails.logger.error "Error occurred updating gocardless transaction #{e.try(:message)}"
+    if params[:payment_provider] == 'go_cardless' && order[:trans_id].present?
+      update_gocardless_transaction(order[:trans_id], response.parsed_response)
     end
 
     Broadcast.emit(
@@ -42,6 +38,15 @@ class DonationCreator
   end
 
   private
+
+  def update_gocardless_transaction(trans_id, resp)
+    begin
+      updator = GocardlessTransactionUpdator.new(gocardless_transaction_id: trans_id, actionkit_response: resp)
+      updator.update
+    rescue => e
+      Rails.logger.error "Error occurred updating gocardless transaction #{e.try(:message)}"
+    end
+  end
 
   def extract_mailing_id(akid = '')
     (akid.try(:split, '.') || []).first
