@@ -19,6 +19,9 @@ class QueueListener
       when 'subscription-payment', 'subscription-payment:new'
         create_payment(params)
 
+      when 'subscription-payment-failure'
+        GocardlessSubscriptionTransactionUpdator.run(params[:params])
+
       when 'subscribe_member', 'member-subscription:new'
         subscribe_member(params)
 
