@@ -166,8 +166,8 @@ describe QueueListener do
       end
 
       let(:action) { Action.create(form_data: {}) }
-      let(:params) { { type: 'action', params: internal_params, meta: { action_id: action.id} } }
-      let(:res) { double(success?: true, parsed_response: {'errors' => 'PARSED_ERRORS' }) }
+      let(:params) { { type: 'action', params: internal_params, meta: { action_id: action.id, member_id: 1} } }
+      let(:res) { double(success?: true, parsed_response: {'errors' => 'PARSED_ERRORS' }, body: "{}") }
 
       before do
         allow(client).to receive(:create_action){ res }

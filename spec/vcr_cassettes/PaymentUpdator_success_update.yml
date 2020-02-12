@@ -1,0 +1,73 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://act.sumofus.org/rest/v1/transaction/234234/
+    body:
+      encoding: UTF-8
+      string: '{"status":"completed"}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 204
+      message: NOCONTENT
+    headers:
+      Date:
+      - Wed, 29 Jan 2020 09:13:12 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      Www-Authenticate:
+      - Basic Realm="django-tastypie"
+      Vary:
+      - Cookie, Origin
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version:
+  recorded_at: Wed, 29 Jan 2020 09:13:12 GMT
+- request:
+    method: put
+    uri: https://act.sumofus.org/rest/v1/donationaction/34234234/
+    body:
+      encoding: UTF-8
+      string: '{"fields":{"payment_gateway_status":"paid_out"}}'
+    headers:
+      Content-Type:
+      - application/json
+      Charset:
+      - UTF-8
+  response:
+    status:
+      code: 204
+      message: NOCONTENT
+    headers:
+      Date:
+      - Wed, 29 Jan 2020 09:13:13 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      Www-Authenticate:
+      - Basic Realm="django-tastypie"
+      Vary:
+      - Cookie, Origin
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version:
+  recorded_at: Wed, 29 Jan 2020 09:13:13 GMT
+recorded_with: VCR 4.0.0

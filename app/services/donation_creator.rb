@@ -27,6 +27,14 @@ class DonationCreator
     end
 
     order = params[:params][:order]
+    if params[:payment_provider] == 'go_cardless'
+      if order[:trans_id].present?
+        update_gocardless_transaction(order[:trans_id], response.parsed_response)
+      elsif order[:recurring_id].present?
+        update_gocardless_subscription(order[:recurring_id], response.parsed_response)
+      end
+    end
+
     Broadcast.emit(
       params[:meta].merge(type: 'donation', amount: order[:amount], currency: order[:currency] )
     )
@@ -34,6 +42,24 @@ class DonationCreator
   end
 
   private
+
+  def update_gocardless_transaction(trans_id, resp)
+    begin
+      updator = GocardlessTransactionUpdator.new(gocardless_transaction_id: trans_id, actionkit_response: resp)
+      updator.update
+    rescue => e
+      Rails.logger.error "Error occurred updating gocardless transaction #{e.try(:message)}"
+    end
+  end
+
+  def update_gocardless_subscription(subscription_id, resp)
+    begin
+      updator = GocardlessSubscriptionUpdator.new(gocardless_id: subscription_id, actionkit_response: resp)
+      updator.update
+    rescue => e
+      Rails.logger.error "Error occurred updating gocardless subscription #{e.try(:message)}"
+    end
+  end
 
   def extract_mailing_id(akid = '')
     (akid.try(:split, '.') || []).first
