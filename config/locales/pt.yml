@@ -5,7 +5,7 @@ page_follow_up:
     <p>Agradecemos muitíssimo sua doação. Não consigo expressar o quanto significa para a SumOfUs.
     Doando, você estará liderando a luta para frear as corporações que se comportam mal.
     Agora, mais do que nunca, esse é um trabalho necessário.</p>
-    <p>Sua doação vai ajudar a financiar nossas campanhas. Esperamos em breve ter um sistema que suporte doações em Real -- muito obrigado pela compreensão. Seu recibo está abaixo.</p>
+    <p>Sua doação vai ajudar a financiar nossas campanhas. {% if order.currency != "BRL" %}Esperamos em breve ter um sistema que suporte doações em Real -- muito obrigado pela compreensão. {% endif %}Seu recibo está abaixo.</p>
     <p>Não aceitamos dinheiro de corporações ou governos, por isso seu suporte é tão importante. Juntxs estamos construindo um movimento que demanda que pessoas, e não lucros, sejam sempre colocadas em primeiro lugar. Enfrentamos as corporações mais poderosas do mundo para proteger nossos direitos e a democracia.</p>
     <p>Agradecemos muitíssimo por tudo que você faz,</p>
     <p>John e todo o time da SumOfUs</p>
