@@ -19,7 +19,8 @@ class FormCreator
       client_url:     @champaign_uri,
       ask_text:       'Dummy ask',
       thank_you_text: 'Dummy thank you',
-      statement_text: 'Dummy statement'
+      statement_text: 'Dummy statement',
+      templateset: 'https://act.sumofus.org/rest/v1/templateset/12/'
     }
   end
 
@@ -27,7 +28,7 @@ class FormCreator
     def run
       response = client.create_petitionform(sanitized_params)
       if !response.success?
-        Rails.logger.error("Failure creating petition fomr - code: #{response.code}, body: #{response.body}")
+        Rails.logger.error("Failure creating petition form - code: #{response.code}, body: #{response.body}")
       end
       response
     end
