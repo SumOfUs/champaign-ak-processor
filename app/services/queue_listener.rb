@@ -17,7 +17,7 @@ class QueueListener
         DonationCreator.run(params)
 
       when 'subscription-payment', 'subscription-payment:new'
-        create_payment(params)
+        upsert_payment(params)
 
       when 'subscription-payment-failure'
         GocardlessSubscriptionTransactionUpdator.run(params[:params])
@@ -66,9 +66,10 @@ class QueueListener
     end
   end
 
-  def create_payment(params)
+  def upsert_payment(params)
     res = client.create_recurring_payment(params[:params])
-    unless res.success?
+    SubscriptionUpdater.run(params);
+    unless res.success? # AskOmar how to check success of the updater here?
       raise Error.new("Managing recurring subscription payment failed with:\n #{res.inspect}")
     end
     res
