@@ -1,4 +1,4 @@
-class SubscriptionUpdater
+class SubscriptionUpdator
     class Error < StandardError; end
     include Ak::Client
   
@@ -10,7 +10,7 @@ class SubscriptionUpdater
       @params = params[:params]
       @subscription_id = @params[:recurring_id] || raise(ArgumentError)
       @transaction_id = @params[:trans_id]
-      @amount = @params[:amount] || 0
+      @amount = @params[:amount]&.to_d || 0
     end
   
     def run
@@ -49,7 +49,7 @@ class SubscriptionUpdater
           customer: customer,
           status: 'success',
           amount: @amount,
-          processor_response_code: '123', #transaction.processor_response_code, #ASkOmar -- can we add this to the msg we send on the webhook listener?
+          processor_response_code: '1000', #transaction.processor_response_code, #ASkOmar -- can we add this to the msg we send on the webhook listener?
           currency: subscription.currency
         )
       end
@@ -70,11 +70,9 @@ class SubscriptionUpdater
       end
 
       def customer
-        begin
-            Payment::Braintree::Customer.find_by(member_id: original_action.member_id)
+        Payment::Braintree::Customer.find_by(member_id: original_action.member_id)
         rescue ActiveRecord::RecordNotFound
-            Rails.logger.error("No Braintree customer found for member with id #{original_action.member_id}!")
-            log_failure
+          Rails.logger.error("No Braintree customer found for member with id #{original_action.member_id}!")
+          log_failure
       end
-    end
   end
