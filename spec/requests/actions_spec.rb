@@ -29,7 +29,7 @@ describe 'REST' do
       let(:data) do
         # ID from https://act.sumofus.org/rest/v1/orderrecurring/10413/
         #
-        { recurring_id: 'd53gs5', amount: 100 }
+        { recurring_id: 'd53gs5' }
       end
 
       before do
