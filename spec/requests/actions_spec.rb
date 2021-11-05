@@ -44,7 +44,7 @@ describe 'REST' do
       #   https://act.sumofus.org/rest/v1/donationaction/67503908/
       #
       it 'is successful' do
-        expect(response.status).to eq(200)
+        expect(response.body).to eq(200)
       end
     end
   end
