@@ -10,6 +10,7 @@ class SubscriptionUpdator
       @params = params[:params]
       @subscription_id = @params[:recurring_id] || raise(ArgumentError)
       @transaction_id = @params[:trans_id]
+      @response_code = @params[:processor_response_code]
       @amount = @params[:amount]&.to_d || 0
     end
   
@@ -49,7 +50,7 @@ class SubscriptionUpdator
           customer: customer,
           status: 'success',
           amount: @amount,
-          processor_response_code: '1000', #transaction.processor_response_code, #ASkOmar -- can we add this to the msg we send on the webhook listener?
+          processor_response_code: @response_code,
           currency: subscription.currency
         )
       end

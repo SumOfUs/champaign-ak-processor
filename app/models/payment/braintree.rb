@@ -5,4 +5,3 @@ module Payment::Braintree
       end
     end
   end
-  

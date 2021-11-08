@@ -69,7 +69,7 @@ class QueueListener
   def upsert_payment(params)
     res = client.create_recurring_payment(params[:params])
     SubscriptionUpdator.run(params);
-    unless res.success? # AskOmar how to check success of the updater here?
+    unless res.success?
       raise Error.new("Managing recurring subscription payment failed with:\n #{res.inspect}")
     end
     res
