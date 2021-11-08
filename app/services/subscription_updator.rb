@@ -46,7 +46,7 @@ class SubscriptionUpdator
         record = Payment::Braintree::Transaction.create!(
           transaction_id: @transaction_id,
           subscription: subscription,
-          page: subscription.action.page,
+          page_id: subscription.action.page_id,
           customer: customer,
           status: 'success',
           amount: @amount,
