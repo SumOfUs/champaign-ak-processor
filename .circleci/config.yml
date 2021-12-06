@@ -42,6 +42,7 @@ jobs:
           AK_SUBSCRIPTION_PAGE_FR: 'registration_french'
           AK_SUBSCRIPTION_PAGE_ES: 'registration_spanish'
           AK_SUBSCRIPTION_PAGE_PT: 'registration_portuguese'
+          AK_SUBSCRIPTION_PAGE_NL: 'registration_dutch'
           AWS_REGION: us-west-2
           CONSTITUENCIES_TABLE: UkConstituencies
       - image: circleci/postgres:9.4-alpine-ram
