@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class PageCreator
   class Error < StandardError; end
 
@@ -12,6 +14,8 @@ class PageCreator
 
   def run
     @page = Page.find @page_id
+    unique_string = SecureRandom.hex(3)
+    @params[:name] = "#{@params[:name]}-#{unique_string}"
     Donation.run(@page, @params)
     Petition.run(@page, @params)
     unless @page.ak_donation_resource_uri.blank? || @page.ak_petition_resource_uri.blank?
