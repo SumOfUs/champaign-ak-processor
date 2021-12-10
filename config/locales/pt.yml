@@ -7,7 +7,7 @@ pt:
       <p>Sua doação vai ajudar a financiar nossas campanhas. Seu recibo está abaixo.</p>
       <p>Não aceitamos dinheiro de corporações ou governos, por isso seu suporte é tão importante. Juntxs estamos construindo um movimento que demanda que pessoas, e não lucros, sejam sempre colocadas em primeiro lugar. Enfrentamos as corporações mais poderosas do mundo para proteger nossos direitos e a democracia.</p>
       <p>Agradecemos muitíssimo por tudo que você faz,</p>
-      <p>John e todo o time da SumOfUs</p>
+      <p>Emma e todo o time da SumOfUs</p>
       <hr />
       <p><strong>Recibo Doação</strong></p>
       <p>{% if order.card_num_last_four = "DDEB" %}{% if order.currency = "GBP" %}<img src="https://s3.amazonaws.com/s3.sumofus.org/images/bacslogo.jpg" alt="" /></p>

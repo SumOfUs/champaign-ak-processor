@@ -7,7 +7,7 @@ fr:
       <p>Votre don nous permet de renforcer nos campagnes. Nous avons inclu un reçu ci-dessous.</p>
       <p>Nous n’acceptons pas un seul centime provenant d’entreprises ou de gouvernements afin de rester totalement indépendant. C'est pourquoi votre soutien est si important. Ensemble, nous construisons un mouvement qui exige que l'humain soit toujours placé au-dessus du profit. Nous tenons tête aux entreprises les plus puissantes du monde pour protéger nos droits et notre démocratie.</p>
       <p>Merci pour tout ce que vous faites,</p>
-      <p>John et le reste de l’équipe à SumOfUs</p>
+      <p>Emma et le reste de l’équipe à SumOfUs</p>
       <hr />
       <p><strong>Reçu de votre don</strong></p>
       {% if order.card_num_last_four = "DDEB" %}
