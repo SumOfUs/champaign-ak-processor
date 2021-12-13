@@ -1,13 +1,12 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
-require 'securerandom'
 
 describe 'REST' do
   let(:language) { Language.create(code: 'en', name: 'English') }
   let(:page) { Page.create(title: 'Foo', slug: 'foo-bar', language: language) }
 
   before do
-    allow(SecureRandom).to(receive(:hex)).and_return("xyz")
     allow_any_instance_of(ActionKitConnector::Client).to(
       receive(:create_petitionform).and_return(double(success?: true))
     )
@@ -175,7 +174,7 @@ describe 'REST' do
           receive(:create_donation_page)
           .with(
             page_id: page.id,
-            name: 'this-page-does-not-exist-13172406-xyz-donation',
+            name: 'this-page-does-not-exist-13172406-donation',
             title: 'Foo Bar (Donation)',
             language: '/rest/v1/language/100/',
             page_type: 'donation',
@@ -190,7 +189,7 @@ describe 'REST' do
           receive(:create_petition_page)
           .with(
             page_id: page.id,
-            name: 'this-page-does-not-exist-13172406-xyz-petition',
+            name: 'this-page-does-not-exist-13172406-petition',
             title: 'Foo Bar (Petition)',
             language: '/rest/v1/language/100/',
             page_type: 'petition',

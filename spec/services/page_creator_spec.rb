@@ -1,8 +1,7 @@
 require 'rails_helper'
-require 'securerandom'
 
 describe PageCreator do
-  before { allow(SecureRandom).to(receive(:hex)).and_return("xyz") }
+
   let!(:language) { Language.create(code: 'en', name: 'English') }
 
   context "when neither a donation or petition page exists (not a retry)" do
@@ -32,13 +31,13 @@ describe PageCreator do
     )}
 
     petition_page_params = {
-      name: 'super-random-horsey-pony-xyz-petition',
+      name: 'super-random-horsey-pony-petition',
       title: 'Vote for this super random horsey pony! (Petition)',
       page_type: 'petition',
       multilingual_campaign: nil
     }
     donation_page_params = {
-      name: 'super-random-horsey-pony-xyz-donation',
+      name: 'super-random-horsey-pony-donation',
       title: 'Vote for this super random horsey pony! (Donation)',
       page_type: 'donation',
       multilingual_campaign: nil,
@@ -116,7 +115,7 @@ describe PageCreator do
     it "doesn't error out before creating the missing resource" do
       ak_client_params = {
         page_id: 4699,
-        name: "aidez-nous-a-reveler-le-cruel-secret-des-poussins-de-mcdonald-s-1-xyz-petition",
+        name: "aidez-nous-a-reveler-le-cruel-secret-des-poussins-de-mcdonald-s-1-petition",
         title: "Aidez-nous à révéler le cruel secret des poussins de McDonald's (Petition)",
         language: "/rest/v1/language/100/",
         tags: nil,
