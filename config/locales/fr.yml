@@ -7,7 +7,7 @@ fr:
       <p>Votre don nous permet de renforcer nos campagnes. Nous avons inclu un reçu ci-dessous.</p>
       <p>Nous n’acceptons pas un seul centime provenant d’entreprises ou de gouvernements afin de rester totalement indépendant. C'est pourquoi votre soutien est si important. Ensemble, nous construisons un mouvement qui exige que l'humain soit toujours placé au-dessus du profit. Nous tenons tête aux entreprises les plus puissantes du monde pour protéger nos droits et notre démocratie.</p>
       <p>Merci pour tout ce que vous faites,</p>
-      <p>John et le reste de l’équipe à SumOfUs</p>
+      <p>Emma et le reste de l’équipe à SumOfUs</p>
       <hr />
       <p><strong>Reçu de votre don</strong></p>
       {% if order.card_num_last_four = "DDEB" %}
@@ -39,7 +39,7 @@ fr:
         {% if orderrecurring %}
           <p>Merci beaucoup d'avoir mis en place un don mensuel avec SumOfUs afin de soutenir nos actions ! Votre don de {{ order.amt }} commence le {{ order.created_at|date:"F j, Y" }}, et votre carte bancaire se terminant par {{ order.card_num_last_four }} sera débitée chaque mois de {{ order.amt }}. Si vous souhaitez modifier ou annuler votre don mensuel, vous pouvez nous contacter en envoyant un courriel à <a href="mailto:donations@sumofus.org">donations@sumofus.org</a>.</p>
         {% else %}
-          <p>Merci de votre don à SumOfUs de {{ order.amt }}, effectué le {{ order.created_at|date:"F j, Y" }} via votre carte bancaire se terminant par  {{ order.card_num_last_four }} !</p>
+          <p>Merci de votre don à SumOfUs de {{ order.amt }}, effectué le {{ order.created_at|date:"F j, Y" }} via {% if order.card_num_last_four = "GIRO" %} Giropay{% elif order.card_num_last_four = "IDEL" %} iDEAL{% else %} votre carte bancaire se terminant par {{ order.card_num_last_four }} !{% endif %}</p>
         {% endif %}
       {% endif %}
       <p>PS - SumOfUs est une ONG déclarée 501(c)4 à Washington DC, USA. Les contributions ou dons ne sont pas déductibles des impôts. Pour plus d’informations, veuillez nous contacter à cette adresse: bonjour@sumofus.org.{% if order.card_num_last_four = "DDEB" %} ou au +1 347-703-5003{% endif %}.</p>
