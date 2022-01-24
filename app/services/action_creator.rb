@@ -23,7 +23,6 @@ class ActionCreator
     params[:params][:mailing_id] = extract_mailing_id(params[:params][:akid])
 
     CountryService.extend_with_local_data(params)
-
     # This is where we write the action to ActionKit
     response = client.create_action(params[:params])
     unless response.success?
