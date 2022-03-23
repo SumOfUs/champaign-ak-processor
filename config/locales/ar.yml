@@ -1,6 +1,6 @@
 ar:
   page_follow_up:
-    email_subject: "شكراً لتبرّعك!"
+    email_subject: "شكرا لتبرّعك!"
     email_body: |
       <p style="direction: rtl; text-align: right;">مرحبا {{ user.first_name|capfirst|default:"friend" }}، </p>
       <p style="direction: rtl; text-align: right;">شكراً جزيلاً لتبرّعك. لا يمكنك تصوّر إلى أي مدىً نحن ممتنين لك في SumOfUs. فعبر تبرّعك، أصبحت رائداً في الصراع لوقف الشركات الكبرى حين تخطئ التصرّف. وهو عملٌ أصبح ضرورياً اليوم أكثر من ذي قبل.</p>
