@@ -11,7 +11,7 @@ gem 'redis'
 gem 'actionkit_connector', git: 'https://github.com/SumOfUs/actionkit_connector.git', branch: 'master'
 gem 'airbrake'
 
-gem 'puma', '~> 3.12.0'
+gem 'puma', '~> 4.3.12'
 gem 'aws-sdk'
 
 # For pushing out updates after processing an event.
