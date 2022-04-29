@@ -3,10 +3,10 @@ ar:
     email_subject: "شكرا لتبرّعك!"
     email_body: |
       <p style="direction: rtl; text-align: right;">مرحبا {{ user.first_name|capfirst|default:"friend" }}، </p>
-      <p style="direction: rtl; text-align: right;">شكراً جزيلاً لتبرّعك. لا يمكنك تصوّر إلى أي مدىً نحن ممتنين لك في SumOfUs. فعبر تبرّعك، أصبحت من روّاد في الصراع لوقف الشركات الكبرى حين تخطئ التصرّف. وهو عملٌ أصبح ضرورياً اليوم أكثر من ذي قبل.</p>
+      <p style="direction: rtl; text-align: right;">شكراً جزيلاً لتبرّعك. لا يمكنك تصوّر إلى أي مدىً نحن ممتنين لك في SumOfUs. فعبر تبرّعك، أصبحت من الروّاد في الصراع لوقف الشركات الكبرى حين تخطئ التصرّف. وهو عملٌ أصبح ضرورياً اليوم أكثر من ذي قبل.</p>
       <p style="direction: rtl; text-align: right;">تبرّعك سيساهم في تعزيز حملاتنا. يمكنك الاطّلاع على الإيصال أدناه.</p>
       <p style="direction: rtl; text-align: right;">نحن لا نقبل أيّ تبرّعاتٍ من جهاتٍ حكوميّةٍ أو شركات. لهذا تبرّعك له أهميّة قصوى. معاً نبني تحرّكنا الذي يطالب بأن توضع مصلحة البشر أوّلاً وأن تًبَدّى على الربح المادي. نحن نقف في وجه أكبر شركات العالم وأكثرها نفوذاً لحماية حقوقنا وديمقراطيّتنا.</p>
-      <p style="direction: rtl; text-align: right;">شكراً جزيلاً لك</p>
+      <p style="direction: rtl; text-align: right;">،شكراً جزيلاً لك</p>
       <p style="direction: rtl; text-align: right;">إيما وكامل فريق SumOfUs</p>
       <p></p>
       <hr />
