@@ -18,6 +18,7 @@
 ./env.yml
 env.yml
 .env
+development.yml
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
@@ -26,3 +27,5 @@ env.yml
 .DS_Store
 .byebug_history
 .ruby-gemset
+
+/vendor/bundle
