@@ -11,7 +11,7 @@ module SecretsManager
         secret_id: secret_name(secret_id)
       ).secret_string)
     rescue StandardError
-      nil
+      {}
     end
 
     private
