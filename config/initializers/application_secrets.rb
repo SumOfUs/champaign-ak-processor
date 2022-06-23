@@ -1,6 +1,6 @@
 require './app/lib/secrets_manager'
 
-if Rails.env == 'production'
+if Rails.env == 'fakeEnv'
   ak_secrets = SecretsManager.get_value('prod/actionKitApi')
   database_secrets = SecretsManager.get_value('champaignDB')
   share_progress_secrets = SecretsManager.get_value('shareProgressApi')
