@@ -12,7 +12,7 @@ module SecretsManager
       ).secret_string)
     rescue StandardError => e
       puts "Error while trying to get secret #{secret_id} from AWS with error: #{e.message}."
-      throw e
+      {}
     end
 
     private
