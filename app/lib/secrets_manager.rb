@@ -30,9 +30,7 @@ module SecretsManager
     end
 
     def prefix
-      prefix = ENV['AWS_SECRETS_MANAGER_PREFIX']
-      puts "The prefix is: #{prefix}"
-      prefix
+      ENV['AWS_SECRETS_MANAGER_PREFIX']
     end
   end
 end
