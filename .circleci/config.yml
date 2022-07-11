@@ -46,6 +46,7 @@ jobs:
           AK_SUBSCRIPTION_PAGE_AR: 'registration_arabic'
           AWS_REGION: us-west-2
           CONSTITUENCIES_TABLE: UkConstituencies
+          AWS_SECRETS_MANAGER_PREFIX: dev
       - image: circleci/postgres:9.4-alpine-ram
         environment:
           POSTGRES_USER: champaign
@@ -81,7 +82,7 @@ jobs:
           at: ~/circleci-champaign-ak-processor
       - run:
           name: Deploy production
-          command: .circleci/deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-production' 'logs3.papertrailapp.com:44107'
+          command: .circleci/deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-production' 'logs3.papertrailapp.com:44107' 'prod'
 
   deploy_staging:
     <<: *defaults
@@ -91,7 +92,7 @@ jobs:
           at: ~/circleci-champaign-ak-processor
       - run:
           name: Deploy staging
-          command: .circleci/deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-staging' 'logs3.papertrailapp.com:34848'
+          command: .circleci/deploy.sh $CIRCLE_SHA1 'champaign' 'ak-worker-staging' 'logs3.papertrailapp.com:34848' 'dev'
 
 workflows:
   version: 2
