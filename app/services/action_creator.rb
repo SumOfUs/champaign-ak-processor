@@ -26,7 +26,7 @@ class ActionCreator
     # This is where we write the action to ActionKit
     Rails.logger.info "Creating AK action with params: #{params[:params]}"
     response = client.create_action(params[:params])
-    Rails.logger.info "Response from AK create_action is: #{response.attributes.inspect}"
+    Rails.logger.info "Response from AK create_action is: #{response.body}"
     unless response.success?
       raise APIError.new('Error while creating AK action', response)
     end
