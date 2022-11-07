@@ -24,7 +24,9 @@ class ActionCreator
 
     CountryService.extend_with_local_data(params)
     # This is where we write the action to ActionKit
+    Rails.logger.info "Creating AK action with params: #{params[:params].attributes.inspect}"
     response = client.create_action(params[:params])
+    Rails.logger.info "Response from AK create_action is: #{response.attributes.inspect}"
     unless response.success?
       raise APIError.new('Error while creating AK action', response)
     end
