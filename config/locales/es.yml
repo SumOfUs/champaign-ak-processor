@@ -3,47 +3,47 @@ es:
     email_subject: "¡Gracias por tu aporte!"
     email_body: |
       <p>Hola {{ user.first_name|capfirst|default:"amigo/a" }},</p>
-      <p>Muchas gracias por tu colaboración. No encontramos palabras que expresen lo que esto significa para todos los que trabajamos en SumOfUs. Con tu aporte, contribuyes en la lucha para frenar el abuso de poder de las grandes corporaciones. Ahora más nunca, es el momento de actuar.</p>
+      <p>Muchas gracias por tu colaboración. No encontramos palabras que expresen lo que esto significa para todos los que trabajamos en Ekō. Con tu aporte, contribuyes en la lucha para frenar el abuso de poder de las grandes corporaciones. Ahora más nunca, es el momento de actuar.</p>
       <p>Tu donación nos ayudará a impulsar nuestras campañas. Te enviamos tu comprobante junto con esta notificación.</p>
       <p>No aceptamos dinero de gobiernos o corporaciones. Por este motivo, tu apoyo es fundamental. Juntos, construimos un movimiento cuya premisa consiste en poner siempre a las personas por encima del beneficio económico. Luchamos mano a mano contra las más grandes corporaciones a nivel mundial para proteger nuestros derechos y nuestra democracia.</p>
       <p>Muchas gracias por todo tu apoyo,</p>
-      <p>De parte de Emma y de todo el equipo de SumOfUs</p>
+      <p>De parte de Emma y de todo el equipo de Ekō</p>
       <p></p>
       <hr />
       <p><strong>Comprobante de donación</strong></p>
       {% if order.card_num_last_four = "DDEB" %}
         {% if order.currency = "GBP" %}
           <p><img src="https://s3.amazonaws.com/s3.sumofus.org/images/bacslogo.jpg" alt="" /></p>
-          <p><strong>Aviso importante: Confirmación de tus ajustes de Direct Debit para SumOfUs</strong></p>
-          <p>¡Muchas gracias por donar a SumOfUs y por apoyar nuestro trabajo!</p>
+          <p><strong>Aviso importante: Confirmación de tus ajustes de Direct Debit para Ekō</strong></p>
+          <p>¡Muchas gracias por donar a Ekō y por apoyar nuestro trabajo!</p>
           {% if orderrecurring %}
-            <p>Tu donación mensual de {{ order.amt }} se debitará a través Direct Debit el día {% right_now %}{% if now|date:"d" < "20" %}{{now|date_add:"day=20"|date:"F j, Y"}} {% else %} {{now|date_add:"months=1 day=20"|date:"F j, Y"}} {% endif %} o a los pocos días posteriores a dicha fecha. Los siguientes débitos se efectuarán el día 20 de cada mes o a los pocos días posteriores a esa fecha. {% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name %}Tus donaciones se debitarán de tu cuenta bancaria ******{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}), y aparecerán en tus movimientos de cuenta como SumOfUs{% if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference }}.{% endif %}{% endif %}{% endif %}</p>
+            <p>Tu donación mensual de {{ order.amt }} se debitará a través Direct Debit el día {% right_now %}{% if now|date:"d" < "20" %}{{now|date_add:"day=20"|date:"F j, Y"}} {% else %} {{now|date_add:"months=1 day=20"|date:"F j, Y"}} {% endif %} o a los pocos días posteriores a dicha fecha. Los siguientes débitos se efectuarán el día 20 de cada mes o a los pocos días posteriores a esa fecha. {% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name %}Tus donaciones se debitarán de tu cuenta bancaria ******{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}), y aparecerán en tus movimientos de cuenta como Ekō{% if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference }}.{% endif %}{% endif %}{% endif %}</p>
           {% else %}
-            <p>Una única donación de {{order.amt}} se debitará a través de Direct Debit el día {% right_now %}{% if now|date:"d" < "20" %}{{now|date_add:"day=20"|date:"F j, Y"}}{% else %}{{now|date_add:"months=1 day=20"|date:"F j, Y"}}{% endif %} o a los pocos días posteriores a dicha fecha. Tu donación se debitará de tu cuenta bancaria *****{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}) y aparecerá en tus movimientos de cuenta como SumOfUs{% if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference }}.{% endif %}</p>
+            <p>Una única donación de {{order.amt}} se debitará a través de Direct Debit el día {% right_now %}{% if now|date:"d" < "20" %}{{now|date_add:"day=20"|date:"F j, Y"}}{% else %}{{now|date_add:"months=1 day=20"|date:"F j, Y"}}{% endif %} o a los pocos días posteriores a dicha fecha. Tu donación se debitará de tu cuenta bancaria *****{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}) y aparecerá en tus movimientos de cuenta como Ekō{% if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference }}.{% endif %}</p>
           {% endif %}
         {% elif order.currency = "EUR" %}
-            <p>¡Muchas gracias por donar a SumOfUs y por apoyar nuestro trabajo!</p>
+            <p>¡Muchas gracias por donar a Ekō y por apoyar nuestro trabajo!</p>
             {% if orderrecurring %}
-                <p>Tu donación mensual de {{ order.amt }} se debitará a través Direct Debit el día {% right_now %}{% if now|date:"d" < "20" %}{{now|date_add:"day=20"|date:"F j, Y"}} {% else %} {{now|date_add:"months=1 day=20"|date:"F j, Y"}} {% endif %} o a los pocos días posteriores a dicha fecha. Los siguientes débitos se efectuarán el día 20 de cada mes o a los pocos días posteriores a esa fecha. {% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name %}Tus donaciones se debitarán de tu cuenta bancaria ******{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}), y aparecerán en tus movimientos de cuenta como SumOfUs{% if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference }}{% endif %}, código de identificación del acreedor: GB62ZZZSDDBARC0000007495895091.{% endif %}{% endif %}</p>
+                <p>Tu donación mensual de {{ order.amt }} se debitará a través Direct Debit el día {% right_now %}{% if now|date:"d" < "20" %}{{now|date_add:"day=20"|date:"F j, Y"}} {% else %} {{now|date_add:"months=1 day=20"|date:"F j, Y"}} {% endif %} o a los pocos días posteriores a dicha fecha. Los siguientes débitos se efectuarán el día 20 de cada mes o a los pocos días posteriores a esa fecha. {% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name %}Tus donaciones se debitarán de tu cuenta bancaria ******{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}), y aparecerán en tus movimientos de cuenta como Ekō{% if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference }}{% endif %}, código de identificación del acreedor: GB62ZZZSDDBARC0000007495895091.{% endif %}{% endif %}</p>
             {% else %}
-                <p>Una única donación de {{order.amt}} se debitará a través de Direct Debit el día {% right_now %}{% if now|date:"d" < "20" %}{{now|date_add:"day=20"|date:"F j, Y"}}{% else %}{{now|date_add:"months=1 day=20"|date:"F j, Y"}}{% endif %} o a los pocos días posteriores a dicha fecha. Tu donación se debitará de tu cuenta bancaria *****{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}) y aparecerá en tus movimientos de cuenta como SumOfUs{% if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference }}{% endif %}, código de identificación del acreedor: GB62ZZZSDDBARC0000007495895091.</p>
+                <p>Una única donación de {{order.amt}} se debitará a través de Direct Debit el día {% right_now %}{% if now|date:"d" < "20" %}{{now|date_add:"day=20"|date:"F j, Y"}}{% else %}{{now|date_add:"months=1 day=20"|date:"F j, Y"}}{% endif %} o a los pocos días posteriores a dicha fecha. Tu donación se debitará de tu cuenta bancaria *****{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}) y aparecerá en tus movimientos de cuenta como Ekō{% if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference }}{% endif %}, código de identificación del acreedor: GB62ZZZSDDBARC0000007495895091.</p>
             {% endif %}
         {% endif %}
       {% elif order.card_num_last_four = "PYPL" %}
         {% if orderrecurring %}
-          <p>¡Muchas gracias por haber programado una donación mensual con SumOfUs para apoyar nuestro trabajo! Tu donación de {{ order.amt}} comienza el día {{ order.created_at|date:"F j, Y" }} y se cobrará mensualmente vía PayPal.</p>
+          <p>¡Muchas gracias por haber programado una donación mensual con Ekō para apoyar nuestro trabajo! Tu donación de {{ order.amt}} comienza el día {{ order.created_at|date:"F j, Y" }} y se cobrará mensualmente vía PayPal.</p>
         {% else %}
-          <p>¡Muchas gracias por donar a SumOfUs la suma de {{order.amt}} el día {{order.created_at|date:"F j, Y"}} vía PayPal!</p>
+          <p>¡Muchas gracias por donar a Ekō la suma de {{order.amt}} el día {{order.created_at|date:"F j, Y"}} vía PayPal!</p>
         {%endif %}
       {% else %}
         <!-- credit cards -->
         {% if orderrecurring %}
-          <p>¡Muchas gracias por haber programado una donación mensual con SumOfUs para apoyar nuestro trabajo! Este monto de {{order.amt}} comenzará a debitarse mensualmente el día {{order.created_at|date:"F j, Y"}} de tu tarjeta de crédito terminada en los siguientes cuatro dígitos {{order.card_num_last_four}}. Si alguna vez deseas modificar o cancelar tu donación mensual, puedes contactarnos a <a href="mailto:donations@sumofus.org">donations@sumofus.org</a>.</p>
+          <p>¡Muchas gracias por haber programado una donación mensual con Ekō para apoyar nuestro trabajo! Este monto de {{order.amt}} comenzará a debitarse mensualmente el día {{order.created_at|date:"F j, Y"}} de tu tarjeta de crédito terminada en los siguientes cuatro dígitos {{order.card_num_last_four}}. Si alguna vez deseas modificar o cancelar tu donación mensual, puedes contactarnos a <a href="mailto:donations@sumofus.org">donations@sumofus.org</a>.</p>
         {% else %}
-          <p>¡Gracias por donar a SumOfUs la suma de {{order.amt}} el día {{order.created_at|date:"F j, Y"}} a través de tu tarjeta de crédito terminada en los siguientes cuatro dígitos {{order.card_num_last_four}}!</p>
+          <p>¡Gracias por donar a Ekō la suma de {{order.amt}} el día {{order.created_at|date:"F j, Y"}} a través de tu tarjeta de crédito terminada en los siguientes cuatro dígitos {{order.card_num_last_four}}!</p>
         {% endif %}
       {% endif %}
-      <p>P.D. SumOfUs es una organización sin fines de lucro, inscripta de acuerdo a la disposición 501(c)4 en Washington D.C., Estados Unidos. Las donaciones a SumOfUs no son deducibles de impuestos. Para obtener más información o si tienes alguna duda acerca de esta donación, contáctanos a <a href="mailto:donations@sumofus.org">donations@sumofus.org</a> o al +1 347-703-5003.</p>
+      <p>P.D. Ekō es una organización sin fines de lucro, inscripta de acuerdo a la disposición 501(c)4 en Washington D.C., Estados Unidos. Las donaciones a Ekō no son deducibles de impuestos. Para obtener más información o si tienes alguna duda acerca de esta donación, contáctanos a <a href="mailto:donations@sumofus.org">donations@sumofus.org</a> o al +1 347-703-5003.</p>
 
       {% if order.card_num_last_four = "DDEB" %}
         {% if order.currency = "GBP" %}

@@ -3,46 +3,46 @@ fr:
     email_subject: "Merci pour votre contribution !"
     email_body: |
       <p>Bonjour {{ user.first_name|capfirst|default:"friend" }},</p>
-      <p>Merci beaucoup pour votre don. Je ne peux vous dire à quel point cela compte pour nous à SumOfUs. En faisant ce don, vous menez la bataille contre les abus des multinationales. Aujourd’hui, plus que jamais, ce travail est nécessaire et doit être fait.</p>
+      <p>Merci beaucoup pour votre don. Je ne peux vous dire à quel point cela compte pour nous à Ekō. En faisant ce don, vous menez la bataille contre les abus des multinationales. Aujourd’hui, plus que jamais, ce travail est nécessaire et doit être fait.</p>
       <p>Votre don nous permet de renforcer nos campagnes. Nous avons inclu un reçu ci-dessous.</p>
       <p>Nous n’acceptons pas un seul centime provenant d’entreprises ou de gouvernements afin de rester totalement indépendant. C'est pourquoi votre soutien est si important. Ensemble, nous construisons un mouvement qui exige que l'humain soit toujours placé au-dessus du profit. Nous tenons tête aux entreprises les plus puissantes du monde pour protéger nos droits et notre démocratie.</p>
       <p>Merci pour tout ce que vous faites,</p>
-      <p>Emma et le reste de l’équipe à SumOfUs</p>
+      <p>Emma et le reste de l’équipe à Ekō</p>
       <hr />
       <p><strong>Reçu de votre don</strong></p>
       {% if order.card_num_last_four = "DDEB" %}
         {% if order.currency = "GBP" %}
           <p><img src="https://s3.amazonaws.com/s3.sumofus.org/images/bacslogo.jpg" alt="" /></p>
           <p><strong>Important: Confirmation de la mise en place de votre prélèvement automatique</strong></p>
-          <p>Merci beaucoup d'avoir fait un don à SumOfUs afin de soutenir nos actions !</p>
+          <p>Merci beaucoup d'avoir fait un don à Ekō afin de soutenir nos actions !</p>
           {% if orderrecurring %}
-            <p>Votre don mensuel de {{ order.amt }} sera débité par prélèvement automatique le (ou peu après) {% right_now %}{% if now|date:"d" < "20" %}{{now|date_add:"day=20"|date:"F j, Y"}}{% else %}{{now|date_add:"months=1 day=20"|date:"F j, Y"}}{% endif %}, et le 20 de chaque mois suivant (ou peu après).{% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name %} Les dons seront débités de votre compte bancaire numéro ******{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}),et apparaîtront sur votre relevé sous le nom de SumOfUs{% if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference }}.{% endif %}{% endif %}{% endif %}</p>
+            <p>Votre don mensuel de {{ order.amt }} sera débité par prélèvement automatique le (ou peu après) {% right_now %}{% if now|date:"d" < "20" %}{{now|date_add:"day=20"|date:"F j, Y"}}{% else %}{{now|date_add:"months=1 day=20"|date:"F j, Y"}}{% endif %}, et le 20 de chaque mois suivant (ou peu après).{% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name %} Les dons seront débités de votre compte bancaire numéro ******{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}),et apparaîtront sur votre relevé sous le nom de Ekō{% if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference }}.{% endif %}{% endif %}{% endif %}</p>
           {% else %}
-            <p>Un don unique de {{ order.amt }} sera débité par prélèvement automatique le (ou peu de temps après) {% right_now %}{% if now|date:"d" < "20" %}{{now|date_add:"day=20"|date:"F j, Y"}}{% else %}{{now|date_add:"months=1 day=20"|date:"F j, Y"}}{% endif %}.{% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name %} Votre don sera débité de votre compte bancaire numéro ******{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}), et apparaîtra sur votre relevé sous le nom de SumOfUs{% if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference }}.{% endif %}{% endif %}{% endif %}</p>
+            <p>Un don unique de {{ order.amt }} sera débité par prélèvement automatique le (ou peu de temps après) {% right_now %}{% if now|date:"d" < "20" %}{{now|date_add:"day=20"|date:"F j, Y"}}{% else %}{{now|date_add:"months=1 day=20"|date:"F j, Y"}}{% endif %}.{% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name %} Votre don sera débité de votre compte bancaire numéro ******{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}), et apparaîtra sur votre relevé sous le nom de Ekō{% if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference }}.{% endif %}{% endif %}{% endif %}</p>
           {% endif %}
         {% elif order.currency = "EUR" %}
-            <p>Merci infiniment d'avoir fait un don à SumOfUs afin de soutenir nos actions !</p>
+            <p>Merci infiniment d'avoir fait un don à Ekō afin de soutenir nos actions !</p>
             {% if orderrecurring %}
-                <p>Votre don mensuel de{{ order.amt }} sera débité par prélèvement automatique le (ou peu après) {% right_now %}{{ now|date_add:"days=3"|date:"F j, Y" }}, et les dons suivants de {{ order.amt }} seront débités le {{ now|date_add:"days=3"|date:"jS" }} de chaque mois, ou peu après.{% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name %} Les dons seront débités de votre compte bancaire numéro ********{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}), et apparaîtront sur votre relevé en tant que SumOfUs, {% if action.custom_fields.mandate_reference %}ref: {{ action.custom_fields.mandate_reference }}, {% endif %}creditor identifier: GB62ZZZSDDBARC0000007495895091.{% endif %}{% endif %}</p>
+                <p>Votre don mensuel de{{ order.amt }} sera débité par prélèvement automatique le (ou peu après) {% right_now %}{{ now|date_add:"days=3"|date:"F j, Y" }}, et les dons suivants de {{ order.amt }} seront débités le {{ now|date_add:"days=3"|date:"jS" }} de chaque mois, ou peu après.{% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name %} Les dons seront débités de votre compte bancaire numéro ********{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}), et apparaîtront sur votre relevé en tant que Ekō, {% if action.custom_fields.mandate_reference %}ref: {{ action.custom_fields.mandate_reference }}, {% endif %}creditor identifier: GB62ZZZSDDBARC0000007495895091.{% endif %}{% endif %}</p>
             {% else %}
-                <p>Votre don de {{ order.amt }} sera débité par prélèvement automatique le (ou peu de temps après) {% right_now %}{{ now|date_add:"days=3"|date:"F j, Y" }}.{% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name %} Votre don sera débité de votre compte bancaire ******{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}), et apparaîtra sur votre relevé en tant que SumOfUs, {% if action.custom_fields.mandate_reference %}ref: {{ action.custom_fields.mandate_reference }}, {% endif %}creditor identifier: GB62ZZZSDDBARC0000007495895091.{% endif %}{% endif %}</p>
+                <p>Votre don de {{ order.amt }} sera débité par prélèvement automatique le (ou peu de temps après) {% right_now %}{{ now|date_add:"days=3"|date:"F j, Y" }}.{% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name %} Votre don sera débité de votre compte bancaire ******{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name }}), et apparaîtra sur votre relevé en tant que Ekō, {% if action.custom_fields.mandate_reference %}ref: {{ action.custom_fields.mandate_reference }}, {% endif %}creditor identifier: GB62ZZZSDDBARC0000007495895091.{% endif %}{% endif %}</p>
             {% endif %}
         {% endif %}
       {% elif order.card_num_last_four = "PYPL" %}
         {% if orderrecurring %}
-          <p>Merci infiniment d'avoir mis en place un don mensuel avec SumOfUs afin de soutenir nos actions ! Votre don de {{ order.amt }} commence le {{ order.created_at|date:"F j, Y" }} et sera débité chaque mois via PayPal.</p>
+          <p>Merci infiniment d'avoir mis en place un don mensuel avec Ekō afin de soutenir nos actions ! Votre don de {{ order.amt }} commence le {{ order.created_at|date:"F j, Y" }} et sera débité chaque mois via PayPal.</p>
         {% else %}
-          <p>Merci beaucoup pour votre don à SumOfUs de {{ order.amt }}, effectué le {{ order.created_at|date:"F j, Y" }} via PayPal !</p>
+          <p>Merci beaucoup pour votre don à Ekō de {{ order.amt }}, effectué le {{ order.created_at|date:"F j, Y" }} via PayPal !</p>
         {%endif %}
       {% else %}
         <!-- credit cards -->
         {% if orderrecurring %}
-          <p>Merci beaucoup d'avoir mis en place un don mensuel avec SumOfUs afin de soutenir nos actions ! Votre don de {{ order.amt }} commence le {{ order.created_at|date:"F j, Y" }}, et votre carte bancaire se terminant par {{ order.card_num_last_four }} sera débitée chaque mois de {{ order.amt }}. Si vous souhaitez modifier ou annuler votre don mensuel, vous pouvez nous contacter en envoyant un courriel à <a href="mailto:donations@sumofus.org">donations@sumofus.org</a>.</p>
+          <p>Merci beaucoup d'avoir mis en place un don mensuel avec Ekō afin de soutenir nos actions ! Votre don de {{ order.amt }} commence le {{ order.created_at|date:"F j, Y" }}, et votre carte bancaire se terminant par {{ order.card_num_last_four }} sera débitée chaque mois de {{ order.amt }}. Si vous souhaitez modifier ou annuler votre don mensuel, vous pouvez nous contacter en envoyant un courriel à <a href="mailto:donations@sumofus.org">donations@sumofus.org</a>.</p>
         {% else %}
-          <p>Merci de votre don à SumOfUs de {{ order.amt }}, effectué le {{ order.created_at|date:"F j, Y" }} via {% if order.card_num_last_four = "GIRO" %} Giropay{% elif order.card_num_last_four = "IDEL" %} iDEAL{% else %} votre carte bancaire se terminant par {{ order.card_num_last_four }} !{% endif %}</p>
+          <p>Merci de votre don à Ekō de {{ order.amt }}, effectué le {{ order.created_at|date:"F j, Y" }} via {% if order.card_num_last_four = "GIRO" %} Giropay{% elif order.card_num_last_four = "IDEL" %} iDEAL{% else %} votre carte bancaire se terminant par {{ order.card_num_last_four }} !{% endif %}</p>
         {% endif %}
       {% endif %}
-      <p>PS - SumOfUs est une ONG déclarée 501(c)4 à Washington DC, USA. Les contributions ou dons ne sont pas déductibles des impôts. Pour plus d’informations, veuillez nous contacter à cette adresse: bonjour@sumofus.org.{% if order.card_num_last_four = "DDEB" %} ou au +1 347-703-5003{% endif %}.</p>
+      <p>PS - Ekō est une ONG déclarée 501(c)4 à Washington DC, USA. Les contributions ou dons ne sont pas déductibles des impôts. Pour plus d’informations, veuillez nous contacter à cette adresse: bonjour@sumofus.org.{% if order.card_num_last_four = "DDEB" %} ou au +1 347-703-5003{% endif %}.</p>
 
       {% if order.card_num_last_four = "DDEB" %}
         {% if order.currency = "GBP" %}
