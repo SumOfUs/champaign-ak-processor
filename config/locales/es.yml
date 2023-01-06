@@ -38,12 +38,12 @@ es:
       {% else %}
         <!-- credit cards -->
         {% if orderrecurring %}
-          <p>¡Muchas gracias por haber programado una donación mensual con Ekō para apoyar nuestro trabajo! Este monto de {{order.amt}} comenzará a debitarse mensualmente el día {{order.created_at|date:"F j, Y"}} de tu tarjeta de crédito terminada en los siguientes cuatro dígitos {{order.card_num_last_four}}. Si alguna vez deseas modificar o cancelar tu donación mensual, puedes contactarnos a <a href="mailto:donations@sumofus.org">donations@sumofus.org</a>.</p>
+          <p>¡Muchas gracias por haber programado una donación mensual con Ekō para apoyar nuestro trabajo! Este monto de {{order.amt}} comenzará a debitarse mensualmente el día {{order.created_at|date:"F j, Y"}} de tu tarjeta de crédito terminada en los siguientes cuatro dígitos {{order.card_num_last_four}}. Si alguna vez deseas modificar o cancelar tu donación mensual, puedes contactarnos a <a href="mailto:donations@eko.org">donations@eko.org</a>.</p>
         {% else %}
           <p>¡Gracias por donar a Ekō la suma de {{order.amt}} el día {{order.created_at|date:"F j, Y"}} a través de tu tarjeta de crédito terminada en los siguientes cuatro dígitos {{order.card_num_last_four}}!</p>
         {% endif %}
       {% endif %}
-      <p>P.D. Ekō es una organización sin fines de lucro, inscripta de acuerdo a la disposición 501(c)4 en Washington D.C., Estados Unidos. Las donaciones a Ekō no son deducibles de impuestos. Para obtener más información o si tienes alguna duda acerca de esta donación, contáctanos a <a href="mailto:donations@sumofus.org">donations@sumofus.org</a> o al +1 347-703-5003.</p>
+      <p>P.D. Ekō es una organización sin fines de lucro, inscripta de acuerdo a la disposición 501(c)4 en Washington D.C., Estados Unidos. Las donaciones a Ekō no son deducibles de impuestos. Para obtener más información o si tienes alguna duda acerca de esta donación, contáctanos a <a href="mailto:donations@eko.org">donations@eko.org</a> o al +1 347-703-5003.</p>
 
       {% if order.card_num_last_four = "DDEB" %}
         {% if order.currency = "GBP" %}

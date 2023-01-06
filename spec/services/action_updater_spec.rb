@@ -18,7 +18,7 @@ describe ActionUpdater do
                                 and_return(successful_response)
 
     ActionRepository.set(123,
-      ak_id: 456, page_ak_uri: 'http://some.url', member_email: 'omar@sumofus.org'
+      ak_id: 456, page_ak_uri: 'http://some.url', member_email: 'omar@eko.org'
     )
   end
 

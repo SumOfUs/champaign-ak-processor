@@ -33,7 +33,7 @@ describe "New Survey Response" do
       action_foo:   "Foo",
       action_bar:   "Bar",
       ignored:      "ignore me",
-      email:        "omar@sumofus.org",
+      email:        "omar@eko.org",
       source:       'FB',
       akid:         '3.4234.fsdf',
       fields:       {}
@@ -57,7 +57,7 @@ describe "New Survey Response" do
       ak_action = ActionRepository.get(action.id)
       expect(ak_action[:page_ak_uri]).to match(%r{rest\/v1\/petitionpage\/})
       expect(ak_action[:ak_id]).to be_present
-      expect(ak_action[:member_email]).to eql "omar@sumofus.org"
+      expect(ak_action[:member_email]).to eql "omar@eko.org"
     end
   end
 

@@ -6,7 +6,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"page_id":12345643,"name":"super-random-horsey-pony-donation","title":"Vote
-        for this super random horsey pony! (Donation)","language":"/rest/v1/language/100/","tags":null,"url":"https://actions.sumofus.org/a/super-random-horsey-pony","hosted_with":"/rest/v1/hostingplatform/2/","page_type":"donation","multilingual_campaign":null,"hpc_rule":"/rest/v1/donationhpcrule/22/"}'
+        for this super random horsey pony! (Donation)","language":"/rest/v1/language/100/","tags":null,"url":"https://actions.eko.org/a/super-random-horsey-pony","hosted_with":"/rest/v1/hostingplatform/2/","page_type":"donation","multilingual_campaign":null,"hpc_rule":"/rest/v1/donationhpcrule/22/"}'
     headers:
       Content-Type:
       - application/json
@@ -41,7 +41,7 @@ http_interactions:
     uri: https://act.sumofus.org/rest/v1/donationform/
     body:
       encoding: UTF-8
-      string: '{"page":"https://act.sumofus.org/rest/v1/donationpage/23604/","client_hosted":true,"client_url":"https://actions.sumofus.org/a/super-random-horsey-pony","ask_text":"Dummy
+      string: '{"page":"https://act.sumofus.org/rest/v1/donationpage/23604/","client_hosted":true,"client_url":"https://actions.eko.org/a/super-random-horsey-pony","ask_text":"Dummy
         ask","thank_you_text":"Dummy thank you","statement_text":"Dummy statement"}'
     headers:
       Content-Type:
@@ -78,7 +78,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"page_id":12345643,"name":"super-random-horsey-pony-petition","title":"Vote
-        for this super random horsey pony! (Petition)","language":"/rest/v1/language/100/","tags":null,"url":"https://actions.sumofus.org/a/super-random-horsey-pony","hosted_with":"/rest/v1/hostingplatform/2/","page_type":"petition","multilingual_campaign":null}'
+        for this super random horsey pony! (Petition)","language":"/rest/v1/language/100/","tags":null,"url":"https://actions.eko.org/a/super-random-horsey-pony","hosted_with":"/rest/v1/hostingplatform/2/","page_type":"petition","multilingual_campaign":null}'
     headers:
       Content-Type:
       - application/json
@@ -113,7 +113,7 @@ http_interactions:
     uri: https://act.sumofus.org/rest/v1/petitionform/
     body:
       encoding: UTF-8
-      string: '{"page":"https://act.sumofus.org/rest/v1/petitionpage/23605/","client_hosted":true,"client_url":"https://actions.sumofus.org/a/super-random-horsey-pony","ask_text":"Dummy
+      string: '{"page":"https://act.sumofus.org/rest/v1/petitionpage/23605/","client_hosted":true,"client_url":"https://actions.eko.org/a/super-random-horsey-pony","ask_text":"Dummy
         ask","thank_you_text":"Dummy thank you","statement_text":"Dummy statement"}'
     headers:
       Content-Type:
@@ -214,13 +214,13 @@ http_interactions:
         Your donation of {{ order.amt }} begins on {{ order.created_at|date:\"F j,
         Y\" }}, and your credit card ending in {{ order.card_num_last_four }} will
         be charged each month for {{ order.amt }}. If you ever want to modify or cancel
-        your recurring donation, you can contact us at donations@sumofus.org. {% else
+        your recurring donation, you can contact us at donations@eko.org. {% else
         %} Thank you for your donation to Ekō of {{ order.amt }} on {{ order.created_at|date:\"F
         j, Y\" }} by your credit card ending in {{ order.card_num_last_four }}!{%
         endif %}{% endif %}\u003c/p\u003e\n\u003cp\u003ePS - Ekō is a registered
         501(c)4 non-profit incorporated in Washington, DC, United States. Donations
         to Ekō are not tax deductible. For further information or if you have
-        any questions about this donation, please reach out at donations@sumofus.org{%
+        any questions about this donation, please reach out at donations@eko.org{%
         if order.card_num_last_four = \"DDEB\" %} or on +1 347-703-5003{% endif %}.\u003c/p\u003e\n\u003cp\u003e{%
         if order.card_num_last_four = \"DDEB\" %}{% if order.currency = \"GBP\" %}\u003ca
         href=\"https://gocardless.com/direct-debit/guarantee\" target=\"_blank\"\u003eView

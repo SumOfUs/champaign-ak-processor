@@ -8,7 +8,7 @@ http_interactions:
       string: '{"page":"/rest/v1/petitionpage/16626/","name":"Pablo José Francisco
         de María","postal":"W1","address1":"The Lodge","address2":"High Street","city":"London","country":"United
         Kingdom","action_age":"101","action_foo":"Foo","action_bar":"Bar","ignored":"ignore
-        me","email":"omar@sumofus.org","source":"FB","akid":"3.4234.fsdf"}'
+        me","email":"omar@eko.org","source":"FB","akid":"3.4234.fsdf"}'
     headers:
       Content-Type:
       - application/json
