@@ -14,7 +14,7 @@ describe PageCreator do
           title: "Vote for this super random horsey pony!",
           language: "/rest/v1/language/100/",
           tags: nil,
-          url: "https://actions.sumofus.org/a/super-random-horsey-pony",
+          url: "https://actions.eko.org/a/super-random-horsey-pony",
           hosted_with: "/rest/v1/hostingplatform/2/",
           campaign_id: nil
         }
@@ -45,11 +45,11 @@ describe PageCreator do
     }
     petition_form_hash = {
       page: 'https://act.sumofus.org/rest/v1/petitionpage/23605/',
-      client_url: 'https://actions.sumofus.org/a/super-random-horsey-pony',
+      client_url: 'https://actions.eko.org/a/super-random-horsey-pony',
     }
     donation_form_hash = {
       page: 'https://act.sumofus.org/rest/v1/donationpage/23604/',
-      client_url: 'https://actions.sumofus.org/a/super-random-horsey-pony',
+      client_url: 'https://actions.eko.org/a/super-random-horsey-pony',
     }
     follow_up_hash = {
       page: 'https://act.sumofus.org/rest/v1/donationpage/23604/'
@@ -93,7 +93,7 @@ describe PageCreator do
           title: "Aidez-nous à révéler le cruel secret des poussins de McDonald's",
           language: "/rest/v1/language/100/",
           tags: nil,
-          url: "https://actions.sumofus.org/a/aidez-nous-a-reveler-le-cruel-secret-des-poussins-de-mcdonald-s-1",
+          url: "https://actions.eko.org/a/aidez-nous-a-reveler-le-cruel-secret-des-poussins-de-mcdonald-s-1",
           hosted_with: "/rest/v1/hostingplatform/2/",
           campaign_id: nil
         }
@@ -119,7 +119,7 @@ describe PageCreator do
         title: "Aidez-nous à révéler le cruel secret des poussins de McDonald's (Petition)",
         language: "/rest/v1/language/100/",
         tags: nil,
-        url: "https://actions.sumofus.org/a/aidez-nous-a-reveler-le-cruel-secret-des-poussins-de-mcdonald-s-1",
+        url: "https://actions.eko.org/a/aidez-nous-a-reveler-le-cruel-secret-des-poussins-de-mcdonald-s-1",
         hosted_with: "/rest/v1/hostingplatform/2/",
         page_type: "petition",
         multilingual_campaign: nil
@@ -132,7 +132,7 @@ describe PageCreator do
         expect_any_instance_of(ActionKitConnector::Client).to receive(:create_petitionform)
           .with(hash_including({
                                    page: 'https://act.sumofus.org/rest/v1/petitionpage/23597/',
-                                   client_url: 'https://actions.sumofus.org/a/aidez-nous-a-reveler-le-cruel-secret-des-poussins-de-mcdonald-s-1',
+                                   client_url: 'https://actions.eko.org/a/aidez-nous-a-reveler-le-cruel-secret-des-poussins-de-mcdonald-s-1',
                                }))
           .and_call_original
         PageCreator.run(params[:params])

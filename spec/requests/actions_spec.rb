@@ -151,7 +151,7 @@ describe 'REST' do
           action_foo: 'Foo',
           action_bar: 'Bar',
           ignored: 'ignore me',
-          email: 'omar@sumofus.org',
+          email: 'omar@eko.org',
           source: 'FB',
           akid: '3.4234.fsdf'
         }

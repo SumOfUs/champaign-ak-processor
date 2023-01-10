@@ -6,7 +6,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"page_id":12345643,"name":"super-random-horsey-pony-donation","title":"Vote
-        for this super random horsey pony! (Donation)","language":"/rest/v1/language/100/","tags":null,"url":"https://actions.sumofus.org/a/super-random-horsey-pony","hosted_with":"/rest/v1/hostingplatform/2/","page_type":"donation","multilingual_campaign":null,"hpc_rule":"/rest/v1/donationhpcrule/22/"}'
+        for this super random horsey pony! (Donation)","language":"/rest/v1/language/100/","tags":null,"url":"https://actions.eko.org/a/super-random-horsey-pony","hosted_with":"/rest/v1/hostingplatform/2/","page_type":"donation","multilingual_campaign":null,"hpc_rule":"/rest/v1/donationhpcrule/22/"}'
     headers:
       Content-Type:
       - application/json
@@ -41,7 +41,7 @@ http_interactions:
     uri: https://act.sumofus.org/rest/v1/donationform/
     body:
       encoding: UTF-8
-      string: '{"page":"https://act.sumofus.org/rest/v1/donationpage/23604/","client_hosted":true,"client_url":"https://actions.sumofus.org/a/super-random-horsey-pony","ask_text":"Dummy
+      string: '{"page":"https://act.sumofus.org/rest/v1/donationpage/23604/","client_hosted":true,"client_url":"https://actions.eko.org/a/super-random-horsey-pony","ask_text":"Dummy
         ask","thank_you_text":"Dummy thank you","statement_text":"Dummy statement"}'
     headers:
       Content-Type:
@@ -78,7 +78,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"page_id":12345643,"name":"super-random-horsey-pony-petition","title":"Vote
-        for this super random horsey pony! (Petition)","language":"/rest/v1/language/100/","tags":null,"url":"https://actions.sumofus.org/a/super-random-horsey-pony","hosted_with":"/rest/v1/hostingplatform/2/","page_type":"petition","multilingual_campaign":null}'
+        for this super random horsey pony! (Petition)","language":"/rest/v1/language/100/","tags":null,"url":"https://actions.eko.org/a/super-random-horsey-pony","hosted_with":"/rest/v1/hostingplatform/2/","page_type":"petition","multilingual_campaign":null}'
     headers:
       Content-Type:
       - application/json
@@ -113,7 +113,7 @@ http_interactions:
     uri: https://act.sumofus.org/rest/v1/petitionform/
     body:
       encoding: UTF-8
-      string: '{"page":"https://act.sumofus.org/rest/v1/petitionpage/23605/","client_hosted":true,"client_url":"https://actions.sumofus.org/a/super-random-horsey-pony","ask_text":"Dummy
+      string: '{"page":"https://act.sumofus.org/rest/v1/petitionpage/23605/","client_hosted":true,"client_url":"https://actions.eko.org/a/super-random-horsey-pony","ask_text":"Dummy
         ask","thank_you_text":"Dummy thank you","statement_text":"Dummy statement"}'
     headers:
       Content-Type:
@@ -152,7 +152,7 @@ http_interactions:
       string: '{"url":"https://not.used.com","send_confirmation":true,"page":"https://act.sumofus.org/rest/v1/donationpage/23604/","email_wrapper":"https://act.sumofus.org/rest/v1/emailwrapper/25/","email_from_line":"https://act.sumofus.org/rest/v1/fromline/62/","email_subject":"Thanks
         for your donation!","email_body":"\u003cp\u003eHi there {{ user.first_name|capfirst|default:\"friend\"
         }},\u003c/p\u003e\n\u003cp\u003eThank you so much for your donation. I can’t
-        tell you how much it means to us here at SumOfUs. By donating, you’re leading
+        tell you how much it means to us here at Ekō. By donating, you’re leading
         the charge to stop big corporations from behaving badly. Now more than ever,
         this is work that needs to be done.\u003c/p\u003e\n\u003cp\u003eYour donation
         will help to power our campaigning. We’ve included the receipt below.\u003c/p\u003e\n\u003cp\u003eWe
@@ -161,12 +161,12 @@ http_interactions:
         are always put above profit. We stand toe to toe against the world’s most
         powerful corporations to protect our rights and our democracy.\u003c/p\u003e\n\u003cp\u003eThanks
         so much for all that you do,\u003c/p\u003e\n\u003cp\u003eJohn and the team
-        at SumOfUs\u003c/p\u003e\n\u003cp\u003e\u003c/p\u003e\n\u003chr /\u003e\n\u003cp\u003e\u003cstrong\u003eDonation
+        at Ekō\u003c/p\u003e\n\u003cp\u003e\u003c/p\u003e\n\u003chr /\u003e\n\u003cp\u003e\u003cstrong\u003eDonation
         receipt\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e{% if order.card_num_last_four
         = \"DDEB\" %}{% if order.currency = \"GBP\" %}\u003cimg src=\"https://s3.amazonaws.com/s3.sumofus.org/images/bacslogo.jpg\"
         alt=\"\" /\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eImportant:
-        Confirmation of the set up of your Direct Debit to SumOfUs\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eThanks
-        so much for donating to SumOfUs to support our work!\u003c/p\u003e\n\u003cp\u003e{%
+        Confirmation of the set up of your Direct Debit to Ekō\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eThanks
+        so much for donating to Ekō to support our work!\u003c/p\u003e\n\u003cp\u003e{%
         if orderrecurring %}Your recurring donation of {{ order.amt }} monthly will
         be charged via Direct Debit on or soon after {% right_now %}{% if now|date:\"d\"
         \u003c \"20\" %}{{now|date_add:\"day=20\"|date:\"F j, Y\"}}{% else %}{{now|date_add:\"months=1
@@ -174,7 +174,7 @@ http_interactions:
         each following month.{% if action.custom_fields.account_number_ending %}{%
         if action.custom_fields.bank_name %} Donations will be debited from your bank
         account ******{{ action.custom_fields.account_number_ending }} ({{ action.custom_fields.bank_name
-        }}), and appear on your statement as SumOfUs{% if action.custom_fields.mandate_reference
+        }}), and appear on your statement as Ekō{% if action.custom_fields.mandate_reference
         %}, ref: {{ action.custom_fields.mandate_reference }}.{% endif %}{% endif
         %}{% endif %}{% else %}A single donation of {{ order.amt }} will be charged
         via Direct Debit on or soon after {% right_now %}{% if now|date:\"d\" \u003c
@@ -182,10 +182,10 @@ http_interactions:
         day=20\"|date:\"F j, Y\"}}{% endif %}.{% if action.custom_fields.account_number_ending
         %}{% if action.custom_fields.bank_name %} Your donation will be debited from
         your bank account ******{{ action.custom_fields.account_number_ending }} ({{
-        action.custom_fields.bank_name }}), and appear on your statement as SumOfUs{%
+        action.custom_fields.bank_name }}), and appear on your statement as Ekō{%
         if action.custom_fields.mandate_reference %}, ref: {{ action.custom_fields.mandate_reference
         }}.{% endif %}{% endif %}{% endif %}{% endif %}\u003c/p\u003e\n\u003cp\u003e{%
-        elif order.currency = \"EUR\" %}Thanks so much for donating to SumOfUs to
+        elif order.currency = \"EUR\" %}Thanks so much for donating to Ekō to
         support our work!\u003c/p\u003e\n\u003cp\u003e{% if orderrecurring %}Your
         recurring donation of {{ order.amt }} monthly will first be charged via Direct
         Debit on or shortly after {% right_now %}{{ now|date_add:\"days=3\"|date:\"F
@@ -194,33 +194,33 @@ http_interactions:
         if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name
         %} Donations will be debited from your bank account ******{{ action.custom_fields.account_number_ending
         }} ({{ action.custom_fields.bank_name }}), and appear on your statement as
-        SumOfUs, {% if action.custom_fields.mandate_reference %}ref: {{ action.custom_fields.mandate_reference
+        Ekō, {% if action.custom_fields.mandate_reference %}ref: {{ action.custom_fields.mandate_reference
         }}, {% endif %}creditor identifier: GB62ZZZSDDBARC0000007495895091.{% endif
         %}{% endif %}{% else %}Your donation of {{ order.amt }} will be charged via
         Direct Debit on or shortly after {% right_now %}{{ now|date_add:\"days=3\"|date:\"F
         j, Y\" }}.{% if action.custom_fields.account_number_ending %}{% if action.custom_fields.bank_name
         %} Your donation will be debited from your bank account ******{{ action.custom_fields.account_number_ending
         }} ({{ action.custom_fields.bank_name }}), and appear on your statement as
-        SumOfUs, {% if action.custom_fields.mandate_reference %}ref: {{ action.custom_fields.mandate_reference
+        Ekō, {% if action.custom_fields.mandate_reference %}ref: {{ action.custom_fields.mandate_reference
         }}, {% endif %}creditor identifier: GB62ZZZSDDBARC0000007495895091.{% endif
         %}{% endif %}{% endif %}{% endif %}\u003c/p\u003e\n\u003cp\u003e{% elif order.card_num_last_four
         = \"PYPL\" %}{% if orderrecurring %}Thanks so much for setting up a recurring
-        donation with SumOfUs to support our work! Your donation of {{ order.amt }}
+        donation with Ekō to support our work! Your donation of {{ order.amt }}
         begins on {{ order.created_at|date:\"F j, Y\" }} and will be charged each
-        month via PayPal. {% else %}Thanks so much for your donation to SumOfUs of
+        month via PayPal. {% else %}Thanks so much for your donation to Ekō of
         {{ order.amt }} on {{ order.created_at|date:\"F j, Y\" }} via PayPal!\u003cbr
         /\u003e\u003cbr /\u003e{% endif %}{% else %}{% if orderrecurring %} Thanks
-        so much for setting up a recurring donation with SumOfUs to support our work!
+        so much for setting up a recurring donation with Ekō to support our work!
         Your donation of {{ order.amt }} begins on {{ order.created_at|date:\"F j,
         Y\" }}, and your credit card ending in {{ order.card_num_last_four }} will
         be charged each month for {{ order.amt }}. If you ever want to modify or cancel
-        your recurring donation, you can contact us at donations@sumofus.org. {% else
-        %} Thank you for your donation to SumOfUs of {{ order.amt }} on {{ order.created_at|date:\"F
+        your recurring donation, you can contact us at donations@eko.org. {% else
+        %} Thank you for your donation to Ekō of {{ order.amt }} on {{ order.created_at|date:\"F
         j, Y\" }} by your credit card ending in {{ order.card_num_last_four }}!{%
-        endif %}{% endif %}\u003c/p\u003e\n\u003cp\u003ePS - SumOfUs is a registered
+        endif %}{% endif %}\u003c/p\u003e\n\u003cp\u003ePS - Ekō is a registered
         501(c)4 non-profit incorporated in Washington, DC, United States. Donations
-        to SumOfUs are not tax deductible. For further information or if you have
-        any questions about this donation, please reach out at donations@sumofus.org{%
+        to Ekō are not tax deductible. For further information or if you have
+        any questions about this donation, please reach out at donations@eko.org{%
         if order.card_num_last_four = \"DDEB\" %} or on +1 347-703-5003{% endif %}.\u003c/p\u003e\n\u003cp\u003e{%
         if order.card_num_last_four = \"DDEB\" %}{% if order.currency = \"GBP\" %}\u003ca
         href=\"https://gocardless.com/direct-debit/guarantee\" target=\"_blank\"\u003eView
