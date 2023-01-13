@@ -21,9 +21,7 @@ class DonationCreator
       referring_user_id:    extract_user_id(params[:params][:referring_akid])
     )
 
-    Rails.logger.info "Creating AK donation with params: #{params[:params]}"
     response = client.create_donation(params[:params])
-    Rails.logger.info "Response from AK create_donation is: #{response.body}"
     if !response.success?
       raise Error.new("Error while creating AK donation action. HTTP Response code: #{response.code}, body: #{response.body}")
     end
