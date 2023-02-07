@@ -269,7 +269,7 @@ describe 'REST' do
             title: 'Vote for this super random horsey pony!',
             language: '/rest/v1/language/100/',
             tags: nil,
-            url: 'https://actions.sumofus.org/a/super-random-horsey-pony',
+            url: 'https://actions.eko.org/a/super-random-horsey-pony',
             hosted_with: '/rest/v1/hostingplatform/2/',
             campaign_id: nil
           }
