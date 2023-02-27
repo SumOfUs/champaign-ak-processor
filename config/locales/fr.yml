@@ -8,6 +8,9 @@ fr:
       <p>Nous n’acceptons pas un seul centime provenant d’entreprises ou de gouvernements afin de rester totalement indépendant. C'est pourquoi votre soutien est si important. Ensemble, nous construisons un mouvement qui exige que l'humain soit toujours placé au-dessus du profit. Nous tenons tête aux entreprises les plus puissantes du monde pour protéger nos droits et notre démocratie.</p>
       <p>Merci pour tout ce que vous faites,</p>
       <p>Emma et le reste de l’équipe à Ekō</p>
+      <br />
+      <p><strong><em>Depuis le 7 février 2023, SumOfUs est devenu Ekō.</em></strong><br /><br />Il se peut que vous voyiez Ekō apparaître sur votre relevé de compte au lieu de SumOfUs.<br /><br />Veuillez noter qu'il peut s'écouler jusqu'à trois mois avant que notre nouveau nom n'apparaisse sur votre relevé de compte. Si vous avez des inquiétudes ou des questions, veuillez contacter bonjour@eko.org.</p>
+      <p></p>
       <hr />
       <p><strong>Reçu de votre don</strong></p>
       {% if order.card_num_last_four = "DDEB" %}
