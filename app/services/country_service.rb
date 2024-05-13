@@ -4,7 +4,10 @@ class CountryService
       case data[:params][:country]
       when 'United Kingdom'
         begin
-          data[:params][:user_uk_parliamentary_constituency] = GetConstituency.for(data[:params][:postal])
+          constituency = GetConstituency.for(data[:params][:postal])
+          if constituency
+            data[:params][:user_uk_parliamentary_constituency] = constituency
+          end
         rescue => e
           Rails.logger.error "Failed to get constituency: #{e.message}"
         end
