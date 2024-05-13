@@ -4,17 +4,9 @@ SHA1=$1
 AWS_APPLICATION_NAME=$2
 AWS_ENVIRONMENT_NAME=$3
 
-# Set configuration for logging with Papertrail
-export PAPERTRAIL_HOST=$(cut -d ":" -f 1 <<< $4)
-export PAPERTRAIL_PORT=$(cut -d ":" -f 2 <<< $4)
-export PAPERTRAIL_SYSTEM=$3
-
 # Set AWS secrets manager prefix
 export AWS_SECRETS_MANAGER_PREFIX=$5
 
-# Set the right place for paper trail logging
-cat .ebextensions/02_papertrail.config | envsubst '$PAPERTRAIL_HOST:$PAPERTRAIL_PORT:$PAPERTRAIL_SYSTEM' >tmp
-mv tmp .ebextensions/02_papertrail.config
 cat .circleci/Dockerrun.aws.json.template | envsubst > Dockerrun.aws.json
 
 # Prepare the source bundle .zip
