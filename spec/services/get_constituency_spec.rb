@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe GetConstituency do
+  before do
+    stub_const('ENV', {'CONSTITUENCIES_TABLE' => 'constituencies_table'})
+  end
   context "postcode found" do
 
     before do
@@ -10,6 +13,7 @@ describe GetConstituency do
           }
         }
       )
+
     end
 
     it "returns constituency" do
@@ -27,6 +31,12 @@ describe GetConstituency do
     it "returns nil" do
       expect(
         GetConstituency.for('FOO', @client)
+      ).to be nil
+    end
+
+    it "plays it cool when postcode is nil" do
+      expect(
+        GetConstituency.for(nil, @client)
       ).to be nil
     end
   end

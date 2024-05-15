@@ -5,7 +5,6 @@ if Rails.env == 'production'
   database_secrets = SecretsManager.get_value('champaignDB')
   share_progress_secrets = SecretsManager.get_value('shareProgressApi')
   champaign_secrets = SecretsManager.get_value('champaign')
-  airbrake_secrets = SecretsManager.get_value('akWorkerAirbrake');
   devise_secrets = SecretsManager.get_value('prod/deviseSecret');
 
   ENV['AK_USERNAME'] = ak_secrets['username']
@@ -20,9 +19,6 @@ if Rails.env == 'production'
   ENV['SHARE_PROGRESS_API_KEY'] = share_progress_secrets['apiKey']
 
   ENV['CHAMPAIGN_API_KEY'] = champaign_secrets['apiKey']
-
-  ENV['AIRBRAKE_API_KEY'] = airbrake_secrets['apiKey']
-  ENV['AIRBRAKE_PROJECT_ID'] = airbrake_secrets['projectId']
 
   ENV['DEVISE_SECRET_KEY'] = devise_secrets['secretKey']
 end

@@ -6,7 +6,7 @@ class GetConstituency
   end
 
   def initialize(postcode, client)
-    @postcode = postcode.downcase.gsub(/\s/, '')
+    @postcode = postcode&.downcase&.gsub(/\s/, '')
     @client = client || Aws::DynamoDB::Client.new(region: ENV['AWS_REGION'])
   end
 
