@@ -20,9 +20,7 @@ class GetConstituency
     {
       table_name: table_name,
       key: {
-        "postcode" => {
-          s: @postcode
-        }
+        postcode: @postcode
       }
     }
   end
