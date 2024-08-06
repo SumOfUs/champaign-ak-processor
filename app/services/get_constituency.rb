@@ -11,6 +11,7 @@ class GetConstituency
   end
 
   def get
+    return nil if @postcode.nil? || @postcode.empty?
     @client.get_item(options).item&.fetch('constituency', nil)
   end
 
